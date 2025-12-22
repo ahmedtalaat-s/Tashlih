@@ -9,6 +9,13 @@ export const authRoutes: Routes = [
         path: 'choose-account',
         loadComponent: () => import('./register/choose-role/choose-role').then((m) => m.ChooseRole),
       },
+      {
+        path: 'customer',
+        loadComponent: () =>
+          import('./register/customer/customer-register-form/customer-register-form').then(
+            (m) => m.CustomerRegisterForm
+          ),
+      },
     ],
   },
 ];
