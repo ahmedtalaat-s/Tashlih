@@ -1,0 +1,195 @@
+<div class="main-wrapper" dir="rtl">
+  <div class="right-panel">
+    <div class="top-nav">
+      <button class="back-btn" aria-label="Back">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="black"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="m9 18 6-6-6-6" />
+        </svg>
+      </button>
+    </div>
+
+    <div class="content-area">
+      <div class="logo-container">
+        <img src="./assets/images/icons/logo.svg" alt="Tashleeh Logo" />
+      </div>
+
+      <div class="header-text">
+        <h1>إنشاء حساب مورد</h1>
+        <p>حدد دورك للاستفادة من خدمات التطبيق المختلفة</p>
+      </div>
+
+      <div class="header-p">
+        <p>رفع مستندات</p>
+      </div>
+
+      <form [formGroup]="documentsForm" (ngSubmit)="submit()">
+        <!-- Commercial Register Copy -->
+        <div
+          class="input-box upload-box"
+          [class.uploaded]="hasFile('commercialRegisterCopy')"
+          (click)="fileCR.click()"
+        >
+          @if (!hasFile('commercialRegisterCopy')) {
+          <!-- Upload Icon -->
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="17 8 12 3 7 8" />
+            <line x1="12" y1="3" x2="12" y2="15" />
+          </svg>
+          } @else {
+          <!-- Check Icon -->
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#16a34a"
+            stroke-width="2"
+          >
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+          }
+
+          <span>
+            {{ getFileName('commercialRegisterCopy') || 'رفع نسخة السجل التجاري' }}
+          </span>
+
+          <input
+            #fileCR
+            type="file"
+            hidden
+            accept="image/*,application/pdf"
+            (change)="onFileSelect($event, 'commercialRegisterCopy')"
+          />
+        </div>
+
+        @if (hasError('commercialRegisterCopy','required')) {
+        <small class="error">نسخة السجل التجاري مطلوبة</small>
+        }
+
+        <!-- National ID -->
+        <div
+          class="input-box upload-box"
+          [class.uploaded]="hasFile('nationalId')"
+          (click)="fileID.click()"
+        >
+          @if (!hasFile('nationalId')) {
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="17 8 12 3 7 8" />
+            <line x1="12" y1="3" x2="12" y2="15" />
+          </svg>
+          } @else {
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#16a34a"
+            stroke-width="2"
+          >
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+          }
+
+          <span>
+            {{ getFileName('nationalId') || 'رفع صورة الهوية' }}
+          </span>
+
+          <input
+            #fileID
+            type="file"
+            hidden
+            accept="image/*"
+            (change)="onFileSelect($event, 'nationalId')"
+          />
+        </div>
+
+        @if (hasError('nationalId','required')) {
+        <small class="error">صورة الهوية مطلوبة</small>
+        }
+
+        <!-- Commercial Register Number -->
+        <div class="input-box">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <rect x="3" y="4" width="18" height="16" rx="2" />
+            <path d="M7 8h10M7 12h6" />
+          </svg>
+
+          <input
+            type="text"
+            placeholder="رقم السجل التجاري"
+            formControlName="commercialRegisterNumber"
+          />
+        </div>
+
+        @if (hasError('commercialRegisterNumber','required')) {
+        <small class="error">رقم السجل التجاري مطلوب</small>
+        }
+
+        <!-- Submit -->
+        <button type="submit" class="submit-btn" [disabled]="isFormInvalid()">التالي</button>
+      </form>
+    </div>
+
+    <div class="footer">
+      <div class="copyright-text">جميع الحقوق محفوظة. <span class="brand">Tashleeh</span>©</div>
+      <button class="lang-switcher">
+        English
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="m5 8 6 6" />
+          <path d="m4 14 6-6 2-3" />
+          <path d="M2 5h12" />
+          <path d="M7 2h1" />
+          <path d="m22 22-5-10-5 10" />
+          <path d="M14 18h6" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="left-panel">
+    <img
+      src="./assets/images/supplier-register.svg"
+      class="illustration"
+      alt="Welcome Illustration"
+    />
+  </div>
+</div>

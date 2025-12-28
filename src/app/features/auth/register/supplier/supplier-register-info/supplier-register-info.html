@@ -23,7 +23,7 @@
       </div>
 
       <div class="header-text">
-        <h1>إنشاء حساب عميل</h1>
+        <h1>إنشاء حساب مورد</h1>
         <p>حدد دورك للاستفادة من خدمات التطبيق المختلفة</p>
       </div>
 
@@ -51,44 +51,59 @@
         } @if (hasError('fullName','minlength')) {
         <small class="error"> الاسم يجب أن يكون 3 حروف على الأقل </small>
         }
-        <!-- Phone -->
-        <div class="phone-input-group">
-          <div class="country-code">
-            <span>+966</span>
-            <img src="assets/images/saudi-arabia.svg" alt="Saudi Arabia" class="flag-icon" />
-          </div>
-          <div class="phone-input-wrapper">
-            <div class="input-box">
-              <svg
-                _ngcontent-ng-c3369730433=""
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  _ngcontent-ng-c3369730433=""
-                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
-                ></path>
-              </svg>
+        <!-- Email -->
+        <div class="input-box">
+          <!-- icon -->
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+            <polyline points="22,6 12,13 2,6" />
+          </svg>
 
-              <input
-                type="tel"
-                placeholder="رقم الهاتف"
-                maxlength="9"
-                pattern="[0-9]*"
-                formControlName="phone"
-              />
-            </div>
-          </div>
+          <input type="email" placeholder="البريد الإلكتروني" formControlName="email" />
+        </div>
+
+        @if (hasError('email','required')) {
+        <small class="error"> البريد الإلكتروني مطلوب </small>
+        } @if (hasError('email','email')) {
+        <small class="error"> البريد الإلكتروني غير صحيح </small>
+        }
+        <!-- Phone -->
+        <div class="input-box">
+          <svg
+            _ngcontent-ng-c3369730433=""
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              _ngcontent-ng-c3369730433=""
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+            ></path>
+          </svg>
+
+          <input
+            type="tel"
+            placeholder="رقم الهاتف"
+            maxlength="10"
+            pattern="[0-9]*"
+            formControlName="phone"
+          />
         </div>
 
         @if (hasError('phone','required')) {
         <small class="error"> رقم الجوال مطلوب </small>
         } @if (hasError('phone','pattern')) {
-        <small class="error"> رقم الجوال يجب أن يبدأ بـ 5 ويتكون من 9 أرقام </small>
+        <small class="error"> رقم الجوال يجب أن يبدأ بـ 05 ويتكون من 10 أرقام </small>
         }
 
         <!-- Password -->
@@ -178,7 +193,7 @@
         }
 
         <!-- Submit -->
-        <button type="submit" class="submit-btn" [disabled]="isFormInvalid()">تسجيل</button>
+        <button type="submit" class="submit-btn" [disabled]="isFormInvalid()">التالي</button>
 
         <div class="login-footer">
           <span>لدي حساب بالفعل؟</span>
@@ -212,13 +227,9 @@
 
   <div class="left-panel">
     <img
-      src="./assets/images/customer-register.svg"
+      src="./assets/images/supplier-register.svg"
       class="illustration"
       alt="Welcome Illustration"
     />
   </div>
 </div>
-
-@if (showOtpCheck()) {
-<app-check-otpcode (verify)="handleOtpVerify($event)" (close)="closeOtp()"></app-check-otpcode>
-}

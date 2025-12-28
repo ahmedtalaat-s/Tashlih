@@ -1,0 +1,152 @@
+<div class="main-wrapper" dir="rtl">
+  <div class="right-panel">
+    <div class="top-nav">
+      <button class="back-btn" aria-label="Back">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="black"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="m9 18 6-6-6-6" />
+        </svg>
+      </button>
+    </div>
+
+    <div class="content-area">
+      <div class="logo-container">
+        <img src="./assets/images/icons/logo.svg" alt="Tashleeh Logo" />
+      </div>
+
+      <div class="header-text">
+        <h1>إنشاء حساب مورد</h1>
+        <p>حدد دورك للاستفادة من خدمات التطبيق المختلفة</p>
+      </div>
+
+      <div class="header-p">
+        <p>معلومات النشاط</p>
+      </div>
+
+      <form [formGroup]="activityForm" (ngSubmit)="submit()">
+        <!-- Activity Name -->
+        <div class="input-box">
+          <svg
+            width="21"
+            height="21"
+            viewBox="0 0 21 21"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M10.499 8.75012H10.5078M10.499 12.2501H10.5078M10.499 5.25012H10.5078M13.999 8.75012H14.0078M13.999 12.2501H14.0078M13.999 5.25012H14.0078M6.99902 8.75012H7.00777M6.99902 12.2501H7.00777M6.99902 5.25012H7.00777M7.87402 19.2501V16.6251C7.87402 16.3931 7.96621 16.1705 8.13031 16.0064C8.2944 15.8423 8.51696 15.7501 8.74902 15.7501H12.249C12.4811 15.7501 12.7036 15.8423 12.8677 16.0064C13.0318 16.1705 13.124 16.3931 13.124 16.6251V19.2501M5.24902 1.75012H15.749C16.7155 1.75012 17.499 2.53362 17.499 3.50012V17.5001C17.499 18.4666 16.7155 19.2501 15.749 19.2501H5.24902C4.28253 19.2501 3.49902 18.4666 3.49902 17.5001V3.50012C3.49902 2.53362 4.28253 1.75012 5.24902 1.75012Z"
+              stroke="#999999"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+
+          <input type="text" placeholder="اسم النشاط / الورشة" formControlName="activityName" />
+        </div>
+
+        @if (hasError('activityName','required')) {
+        <small class="error">اسم النشاط مطلوب</small>
+        }
+
+        <!-- Activity Type -->
+        <div class="input-box">
+          <svg
+            width="21"
+            height="21"
+            viewBox="0 0 21 21"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12.8629 5.51256C12.7026 5.67612 12.6128 5.89602 12.6128 6.12506C12.6128 6.35409 12.7026 6.57399 12.8629 6.73756L14.2629 8.13756C14.4265 8.29788 14.6464 8.38768 14.8754 8.38768C15.1044 8.38768 15.3243 8.29788 15.4879 8.13756L18.2057 5.42068C18.4857 5.13893 18.9608 5.22818 19.0658 5.61143C19.3301 6.57295 19.3152 7.58987 19.0227 8.5432C18.7302 9.49653 18.1723 10.3468 17.4141 10.9946C16.656 11.6424 15.729 12.0609 14.7418 12.2011C13.7545 12.3413 12.7477 12.1974 11.8392 11.7863L4.91791 18.7076C4.56981 19.0555 4.09774 19.251 3.60554 19.2509C3.11334 19.2508 2.64133 19.0552 2.29335 18.7071C1.94537 18.359 1.74992 17.8869 1.75 17.3947C1.75008 16.9025 1.94569 16.4305 2.29378 16.0826L9.21503 9.16131C8.80391 8.25281 8.66003 7.246 8.80023 6.25871C8.94042 5.27142 9.3589 4.34448 10.0067 3.58634C10.6545 2.82821 11.5048 2.27025 12.4581 1.97775C13.4115 1.68525 14.4284 1.67031 15.3899 1.93468C15.7732 2.03968 15.8624 2.51393 15.5815 2.79568L12.8629 5.51256Z"
+              stroke="#999999"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+
+          <input type="text" placeholder="نوع نشاط التشليح" formControlName="activityType" />
+
+          <!-- <select formControlName="activityType">
+            <option value="" disabled selected>نوع نشاط التشليح</option>
+            <option value="scrap">تشليح سيارات</option>
+            <option value="parts">قطع غيار</option>
+            <option value="both">تشليح + قطع غيار</option>
+          </select> -->
+        </div>
+
+        @if (hasError('activityType','required')) {
+        <small class="error">نوع النشاط مطلوب</small>
+        }
+
+        <!-- Commercial Register -->
+        <div class="input-box">
+          <svg
+            width="21"
+            height="21"
+            viewBox="0 0 21 21"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M14 8.75H15.75M14 12.25H15.75M5.39875 13.125C5.57912 12.6123 5.91421 12.1682 6.35777 11.854C6.80132 11.5398 7.33146 11.3711 7.875 11.3711C8.41854 11.3711 8.94868 11.5398 9.39223 11.854C9.83579 12.1682 10.1709 12.6123 10.3512 13.125M9.625 9.625C9.625 10.5915 8.8415 11.375 7.875 11.375C6.9085 11.375 6.125 10.5915 6.125 9.625C6.125 8.6585 6.9085 7.875 7.875 7.875C8.8415 7.875 9.625 8.6585 9.625 9.625ZM3.5 4.375H17.5C18.4665 4.375 19.25 5.1585 19.25 6.125V14.875C19.25 15.8415 18.4665 16.625 17.5 16.625H3.5C2.5335 16.625 1.75 15.8415 1.75 14.875V6.125C1.75 5.1585 2.5335 4.375 3.5 4.375Z"
+              stroke="#999999"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+
+          <input type="text" placeholder="رقم السجل التجاري" formControlName="commercialRegister" />
+        </div>
+
+        @if (hasError('commercialRegister','required')) {
+        <small class="error">رقم السجل التجاري مطلوب</small>
+        }
+
+        <!-- Submit -->
+        <button type="submit" class="submit-btn" [disabled]="isFormInvalid()">التالي</button>
+      </form>
+    </div>
+
+    <div class="footer">
+      <div class="copyright-text">جميع الحقوق محفوظة. <span class="brand">Tashleeh</span>©</div>
+      <button class="lang-switcher">
+        English
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="m5 8 6 6" />
+          <path d="m4 14 6-6 2-3" />
+          <path d="M2 5h12" />
+          <path d="M7 2h1" />
+          <path d="m22 22-5-10-5 10" />
+          <path d="M14 18h6" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="left-panel">
+    <img
+      src="./assets/images/supplier-register.svg"
+      class="illustration"
+      alt="Welcome Illustration"
+    />
+  </div>
+</div>

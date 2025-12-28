@@ -1,5 +1,16 @@
+import { isPlatformBrowser } from '@angular/common';
+import { inject, PLATFORM_ID } from '@angular/core';
+
 export class StorageHelper {
+  // private static platformId = inject(PLATFORM_ID);
+  static isBrowser(): boolean {
+    return typeof window !== 'undefined';
+  }
+
   static setItem(key: string, value: any): void {
+    if (!this.isBrowser()) {
+      return;
+    }
     try {
       const serializedValue = JSON.stringify(value);
       localStorage.setItem(key, serializedValue);
@@ -9,6 +20,9 @@ export class StorageHelper {
   }
 
   static getItem<T>(key: string): T | null {
+    if (!this.isBrowser()) {
+      return null;
+    }
     try {
       const item = localStorage.getItem(key);
       return item ? JSON.parse(item) : null;
@@ -19,6 +33,9 @@ export class StorageHelper {
   }
 
   static removeItem(key: string): void {
+    if (!this.isBrowser()) {
+      return;
+    }
     try {
       localStorage.removeItem(key);
     } catch (error) {
@@ -27,6 +44,9 @@ export class StorageHelper {
   }
 
   static clear(): void {
+    if (!this.isBrowser()) {
+      return;
+    }
     try {
       localStorage.clear();
     } catch (error) {
@@ -61,4 +81,3 @@ export class StorageHelper {
     }
   }
 }
-

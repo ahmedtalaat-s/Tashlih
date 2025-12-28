@@ -1,0 +1,108 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Tajawal', sans-serif;
+}
+
+/* The semi-black background */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  /* Semi-transparent black */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+  /* Ensures it stays above other content */
+}
+
+/* The Card */
+.card {
+  background-color: #fff;
+  width: 90%;
+  max-width: 450px;
+  padding: 40px 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  position: relative;
+  text-align: center;
+}
+
+/* Close Button */
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: #f0f0f0;
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+}
+
+.card h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.card p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+/* OTP Inputs Container */
+.otp-container {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.otp-input {
+  width: 65px;
+  height: 65px;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #8898aa;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.otp-input:focus {
+  border-color: var(--primary-500);
+}
+
+/* Action Button */
+.verify-btn {
+  width: 100%;
+  background-color: var(--primary-500);
+  /* Yellow from image */
+  border: none;
+  padding: 15px;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.verify-btn:hover {
+  background-color: var(--primary-600);
+}

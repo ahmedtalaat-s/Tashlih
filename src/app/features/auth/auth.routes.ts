@@ -16,6 +16,31 @@ export const authRoutes: Routes = [
             (m) => m.CustomerRegisterForm
           ),
       },
+      {
+        path: 'supplier-info',
+        loadComponent: () =>
+          import('./register/supplier/supplier-register-info/supplier-register-info').then(
+            (m) => m.SupplierRegisterInfo
+          ),
+      },
+      {
+        path: 'bussiness-info',
+        loadComponent: () =>
+          import(
+            './register/supplier/supplier-register-business-info/supplier-register-business-info'
+          ).then((m) => m.SupplierRegisterBusinessInfo),
+      },
+      {
+        path: 'supplier-files',
+        loadComponent: () =>
+          import('./register/supplier/supplier-register-files/supplier-register-files').then(
+            (m) => m.SupplierRegisterFiles
+          ),
+      },
     ],
+  },
+  {
+    path: 'login',
+    loadComponent: () => import('./login/login').then((m) => m.Login),
   },
 ];

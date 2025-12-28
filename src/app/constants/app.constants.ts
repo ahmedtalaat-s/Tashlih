@@ -1,9 +1,11 @@
 export const APP_CONSTANTS = {
   APP_NAME: 'Taslih',
   VERSION: '1.0.0',
-  STORAGE_KEY: {
+  STORAGE_KEYS: {
     TOKEN: 'auth_token',
     LANGUAGE: 'language',
+    USER: 'user',
+    PHONE_NUMBER: 'phone_number',
   },
   ROUTES: {},
 } as const;

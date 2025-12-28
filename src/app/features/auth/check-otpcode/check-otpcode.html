@@ -1,0 +1,27 @@
+<div class="overlay">
+  <div class="card">
+    <button class="close-btn" (click)="onClose()">&times;</button>
+
+    <h2>تحقق من رقمك</h2>
+    <p>ادخل الرقم المرسل علي هاتفك للتحقق</p>
+
+    <div class="otp-container">
+      @for (item of otpValues; track $index) {
+      <input
+        #otpInput
+        type="text"
+        maxlength="1"
+        class="otp-input"
+        inputmode="numeric"
+        autocomplete="one-time-code"
+        aria-label="OTP digit {{ $index + 1 }}"
+        (keydown)="onKeyDown($event, $index)"
+        (input)="onInput($event, $index)"
+        (paste)="onPaste($event)"
+      />
+      }
+    </div>
+
+    <button class="verify-btn" (click)="onVerify()">تحقق</button>
+  </div>
+</div>
