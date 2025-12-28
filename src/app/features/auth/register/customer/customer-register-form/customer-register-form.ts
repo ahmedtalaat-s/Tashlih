@@ -25,12 +25,17 @@ export class CustomerRegisterForm {
 
   showOtpCheck = signal(false);
 
-  registerForm = this.fb.nonNullable.group({
-    fullName: ['', [Validators.required, Validators.minLength(3)]],
-    phone: ['', [Validators.required, Validators.pattern(/^5\d{8}$/)]],
-    password: ['', [Validators.required, Validators.minLength(8)]],
-    terms: [false, Validators.requiredTrue],
-  });
+  registerForm = this.fb.nonNullable.group(
+    {
+      fullName: ['', [Validators.required, Validators.minLength(3)]],
+      phone: ['', [Validators.required, Validators.pattern(/^5\d{8}$/)]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      confirmPassword: ['', [Validators.required]],
+      terms: [false, Validators.requiredTrue],
+    },
+    { validators: this.matchPassword }
+  );
 
   submitted = signal(false);
   formStatus = toSignal(this.registerForm.statusChanges, {
@@ -53,6 +58,7 @@ export class CustomerRegisterForm {
     const registerData: registerCustomerRequest = {
       fullName: this.getValue('fullName'),
       phone: this.getPhoneWithCode(this.getValue('phone')),
+      email: this.getValue('email'),
       password: this.getValue('password'),
       preferredLanguage: this.languageService.defaultLanguage(),
     };
@@ -72,9 +78,13 @@ export class CustomerRegisterForm {
   }
 
   showPassword = signal(false);
+  showConfirmPassword = signal(false);
 
   togglePassword() {
     this.showPassword.update((v) => !v);
+  }
+  toggleConfirmPassword() {
+    this.showConfirmPassword.update((v) => !v);
   }
 
   getPhoneWithCode(phone: string): string {
@@ -100,5 +110,12 @@ export class CustomerRegisterForm {
 
   closeOtp() {
     this.showOtpCheck.set(false);
+  }
+
+  matchPassword(form: any) {
+    const password = form.get('password')?.value;
+    const confirmPassword = form.get('confirmPassword')?.value;
+    if (!password || !confirmPassword) return null;
+    return password === confirmPassword ? null : { passwordMismatch: true };
   }
 }

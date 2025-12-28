@@ -81,6 +81,10 @@
   /* ================= RADIUS ================= */
   --radius-m: 16px;
   --radius-s: 12px;
+  /* ================= HEIGHT ================= */
+  :root {
+      --input-height: clamp(40px, 5vh, 50px);
+    }
 }
 
 body,html{
@@ -115,7 +119,9 @@ h2 {
   font-weight: 500;
 }
 
-
+.input-box {
+  height: var(--input-height);
+}
 /* ================= CUSTOM SCROLLBAR ================= */
 /* .right-panel {
   scrollbar-width: thin;

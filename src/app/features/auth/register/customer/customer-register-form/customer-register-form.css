@@ -63,28 +63,30 @@
   width: 100%;
   max-width: 420px;
   text-align: center;
+  flex-shrink: 1;
+    /* Allows this area to shrink if space is tight */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-.logo-container {
-  margin-bottom: 10px;
-}
 
 .logo-container img {
   height: 80px;
 }
 
 .header-text h1 {
-  font-size: 32px;
+  font-size: 30px;
   /* Balanced for UI scale */
   color: var(--primary-950);
-  margin-bottom: 12px;
+  margin-bottom: 5px;
   font-weight: 700;
 }
 
 .header-text p {
   font-size: var(--caption);
   color: var(--color-text-secondary);
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 /* --- Form Elements --- */
@@ -92,7 +94,7 @@
   background: var(--color-white);
   border: 1.5px solid var(--border-gray);
   border-radius: 12px;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
   display: flex;
   align-items: center;
   height: 45px;
@@ -118,7 +120,7 @@
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  margin: 20px 0;
+  margin: 5px 0 13px 0;
   font-size: 14px;
   color: var(--text-light-gray);
   text-align: right;
@@ -155,8 +157,8 @@
 }
 
 .login-footer {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
   font-size: var(--caption);
 }
 
@@ -182,7 +184,7 @@
   align-items: center;
   gap: 12px;
   width: 100%;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .country-code {
@@ -207,7 +209,6 @@
   flex: 1;
   display: flex;
   align-items: center;
-  height: 55px;
 }
 .phone-input-wrapper .input-box{
   margin: 0;
@@ -248,7 +249,7 @@
 }
 .footer{
   width: 100%;
-  padding: 25px 12px 0;
+  padding: 0 12px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
