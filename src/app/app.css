@@ -2,3 +2,12 @@
   direction: rtl;
   text-align: right;
 }
+.p-toast {
+  max-width: 90vw;
+  width: auto;
+}
+
+.p-toast-message {
+  word-wrap: break-word;
+  white-space: normal;
+}
