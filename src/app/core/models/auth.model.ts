@@ -26,15 +26,7 @@ export interface registerCustomerResponse {
 }
 
 //otp
-// {
-//   "success": true,
-//   "message": "OTP sent successfully",
-//   "messageAr": "تم إرسال رمز التحقق",
-//   "token": null,
-//   "expiresAt": null,
-//   "user": null,
-//   "otpCode": "4722"
-// }
+
 export interface sendOtpResponse {
   success: boolean;
   message: string;
@@ -47,3 +39,38 @@ export interface sendOtpResponse {
 
 //verify otp
 export interface verifyOtpResponse extends sendOtpResponse {}
+
+// supplier registration interfaces
+export interface SupplierRegisterRequest {
+  fullName: string;
+  phone: string;
+  email?: string;
+  password: string;
+
+  businessNameAr: string;
+  businessNameEn?: string;
+  businessType: string;
+
+  city: string;
+  district?: string;
+
+  commercialRegisterNumber: string;
+
+  commercialRegisterImage: File;
+  identityImage: File;
+  logo?: File;
+
+  latitude?: number;
+  longitude?: number;
+
+  preferredLanguage?: string;
+}
+export interface SupplierRegisterResponse {
+  success: boolean;
+  message: string;
+  messageAr: string;
+  token: string | null;
+  expiresAt: string | null;
+  user: User | null;
+  otpCode?: string;
+}

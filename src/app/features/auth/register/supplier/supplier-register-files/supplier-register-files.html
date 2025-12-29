@@ -1,7 +1,7 @@
 <div class="main-wrapper" dir="rtl">
   <div class="right-panel">
     <div class="top-nav">
-      <button class="back-btn" aria-label="Back">
+      <button class="back-btn" aria-label="Back" (click)="goBack()">
         <svg
           width="24"
           height="24"
@@ -32,6 +32,30 @@
       </div>
 
       <form [formGroup]="documentsForm" (ngSubmit)="submit()">
+        <!-- Commercial Register Number -->
+        <div class="input-box">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <rect x="3" y="4" width="18" height="16" rx="2" />
+            <path d="M7 8h10M7 12h6" />
+          </svg>
+
+          <input
+            type="text"
+            placeholder="رقم السجل التجاري"
+            formControlName="commercialRegisterNumber"
+          />
+        </div>
+
+        @if (hasError('commercialRegisterNumber','required')) {
+        <small class="error">رقم السجل التجاري مطلوب</small>
+        }
         <!-- Commercial Register Copy -->
         <div
           class="input-box upload-box"
@@ -66,7 +90,7 @@
           </svg>
           }
 
-          <span>
+          <span class="upload-lable">
             {{ getFileName('commercialRegisterCopy') || 'رفع نسخة السجل التجاري' }}
           </span>
 
@@ -115,7 +139,7 @@
           </svg>
           }
 
-          <span>
+          <span class="upload-lable">
             {{ getFileName('nationalId') || 'رفع صورة الهوية' }}
           </span>
 
@@ -132,33 +156,8 @@
         <small class="error">صورة الهوية مطلوبة</small>
         }
 
-        <!-- Commercial Register Number -->
-        <div class="input-box">
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <rect x="3" y="4" width="18" height="16" rx="2" />
-            <path d="M7 8h10M7 12h6" />
-          </svg>
-
-          <input
-            type="text"
-            placeholder="رقم السجل التجاري"
-            formControlName="commercialRegisterNumber"
-          />
-        </div>
-
-        @if (hasError('commercialRegisterNumber','required')) {
-        <small class="error">رقم السجل التجاري مطلوب</small>
-        }
-
         <!-- Submit -->
-        <button type="submit" class="submit-btn" [disabled]="isFormInvalid()">التالي</button>
+        <button type="submit" class="submit-btn" [disabled]="isFormInvalid()">تسجيل</button>
       </form>
     </div>
 

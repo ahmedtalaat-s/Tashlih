@@ -4,6 +4,8 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../../../core/services/auth.service';
 import { LanguageService } from '../../../../../core/services/language.service';
+import { SupplierRegisterStore } from '../supplier-register.store';
+import { get } from 'http';
 
 @Component({
   selector: 'app-supplier-register-info',
@@ -14,16 +16,27 @@ import { LanguageService } from '../../../../../core/services/language.service';
 export class SupplierRegisterInfo {
   private fb = inject(FormBuilder);
   private router = inject(Router);
-  private authService = inject(AuthService);
+  private store = inject(SupplierRegisterStore);
   private languageService = inject(LanguageService);
 
-  registerForm = this.fb.nonNullable.group({
-    fullName: ['', [Validators.required, Validators.minLength(3)]],
-    email: ['', [Validators.required, Validators.email]],
-    phone: ['', [Validators.required, Validators.pattern(/^05\d{8}$/)]],
-    password: ['', [Validators.required, Validators.minLength(8)]],
-    terms: [false, Validators.requiredTrue],
-  });
+  registerForm = this.fb.nonNullable.group(
+    {
+      fullName: ['', [Validators.required, Validators.minLength(3)]],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', [Validators.required, Validators.pattern(/^5\d{8}$/)]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      confirmPassword: ['', [Validators.required]],
+      terms: [false, Validators.requiredTrue],
+    },
+    { validators: this.matchPassword }
+  );
+
+  matchPassword(form: any) {
+    const password = form.get('password')?.value;
+    const confirmPassword = form.get('confirmPassword')?.value;
+    if (!password || !confirmPassword) return null;
+    return password === confirmPassword ? null : { passwordMismatch: true };
+  }
 
   submitted = signal(false);
   formStatus = toSignal(this.registerForm.statusChanges, {
@@ -46,16 +59,25 @@ export class SupplierRegisterInfo {
     const registerData = {
       fullName: this.getValue('fullName'),
       email: this.getValue('email'),
-      phone: this.getValue('phone'),
+      phone: this.getPhoneWithCode(this.getValue('phone')),
       password: this.getValue('password'),
       preferredLanguage: this.languageService.defaultLanguage(),
     };
-    console.log('Form Data:', registerData);
+    this.store.setStepData(registerData);
+    this.router.navigate(['/auth/register/supplier/business-info']);
+  }
+  getPhoneWithCode(phone: string): string {
+    return '+966' + phone;
   }
 
+  //handle password visibility
   showPassword = signal(false);
+  showConfirmPassword = signal(false);
 
   togglePassword() {
     this.showPassword.update((v) => !v);
+  }
+  toggleConfirmPassword() {
+    this.showConfirmPassword.update((v) => !v);
   }
 }

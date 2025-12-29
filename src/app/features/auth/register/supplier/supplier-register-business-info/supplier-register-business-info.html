@@ -1,7 +1,7 @@
 <div class="main-wrapper" dir="rtl">
   <div class="right-panel">
     <div class="top-nav">
-      <button class="back-btn" aria-label="Back">
+      <button class="back-btn" aria-label="Back" (click)="goBack()">
         <svg
           width="24"
           height="24"
@@ -89,8 +89,68 @@
         <small class="error">نوع النشاط مطلوب</small>
         }
 
-        <!-- Commercial Register -->
+        <!-- City -->
         <div class="input-box">
+          <lucide-icon name="building-2" [img]="building2" class="lucide-icon"></lucide-icon>
+          <input type="text" placeholder="المدينة" formControlName="city" />
+        </div>
+        @if (hasError('city','required')) {
+        <small class="error">المدينة مطلوبة</small>
+        }
+
+        <!-- District -->
+        <div class="input-box">
+          <lucide-icon name="map-pin-house" [img]="mapPinHouse" class="lucide-icon"></lucide-icon>
+          <input type="text" placeholder="الحي" formControlName="district" />
+        </div>
+        <!-- logo -->
+        <div
+          class="input-box upload-box"
+          [class.uploaded]="hasFile('logo')"
+          (click)="logoInput.click()"
+        >
+          @if (!hasFile('logo')) {
+          <!-- Upload Icon -->
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="17 8 12 3 7 8" />
+            <line x1="12" y1="3" x2="12" y2="15" />
+          </svg>
+          } @else {
+          <!-- Check Icon -->
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#16a34a"
+            stroke-width="2"
+          >
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+          }
+          <span class="upload-lable">
+            {{ getFileName('logo') || 'رفع شعار النشاط (اختياري)' }}
+          </span>
+
+          <input
+            #logoInput
+            type="file"
+            hidden
+            accept="image/*"
+            (change)="onFileSelect($event, 'logo')"
+          />
+        </div>
+
+        <!-- Commercial Register -->
+        <!-- <div class="input-box">
           <svg
             width="21"
             height="21"
@@ -112,7 +172,7 @@
 
         @if (hasError('commercialRegister','required')) {
         <small class="error">رقم السجل التجاري مطلوب</small>
-        }
+        } -->
 
         <!-- Submit -->
         <button type="submit" class="submit-btn" [disabled]="isFormInvalid()">التالي</button>

@@ -1,6 +1,8 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { SupplierRegisterStore } from '../supplier-register.store';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-supplier-register-files',
@@ -10,6 +12,12 @@ import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 })
 export class SupplierRegisterFiles {
   private fb = inject(FormBuilder);
+  private router = inject(Router);
+  private store = inject(SupplierRegisterStore);
+
+  constructor() {
+    console.log(this.store.getData());
+  }
 
   documentsForm = this.fb.nonNullable.group({
     commercialRegisterCopy: [null, Validators.required],
@@ -58,5 +66,10 @@ export class SupplierRegisterFiles {
     });
 
     console.log('Documents ready:', formData);
+  }
+
+  //navigate back
+  goBack() {
+    this.router.navigate(['/auth/register/supplier/business-info']);
   }
 }

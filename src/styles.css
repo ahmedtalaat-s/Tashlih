@@ -73,10 +73,13 @@
   --subheading-lg: 32px;
   --subheading-md: 28px;
 
+
   --body-lg: 20px;
   --body-md: 18px;
   --caption: 16px;
   --caption-sm: 14px;
+
+  --btn-height: 45px;
 
   /* ================= RADIUS ================= */
   --radius-m: 16px;
@@ -121,6 +124,9 @@ h2 {
 
 .input-box {
   height: var(--input-height);
+}
+button{
+  height: var(--btn-height);
 }
 /* ================= CUSTOM SCROLLBAR ================= */
 /* .right-panel {

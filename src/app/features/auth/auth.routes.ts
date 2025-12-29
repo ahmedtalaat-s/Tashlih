@@ -17,21 +17,21 @@ export const authRoutes: Routes = [
           ),
       },
       {
-        path: 'supplier-info',
+        path: 'supplier/info',
         loadComponent: () =>
           import('./register/supplier/supplier-register-info/supplier-register-info').then(
             (m) => m.SupplierRegisterInfo
           ),
       },
       {
-        path: 'bussiness-info',
+        path: 'supplier/business-info',
         loadComponent: () =>
           import(
             './register/supplier/supplier-register-business-info/supplier-register-business-info'
           ).then((m) => m.SupplierRegisterBusinessInfo),
       },
       {
-        path: 'supplier-files',
+        path: 'supplier/files',
         loadComponent: () =>
           import('./register/supplier/supplier-register-files/supplier-register-files').then(
             (m) => m.SupplierRegisterFiles

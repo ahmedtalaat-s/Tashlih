@@ -12,6 +12,7 @@ import {
   registerCustomerRequest,
   registerCustomerResponse,
   sendOtpResponse,
+  SupplierRegisterRequest,
 } from '../models/auth.model';
 import { response } from 'express';
 
@@ -82,16 +83,52 @@ export class AuthService {
     );
   }
 
-  //verify otp code
-  //   {
-  //   "phone": "string",
-  //   "otpCode": "string"
-  // }
+  // verify otp code
   verifyOtpCode(phone: string, otpCode: string): Observable<sendOtpResponse> {
     return this.http.post<sendOtpResponse>(
       `${API_CONSTSANTS.BASE_URL}${API_CONSTSANTS.END_POINTS.AUTH.VERIFY_OTP}`,
       { phone, otpCode }
     );
+  }
+  //register supplier user
+  registerSupplier(userData: SupplierRegisterRequest): Observable<registerCustomerResponse> {
+    const formData = this.getFormData(userData);
+    return this.http.post<registerCustomerResponse>(
+      `${API_CONSTSANTS.BASE_URL}${API_CONSTSANTS.END_POINTS.AUTH.REGISTER_SUPPLIER}`,
+      formData
+    );
+  }
+
+  // Helper function to convert object to FormData
+  getFormData(data: SupplierRegisterRequest): FormData {
+    const formData = new FormData();
+
+    formData.append('FullName', data.fullName);
+    formData.append('Phone', data.phone);
+    if (data.email) formData.append('Email', data.email);
+    formData.append('Password', data.password);
+
+    formData.append('BusinessNameAr', data.businessNameAr);
+    if (data.businessNameEn) formData.append('BusinessNameEn', data.businessNameEn);
+
+    formData.append('BusinessType', data.businessType);
+    formData.append('City', data.city);
+    if (data.district) formData.append('District', data.district);
+
+    formData.append('CommercialRegisterNumber', data.commercialRegisterNumber);
+
+    formData.append('CommercialRegisterImage', data.commercialRegisterImage);
+
+    formData.append('IdentityImage', data.identityImage);
+
+    if (data.logo) formData.append('Logo', data.logo);
+
+    if (data.latitude !== undefined) formData.append('Latitude', data.latitude.toString());
+
+    if (data.longitude !== undefined) formData.append('Longitude', data.longitude.toString());
+
+    if (data.preferredLanguage) formData.append('PreferredLanguage', data.preferredLanguage);
+    return formData;
   }
 
   // logout user

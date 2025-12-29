@@ -75,35 +75,43 @@
         <small class="error"> البريد الإلكتروني غير صحيح </small>
         }
         <!-- Phone -->
-        <div class="input-box">
-          <svg
-            _ngcontent-ng-c3369730433=""
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path
-              _ngcontent-ng-c3369730433=""
-              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
-            ></path>
-          </svg>
+        <div class="phone-input-group">
+          <div class="country-code">
+            <span>+966</span>
+            <img src="assets/images/saudi-arabia.svg" alt="Saudi Arabia" class="flag-icon" />
+          </div>
+          <div class="phone-input-wrapper">
+            <div class="input-box">
+              <svg
+                _ngcontent-ng-c3369730433=""
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  _ngcontent-ng-c3369730433=""
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                ></path>
+              </svg>
 
-          <input
-            type="tel"
-            placeholder="رقم الهاتف"
-            maxlength="10"
-            pattern="[0-9]*"
-            formControlName="phone"
-          />
+              <input
+                type="tel"
+                placeholder="رقم الهاتف"
+                maxlength="9"
+                pattern="[0-9]*"
+                formControlName="phone"
+              />
+            </div>
+          </div>
         </div>
 
         @if (hasError('phone','required')) {
         <small class="error"> رقم الجوال مطلوب </small>
         } @if (hasError('phone','pattern')) {
-        <small class="error"> رقم الجوال يجب أن يبدأ بـ 05 ويتكون من 10 أرقام </small>
+        <small class="error"> رقم الجوال يجب أن يبدأ بـ 5 ويتكون من 9 أرقام </small>
         }
 
         <!-- Password -->
@@ -178,6 +186,79 @@
         <small class="error"> كلمة المرور مطلوبة </small>
         } @if (hasError('password','minlength')) {
         <small class="error"> كلمة المرور يجب أن تكون 8 أحرف على الأقل </small>
+        }
+        <!--confirm Password -->
+        <div class="input-box">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <rect x="3" y="11" width="18" height="11" rx="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+
+          <input
+            [type]="showConfirmPassword() ? 'text' : 'password'"
+            placeholder="تأكيد كلمة المرور"
+            formControlName="confirmPassword"
+          />
+          <!-- Eye Toggle -->
+          <button
+            type="button"
+            class="password-toggle"
+            (click)="toggleConfirmPassword()"
+            [attr.aria-label]="showConfirmPassword() ? 'إخفاء كلمة المرور' : 'إظهار كلمة المرور'"
+          >
+            @if (showConfirmPassword()) {
+            <!-- Eye Off -->
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M17.94 17.94A10.94 10.94 0 0 1 12 20
+             c-7 0-11-8-11-8
+             a21.81 21.81 0 0 1 5.06-6.88"
+              />
+              <path
+                d="M9.9 4.24A9.12 9.12 0 0 1 12 4
+             c7 0 11 8 11 8
+             a21.81 21.81 0 0 1-4.87 6.36"
+              />
+              <path d="M14.12 14.12a3 3 0 1 1-4.24-4.24" />
+              <path d="M1 1l22 22" />
+            </svg>
+            } @else {
+            <!-- Eye -->
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+            }
+          </button>
+        </div>
+        @if (hasError('confirmPassword','required')) {
+        <small class="error"> كلمة المرور مطلوبة </small>
+        } @if (registerForm.hasError('passwordMismatch') &&
+        registerForm.get('confirmPassword')?.touched) {
+        <small class="error"> كلمة المرور غير متطابقة </small>
         }
 
         <!-- Terms -->

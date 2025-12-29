@@ -34,6 +34,7 @@
     "@primeng/themes": "^21.0.2",
     "@primeuix/themes": "^2.0.2",
     "express": "^5.1.0",
+    "lucide-angular": "^0.562.0",
     "primeicons": "^7.0.0",
     "primeng": "^20.4.0",
     "rxjs": "~7.8.0",

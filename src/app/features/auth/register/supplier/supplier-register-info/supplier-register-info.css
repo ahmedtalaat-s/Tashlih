@@ -10,7 +10,7 @@
   display: flex;
   justify-content: space-around;
   gap: 1.5rem;
-  padding: 1rem;
+  padding: 0.8rem;
   width: 100%;
   height: 100vh;
   overflow: hidden;
@@ -65,9 +65,6 @@
   text-align: center;
 }
 
-.logo-container {
-  margin-bottom: 10px;
-}
 
 .logo-container img {
   height: 80px;
@@ -77,14 +74,14 @@
   font-size: 32px;
   /* Balanced for UI scale */
   color: var(--primary-950);
-  margin-bottom: 12px;
+  margin-bottom: 7px;
   font-weight: 700;
 }
 
 .header-text p {
   font-size: var(--caption);
   color: var(--color-text-secondary);
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 }
 
 /* --- Form Elements --- */
@@ -97,6 +94,7 @@
   align-items: center;
   padding: 0 16px;
   height: 45px;
+  width: 100%;
 }
 
 .input-box input {
@@ -118,7 +116,7 @@
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  margin: 20px 0;
+  margin: 11px 0;
   font-size: 14px;
   color: var(--text-light-gray);
   text-align: right;
@@ -138,7 +136,6 @@
 
 .submit-btn {
   width: 100%;
-  height: 56px;
   background-color: var(--primary-500);
   color: var(--primary-950);
   border: none;
@@ -213,7 +210,6 @@
 
 .footer {
   width: 100%;
-  padding: 13px 12px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -268,4 +264,42 @@
   .right-panel {
     background-color: rgba(255, 255, 255);
   }
+}
+
+/*phone wrapper*/
+.phone-input-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.country-code {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 10px;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 400;
+  color: #000000;
+}
+
+.flag-icon {
+  width: 24.5px;
+  height: 18px;
+}
+
+.phone-input-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.phone-input-wrapper .input-box {
+  margin: 0;
 }
