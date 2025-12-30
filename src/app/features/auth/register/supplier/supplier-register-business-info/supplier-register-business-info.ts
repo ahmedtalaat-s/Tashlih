@@ -28,6 +28,20 @@ export class SupplierRegisterBusinessInfo {
     logo: [null],
   });
 
+  ngOnInit() {
+    const data = this.store.getData();
+
+    if (data) {
+      this.activityForm.patchValue({
+        activityName: data.businessNameAr,
+        activityType: data.businessType,
+        city: data.city,
+        district: data.district,
+        logo: data.logo,
+      });
+    }
+  }
+
   submitted = signal(false);
 
   formStatus = toSignal(this.activityForm.statusChanges, {

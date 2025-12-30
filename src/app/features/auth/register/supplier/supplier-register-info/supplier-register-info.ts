@@ -6,6 +6,7 @@ import { AuthService } from '../../../../../core/services/auth.service';
 import { LanguageService } from '../../../../../core/services/language.service';
 import { SupplierRegisterStore } from '../supplier-register.store';
 import { get } from 'http';
+import { UserService } from '../../../../../core/services/user.service';
 
 @Component({
   selector: 'app-supplier-register-info',
@@ -18,6 +19,7 @@ export class SupplierRegisterInfo {
   private router = inject(Router);
   private store = inject(SupplierRegisterStore);
   private languageService = inject(LanguageService);
+  private userService = inject(UserService);
 
   registerForm = this.fb.nonNullable.group(
     {
@@ -36,6 +38,19 @@ export class SupplierRegisterInfo {
     const confirmPassword = form.get('confirmPassword')?.value;
     if (!password || !confirmPassword) return null;
     return password === confirmPassword ? null : { passwordMismatch: true };
+  }
+
+  //oninit
+  ngOnInit() {
+    const data = this.store.getData();
+
+    if (data) {
+      this.registerForm.patchValue({
+        fullName: data.fullName,
+        email: data.email,
+        phone: data.phone?.split('+966')[1],
+      });
+    }
   }
 
   submitted = signal(false);
@@ -64,6 +79,7 @@ export class SupplierRegisterInfo {
       preferredLanguage: this.languageService.defaultLanguage(),
     };
     this.store.setStepData(registerData);
+    this.userService.phoneNumber = registerData.phone;
     this.router.navigate(['/auth/register/supplier/business-info']);
   }
   getPhoneWithCode(phone: string): string {

@@ -28,27 +28,62 @@
           <p class="description">حدد دورك للاستفادة من خدمات التطبيق المختلفة</p>
         </div>
 
-        <div class="form-section">
+        <form class="form-section" [formGroup]="loginForm" (ngSubmit)="submit()">
+          <!-- Phone -->
           <div class="form-group">
             <div class="phone-input-group">
-              <div class="phone-input-wrapper">
-                <input type="tel" placeholder="00 0000 00000" class="phone-input" />
-              </div>
-
               <div class="country-code">
-                <span>+966</span>
-                <img src="assets/images/saudi-arabia.svg" alt="Saudi Arabia" class="flag-icon" />
+                <span dir="ltr">+966</span>
+                <img src="assets/images/saudi-arabia.svg" alt="SA" class="flag-icon" />
+              </div>
+              <div class="input-box">
+                <input
+                  id="phone"
+                  type="tel"
+                  formControlName="phone"
+                  placeholder="5-XXXX-XXXX"
+                  maxlength="9"
+                  class="phone-input"
+                />
               </div>
             </div>
+            @if (loginForm.controls.phone.touched && loginForm.controls.phone.invalid) {
+            <small class="error">رقم الهاتف غير صحيح</small>
+            }
           </div>
 
-          <button class="submit-button">تسجيل الدخول</button>
+          <!-- Password -->
+          @if (loginWithPassword()) {
+          <div class="form-group">
+            <div class="input-box">
+              <input
+                id="password"
+                type="password"
+                formControlName="password"
+                placeholder="كلمة المرور"
+                class="password-input"
+              />
+            </div>
+            @if (loginForm.controls.password.touched && loginForm.controls.password.invalid) {
+            <small class="error">كلمة المرور مطلوبة (6 أحرف على الأقل)</small>
+            }
+          </div>
+          }
 
+          <!-- Submit -->
+          <button class="submit-button" type="submit">تسجيل الدخول</button>
+
+          <!-- Toggle -->
+          <button type="button" class="link-button" (click)="toggleLoginMethod()">
+            {{ loginWithPassword() ? 'الدخول باستخدام رمز التحقق' : 'الدخول باستخدام كلمة المرور' }}
+          </button>
+
+          <!-- Signup -->
           <div class="signup-link">
-            <span class="signup-text">ليس لدي حساب ؟</span>
+            <span class="signup-text">ليس لدي حساب؟</span>
             <button class="link-button">إنشاء الحساب</button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
 
@@ -76,10 +111,10 @@
   </div>
 
   <div class="left-panel">
-    <img
-      src="./assets/images/supplier-register.svg"
-      class="illustration"
-      alt="Welcome Illustration"
-    />
+    <img src="./assets/images/login.svg" class="illustration" alt="Welcome Illustration" />
   </div>
 </div>
+
+@if (showOtp()) {
+<app-check-otpcode (verify)="handleOtpLogin($event)" (close)="closeOtp()"> </app-check-otpcode>
+}

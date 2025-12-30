@@ -9,4 +9,9 @@ export class UserService {
   get phoneNumber(): string | null {
     return StorageHelper.getItem<string>(APP_CONSTANTS.STORAGE_KEYS.PHONE_NUMBER);
   }
+  set phoneNumber(value: string) {
+    if (value) {
+      StorageHelper.setItem(APP_CONSTANTS.STORAGE_KEYS.PHONE_NUMBER, value);
+    }
+  }
 }

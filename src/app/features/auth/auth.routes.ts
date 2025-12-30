@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { register } from 'module';
 import path from 'path';
+import { supplierRegisterGuardGuard } from '../../core/guards/supplier-register-guard-guard';
 export const authRoutes: Routes = [
   {
     path: 'register',
@@ -25,6 +26,7 @@ export const authRoutes: Routes = [
       },
       {
         path: 'supplier/business-info',
+        canActivate: [supplierRegisterGuardGuard],
         loadComponent: () =>
           import(
             './register/supplier/supplier-register-business-info/supplier-register-business-info'
@@ -32,6 +34,7 @@ export const authRoutes: Routes = [
       },
       {
         path: 'supplier/files',
+        canActivate: [supplierRegisterGuardGuard],
         loadComponent: () =>
           import('./register/supplier/supplier-register-files/supplier-register-files').then(
             (m) => m.SupplierRegisterFiles

@@ -13,6 +13,9 @@ export class SupplierRegisterStore {
   getData() {
     return this.data;
   }
+  hasData(): boolean {
+    return Object.keys(this.data).length > 0;
+  }
 
   clear() {
     this.data = {};

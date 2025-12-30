@@ -9,6 +9,10 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { API_CONSTSANTS } from '../../constants/api.constants';
 import {
   getUserResponse,
+  LoginOtpRequest,
+  LoginOtpResponse,
+  LoginRequest,
+  LoginResponse,
   registerCustomerRequest,
   registerCustomerResponse,
   sendOtpResponse,
@@ -129,6 +133,44 @@ export class AuthService {
 
     if (data.preferredLanguage) formData.append('PreferredLanguage', data.preferredLanguage);
     return formData;
+  }
+
+  //login user
+  login(data: LoginRequest): Observable<LoginResponse> {
+    return this.http
+      .post<LoginResponse>(
+        `${API_CONSTSANTS.BASE_URL}${API_CONSTSANTS.END_POINTS.AUTH.LOGIN}`,
+        data
+      )
+      .pipe(
+        map((response) => {
+          if (response.success && response.token && response.user) {
+            StorageHelper.setItem(APP_CONSTANTS.STORAGE_KEYS.TOKEN, response.token);
+            StorageHelper.setItem(APP_CONSTANTS.STORAGE_KEYS.USER, response.user);
+            this.userInfo.set(response.user);
+          }
+          return response;
+        })
+      );
+  }
+
+  //login with otp
+  loginWithOtp(data: LoginOtpRequest): Observable<LoginOtpResponse> {
+    return this.http
+      .post<LoginOtpResponse>(
+        `${API_CONSTSANTS.BASE_URL}${API_CONSTSANTS.END_POINTS.AUTH.LOGIN_OTP}`,
+        data
+      )
+      .pipe(
+        map((response) => {
+          if (response.success && response.token && response.user) {
+            StorageHelper.setItem(APP_CONSTANTS.STORAGE_KEYS.TOKEN, response.token);
+            StorageHelper.setItem(APP_CONSTANTS.STORAGE_KEYS.USER, response.user);
+            this.userInfo.set(response.user);
+          }
+          return response;
+        })
+      );
   }
 
   // logout user

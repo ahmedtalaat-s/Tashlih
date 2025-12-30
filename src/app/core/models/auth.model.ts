@@ -74,3 +74,33 @@ export interface SupplierRegisterResponse {
   user: User | null;
   otpCode?: string;
 }
+
+// login with password
+export interface LoginRequest {
+  phone: string;
+  password: string;
+}
+
+export interface LoginResponse {
+  success: boolean;
+  message: string;
+  messageAr: string;
+  token: string | null;
+  expiresAt: string | null;
+  user: User | null;
+}
+
+// login with otp
+export interface LoginOtpRequest {
+  phone: string;
+  otpCode: string;
+}
+
+export interface LoginOtpResponse {
+  success: boolean;
+  message: string;
+  messageAr: string;
+  token: string | null;
+  expiresAt: string | null;
+  user: User | null;
+}

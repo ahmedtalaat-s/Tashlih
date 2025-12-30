@@ -1,4 +1,5 @@
 import { environment } from '../environment/environment';
+import { Login } from '../features/auth/login/login';
 
 export const API_CONSTSANTS = {
   BASE_URL: environment.API_URL,
@@ -11,6 +12,9 @@ export const API_CONSTSANTS = {
       // OTP
       SEND_OTP: 'Auth/send-otp',
       VERIFY_OTP: 'Auth/verify-otp',
+
+      //Login
+      Login: 'Auth/login',
       LOGIN_OTP: 'Auth/login-otp',
 
       // Password

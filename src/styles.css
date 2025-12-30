@@ -85,9 +85,14 @@
   --radius-m: 16px;
   --radius-s: 12px;
   /* ================= HEIGHT ================= */
-  :root {
-      --input-height: clamp(40px, 5vh, 50px);
-    }
+  --input-height: clamp(40px, 5vh, 50px);
+
+  /* =================login page constants ============= */
+  --form-max-width: 420px;
+    --input-padding: 0 16px;
+    --gap-sm: 12px;
+    --gap-md: 16px;
+    --gap-lg: 24px;
 }
 
 body,html{
