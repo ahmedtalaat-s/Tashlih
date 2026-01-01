@@ -1,0 +1,195 @@
+
+.suppliers-section {
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  direction: rtl;
+}
+
+.section-header {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 25px;
+  color: var(--color-text-black);
+}
+
+.cards-container {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding-bottom: 20px;
+  scrollbar-width: none;
+}
+
+.cards-container::-webkit-scrollbar {
+  display: none;
+}
+
+.supplier-card {
+  background-color: var(--bg-gray);
+  border-radius: 15px;
+  padding: 20px;
+  min-width: 260px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.heart-btn {
+  background: #e0e0e0;
+  border: none;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #555;
+}
+
+.image-placeholder {
+  background: #e0e0e0;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: #bbb;
+}
+
+.card-info {
+  text-align: right;
+  margin-bottom: 15px;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.phone-number {
+  font-size: 14px;
+  direction: ltr;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 5px;
+}
+
+.phone-number i {
+  color: var(--primary-500);
+  transform: scaleX(-1);
+}
+
+.specialization-label {
+  font-size: 12px;
+  color: var(--text-gray);
+  margin-top: 15px;
+  display: block;
+}
+
+.specialization-tag {
+  background: #fff;
+  padding: 8px 15px;
+  border-radius: 8px;
+  display: inline-block;
+  font-size: 13px;
+  margin-top: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.go-btn {
+  background-color: var(--primary-500);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: auto;
+  align-self: flex-end;
+  cursor: pointer;
+}
+
+.navigation-controls {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.nav-btn {
+  background-color: #e8e8e8;
+  border: none;
+  width: 45px;
+  height: 45px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+.suppliers-section {
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  direction: rtl;
+}
+
+.section-header {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+
+.cards-container {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 20px;
+
+  /* Snap Effect */
+  scroll-snap-type: x mandatory;
+
+  scrollbar-width: none;
+}
+
+.cards-container::-webkit-scrollbar {
+  display: none;
+}
+
+.supplier-card {
+  min-width: 260px;
+  scroll-snap-align: start;
+  background-color: #f2f2f2;
+  border-radius: 15px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+lucide-icon {
+  display: inline-flex;
+}
+
+/* Phone icon RTL fix */
+.phone-icon {
+  color: var(--primary-yellow);
+  transform: scaleX(-1);
+}
+
+/* Align icons nicely */
+.heart-btn lucide-icon,
+.go-btn lucide-icon,
+.nav-btn lucide-icon {
+  stroke: currentColor;
+}

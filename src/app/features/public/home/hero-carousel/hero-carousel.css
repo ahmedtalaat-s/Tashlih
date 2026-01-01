@@ -1,0 +1,155 @@
+
+.hero-carousel {
+  background-color: var(--primary-50);
+  padding: 20px 0;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+}
+
+
+/* PrimeNG override */
+:host ::ng-deep .p-carousel-content-container{
+  gap: 40px;
+}
+:host ::ng-deep .p-carousel {
+  width: 100%;
+}
+
+:host ::ng-deep .p-carousel-indicators {
+  bottom: 600px;
+}
+
+:host ::ng-deep .p-carousel-indicator button {
+  width: 12px;
+  height: 12px;
+  border-radius: 20px;
+  background: #f1eec9;
+  transition: all 0.3s;
+}
+
+:host ::ng-deep .p-carousel-indicator.p-highlight button {
+  width: 35px;
+  background: var(--primary-500);
+}
+
+
+
+:host ::ng-deep .p-carousel-indicator {
+  width: 12px;
+  height: 12px;
+  background-color: var(--primary-400);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+:host ::ng-deep .p-carousel-indicator-active {
+  background-color: var(--primary-500);
+  width: 35px;
+  border-radius: 10px;
+}
+:host ::ng-deep .p-carousel-indicator-active button{
+  background-color: var(--primary-500);
+}
+
+/* Slide layout */
+.slide {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 20px;
+  width: 100%;
+}
+
+.slide-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+/* Text */
+.text-content {
+  flex: 1;
+  text-align: right;
+}
+
+.text-content h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: var(--primary-900);
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.text-content p {
+  font-size: 1.1rem;
+  color: var(--black-800);
+  margin-bottom: 30px;
+  max-width: 500px;
+}
+
+.btn-primary {
+  background-color: var(--primary-500);
+  border: none;
+  padding: 15px 35px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.btn-primary:hover {
+  transform: scale(1.05);
+}
+
+/* Image */
+.image-box {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.placeholder-img {
+  width: 300px;
+  height: 300px;
+  border: 4px solid #e0e0e0;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ccc;
+}
+
+.placeholder-img svg {
+  width: 100px;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .slide-flex {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .text-content {
+    text-align: center;
+  }
+
+  .text-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .text-content p {
+    margin: 0 auto 30px;
+  }
+}
+

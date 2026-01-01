@@ -1,0 +1,15 @@
+<section class="products">
+  <div class="container">
+    <h2 class="section-title">{{ title }}</h2>
+
+    <div class="product-grid">
+      @for (product of products; track $index) {
+      <app-product-card [product]="product"> </app-product-card>
+      }
+    </div>
+
+    <div class="center-btn">
+      <button class="btn-black">المزيد من المنتجات</button>
+    </div>
+  </div>
+</section>

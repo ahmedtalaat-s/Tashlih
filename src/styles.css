@@ -58,13 +58,14 @@
   /* ================= TEXT ================= */
   --color-text-primary: #2c2c2c;
   --color-text-secondary: #4d4d4d;
+  --text-gray:#626262
   --text-light-gray: #666666;
   --text-lighter-gray: #999999;
   --border-gray: #e6e6e6;
   --color-text-black: #000000;
   --color-white: #ffffff;
   --bg-gray: #f2f2f2;
-
+  --text-brown: #3d3112;
   /* ================= TYPOGRAPHY ================= */
   --font-family-base: 'Tajawal', sans-serif;
 
@@ -137,6 +138,7 @@ h2 {
 }
 button{
   height: var(--btn-height);
+  font-family: var(--font-family-base);
 }
 /* ================= CUSTOM SCROLLBAR ================= */
 /* .right-panel {

@@ -1,0 +1,28 @@
+<div class="product-card" dir="rtl">
+  <button class="fav-btn">
+    <i-lucide [img]="heart"></i-lucide>
+  </button>
+
+  <div class="prod-img-box">
+    <img [src]="product.image" [alt]="product.title" />
+  </div>
+
+  <h3>{{ product.title }}</h3>
+
+  <div class="card-footer">
+    <span class="price">
+      {{ product.price | currency : 'SAR' }}
+      <!-- <small>{{ product.currency }}</small> -->
+    </span>
+
+    <button class="add-btn">
+      <svg width="7" height="11" viewBox="0 0 7 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M5.91431 0.707031L1.41431 5.20703L5.91431 9.70703"
+          stroke="#1A1500"
+          stroke-width="2"
+        />
+      </svg>
+    </button>
+  </div>
+</div>

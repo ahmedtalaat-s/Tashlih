@@ -7,10 +7,10 @@
 
 /* Footer Base */
 .main-footer {
-  background-color: var(--bg-dark);
+  background-color: var(--primary-950);
+  /* background-color: var(--bg-dark); */
   color: #ffffff;
   padding-top: 60px;
-  font-family: 'Cairo', sans-serif;
 }
 
 .container {
@@ -59,17 +59,13 @@
 
 .footer-logo {
   display: flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--accent-yellow);
-  font-size: 1.5rem;
-  font-weight: 800;
+  justify-content: start;
   margin-bottom: 20px;
 }
 
-.footer-logo i-lucide {
-  width: 22px;
-  height: 22px;
+.footer-logo img {
+  width: 100px;
+  height: 100px;
 }
 
 .brand-desc {
@@ -110,7 +106,7 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
-  max-width: 200px;
+  max-width: 400px;
 }
 
 .badge img {
@@ -120,7 +116,7 @@
 
 /* Bottom */
 .footer-bottom {
-  background-color: var(--footer-bottom-bg);
+  background-color: var(--primary-900);
   padding: 20px 0;
   border-top: 1px solid #1e1e0a;
 }
@@ -186,4 +182,7 @@
 /* Lucide default */
 i-lucide {
   stroke-width: 1.8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

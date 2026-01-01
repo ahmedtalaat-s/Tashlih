@@ -1,0 +1,17 @@
+<section class="feature-banner">
+  <div class="container">
+    <div class="banner-card" [style.backgroundColor]="bgColor">
+      <div class="banner-content">
+        <h2>{{ title }}</h2>
+        <p>{{ description }}</p>
+      </div>
+      <div class="banner-image">
+        @if (imageSrc) {
+        <img [src]="imageSrc" alt="banner image" />
+        }@else{
+        <i-lucide [img]="Image" [size]="100" class="placeholder-icon"></i-lucide>
+        }
+      </div>
+    </div>
+  </div>
+</section>

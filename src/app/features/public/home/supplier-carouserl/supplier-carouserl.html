@@ -1,0 +1,50 @@
+<section class="suppliers-section">
+  <h2 class="section-header">الموردين المتاحين</h2>
+
+  <div class="cards-container" #carousel>
+    @for (item of items; track $index) {
+    <div class="supplier-card">
+      <div class="card-top">
+        <!-- Heart -->
+        <button class="heart-btn">
+          <lucide-icon [img]="HeartIcon" size="18" strokeWidth="1.8"> </lucide-icon>
+        </button>
+
+        <!-- Image placeholder -->
+        <div class="image-placeholder">
+          <lucide-icon [img]="ImageIcon" size="26" strokeWidth="1.5"> </lucide-icon>
+        </div>
+      </div>
+
+      <div class="card-info">
+        <h3 class="card-title">مركز البركة</h3>
+
+        <div class="phone-number">
+          <span>+01123456789</span>
+          <lucide-icon class="phone-icon" [img]="PhoneIcon" size="16" strokeWidth="1.8">
+          </lucide-icon>
+        </div>
+
+        <span class="specialization-label">التخصص</span>
+        <div class="specialization-tag">شراء وبيع قطع غيار</div>
+      </div>
+
+      <!-- Go button -->
+      <button class="go-btn">
+        <lucide-icon [img]="ChevronLeftIcon" size="18" strokeWidth="2"> </lucide-icon>
+      </button>
+    </div>
+    }
+  </div>
+
+  <!-- Navigation -->
+  <div class="navigation-controls">
+    <button class="nav-btn" (click)="scrollPrev()">
+      <lucide-icon [img]="ChevronRightIcon" size="20" strokeWidth="2"> </lucide-icon>
+    </button>
+
+    <button class="nav-btn" (click)="scrollNext()">
+      <lucide-icon [img]="ChevronLeftIcon" size="20" strokeWidth="2"> </lucide-icon>
+    </button>
+  </div>
+</section>
