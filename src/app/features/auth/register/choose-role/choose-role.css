@@ -12,6 +12,10 @@
   display: flex;
   flex-direction: column;
   background-color: var(--color-white);
+  background-image: url('/assets/images/bg-register.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .header {

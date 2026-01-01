@@ -1,7 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../../../core/services/auth.service';
 import { LanguageService } from '../../../../../core/services/language.service';
 import { registerCustomerRequest } from '../../../../../core/models/auth.model';
@@ -11,7 +11,7 @@ import { UserService } from '../../../../../core/services/user.service';
 
 @Component({
   selector: 'app-customer-register-form',
-  imports: [ReactiveFormsModule, CheckOtpcode],
+  imports: [ReactiveFormsModule, CheckOtpcode, RouterLink],
   templateUrl: './customer-register-form.html',
   styleUrl: './customer-register-form.css',
 })

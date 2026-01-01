@@ -1,0 +1,118 @@
+.main-footer {
+  background-color: #0a0a0a;
+  color: #ffffff;
+  padding: 60px 20px 30px;
+  text-align: center;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Logo and Header */
+.logo {
+  margin-bottom: 30px;
+}
+
+.logo img {
+  width: 50px;
+  margin-bottom: 10px;
+}
+
+.logo h2 {
+  color: #ffcc00;
+  font-size: 1.5rem;
+  margin: 0;
+  letter-spacing: 2px;
+}
+
+/* Download Button */
+.btn-download {
+  background-color: #ffcc00;
+  color: #000;
+  border: none;
+  padding: 12px 40px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 12px;
+  cursor: pointer;
+  margin-bottom: 40px;
+  transition: transform 0.2s;
+}
+
+.btn-download:hover {
+  transform: scale(1.05);
+}
+
+/* Contact Info Row */
+.contact-info {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #cccccc;
+  font-size: 0.95rem;
+}
+
+.info-item i {
+  width: 20px;
+  height: 20px;
+  color: #ffffff;
+}
+
+/* Divider */
+.footer-divider {
+  border: 0;
+  border-top: 1px solid #222;
+  margin: 0 0 30px;
+}
+
+/* Bottom Bar */
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 25px;
+}
+
+.footer-links a {
+  color: #ffffff;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover {
+  color: #ffcc00;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .footer-bottom {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+
+  .footer-links {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

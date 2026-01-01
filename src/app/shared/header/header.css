@@ -1,0 +1,278 @@
+/* ================= Reset ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ================= Base ================= */
+.main-header {
+  font-family: 'Cairo', sans-serif;
+  direction: rtl;
+  text-align: right;
+}
+
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ================= Header Top ================= */
+.header-top {
+  background-color: #ffffff;
+  padding: 15px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.top-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* ================= Logo ================= */
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 120px;
+}
+
+.logo-placeholder {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #ffd700 50%, #2c3e50 50%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-icon {
+  width: 20px;
+  height: 20px;
+  color: #ffffff;
+}
+
+.brand-name {
+  font-weight: 700;
+  color: #2c3e50;
+  font-size: 1.2rem;
+}
+
+/* ================= Search ================= */
+.search-section {
+  flex-grow: 1;
+  max-width: 600px;
+}
+
+.search-box {
+  position: relative;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 12px 50px 12px 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #f9f9f9;
+  font-family: inherit;
+}
+
+.search-btn {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #888;
+}
+
+/* ================= User Actions ================= */
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.action-icons {
+  display: flex;
+  gap: 10px;
+}
+
+.icon-btn {
+  width: 40px;
+  height: 40px;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.icon-btn:hover {
+  background-color: #e5e5e5;
+}
+
+/* ================= User Profile ================= */
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.user-name-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: #333;
+}
+
+.dropdown-icon {
+  width: 14px;
+  height: 14px;
+  color: #777;
+}
+
+.user-location {
+  font-size: 0.85rem;
+  color: #777;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 4px;
+}
+
+.user-location i-lucide {
+  width: 14px;
+  height: 14px;
+  color: #ffd700;
+}
+
+.user-avatar {
+  width: 50px;
+  height: 50px;
+  background-color: #ddd;
+  border-radius: 50%;
+}
+
+/* ================= Mobile Location ================= */
+.mobile-location-container {
+  display: none;
+  width: 100%;
+}
+
+/* ================= Header Bottom ================= */
+.header-bottom {
+  background-color: #e9ecef;
+  padding: 10px 0;
+}
+
+.bottom-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.categories-btn {
+  background-color: #ffd700;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.categories-btn i-lucide {
+  width: 18px;
+  height: 18px;
+}
+
+/* ================= Navigation ================= */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #555;
+  font-weight: 600;
+  font-size: 1.05rem;
+  transition: color 0.2s;
+}
+
+.nav-links a.active,
+.nav-links a:hover {
+  color: #333;
+}
+
+/* ================= Lucide Global Sizing ================= */
+i-lucide {
+  width: 18px;
+  height: 18px;
+  stroke-width: 1.8;
+}
+
+/* ================= Responsive ================= */
+@media (max-width: 920px) {
+  .desktop-location {
+    display: none;
+  }
+
+  .header-bottom {
+    display: none;
+  }
+
+  .mobile-location-container {
+    display: block;
+    padding-top: 10px;
+  }
+
+  .search-section {
+    flex-basis: 100%;
+    max-width: 100%;
+  }
+
+  .user-avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .icon-btn {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+@media (max-width: 480px) {
+  .user-name {
+    display: none;
+  }
+
+  .dropdown-icon {
+    display: none;
+  }
+}

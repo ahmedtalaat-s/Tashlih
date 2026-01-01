@@ -89,10 +89,15 @@
 
   /* =================login page constants ============= */
   --form-max-width: 420px;
-    --input-padding: 0 16px;
-    --gap-sm: 12px;
-    --gap-md: 16px;
-    --gap-lg: 24px;
+  --input-padding: 0 16px;
+  --gap-sm: 12px;
+  --gap-md: 16px;
+  --gap-lg: 24px;
+  /* =================main footer constants ============= */
+  --bg-dark: #141405;
+    --accent-yellow: #ffd700;
+    --text-gray: #b5b5b5;
+    --footer-bottom-bg: #0d0d04;
 }
 
 body,html{

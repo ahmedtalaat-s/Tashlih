@@ -1,7 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../../../core/services/auth.service';
 import { LanguageService } from '../../../../../core/services/language.service';
 import { SupplierRegisterStore } from '../supplier-register.store';
@@ -10,7 +10,7 @@ import { UserService } from '../../../../../core/services/user.service';
 
 @Component({
   selector: 'app-supplier-register-info',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './supplier-register-info.html',
   styleUrl: './supplier-register-info.css',
 })

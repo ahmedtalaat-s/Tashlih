@@ -66,7 +66,8 @@ export class Login {
         },
       });
     } else {
-      this.authService.sendOtpCode(phone ?? '', 'login').subscribe({
+      const phoneWithCode = this.getPhoneWithCode(phone!);
+      this.authService.sendOtpCode(phoneWithCode, 'login').subscribe({
         next: (response) => {
           if (response.success) {
             this.showOtp.set(true);

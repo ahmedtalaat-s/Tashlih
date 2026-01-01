@@ -1,0 +1,88 @@
+<header class="main-header" dir="rtl">
+  <!-- ================= Header Top ================= -->
+  <div class="header-top">
+    <div class="container top-container">
+      <!-- Logo -->
+      <div class="logo-section">
+        <div class="logo-placeholder">
+          <i-lucide [img]="MapPin" class="logo-icon"></i-lucide>
+        </div>
+        <span class="brand-name">TASHLEEH</span>
+      </div>
+
+      <!-- Search -->
+      <div class="search-section order-mobile-2">
+        <div class="search-box">
+          <input type="text" placeholder="ابحث عن قطعة او مورد" />
+          <button class="search-btn">
+            <i-lucide [img]="Search"></i-lucide>
+          </button>
+        </div>
+      </div>
+
+      <!-- User Actions -->
+      <div class="user-actions order-mobile-1">
+        <div class="action-icons">
+          <a routerLink="/notifications" class="icon-btn">
+            <i-lucide [img]="Bell"></i-lucide>
+          </a>
+
+          <a routerLink="/wishlist" class="icon-btn">
+            <i-lucide [img]="Heart"></i-lucide>
+          </a>
+        </div>
+
+        <div class="user-profile">
+          <div class="user-info">
+            <div class="user-name-row">
+              <i-lucide [img]="ChevronDown" class="dropdown-icon"></i-lucide>
+              <span class="user-name">أحمد سامي علي</span>
+            </div>
+
+            <span class="user-location desktop-location">
+              <i-lucide [img]="MapPin"></i-lucide>
+              حي الفجر، برج الفجر، الرياض
+            </span>
+          </div>
+
+          <div class="user-avatar"></div>
+        </div>
+      </div>
+
+      <!-- Mobile Location -->
+      <div class="mobile-location-container order-mobile-3">
+        <span class="user-location">
+          <i-lucide [img]="MapPin"></i-lucide>
+          حي الفجر، برج الفجر، الرياض
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= Header Bottom ================= -->
+  <div class="header-bottom">
+    <div class="container bottom-container">
+      <button class="categories-btn">
+        <i-lucide [img]="Menu"></i-lucide>
+        جميع الأقسام
+      </button>
+
+      <nav class="main-nav">
+        <ul class="nav-links">
+          <li>
+            <a routerLink="/" routerLinkActive="active">الرئيسية</a>
+          </li>
+          <li>
+            <a routerLink="/orders">طلباتي</a>
+          </li>
+          <li>
+            <a routerLink="/suppliers">الموردين</a>
+          </li>
+          <li>
+            <a routerLink="/settings">الاعدادات</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
