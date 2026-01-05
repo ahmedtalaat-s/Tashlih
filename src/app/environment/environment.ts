@@ -1,3 +1,5 @@
 export const environment = {
-  API_URL: 'http://72.61.98.135/api/',
+  API_URL: 'https://www.altashalih.app/api/',
+  mapboxToken:
+    'pk.eyJ1IjoiZW1hZGVhZGV2IiwiYSI6ImNtanNmcnBqOTRidGozZ3F6MmI4NWxnZzUifQ.tmDiESfCs-kxygrXSFNcQQ',
 };

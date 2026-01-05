@@ -96,9 +96,16 @@
   --gap-lg: 24px;
   /* =================main footer constants ============= */
   --bg-dark: #141405;
-    --accent-yellow: #ffd700;
-    --text-gray: #b5b5b5;
-    --footer-bottom-bg: #0d0d04;
+  --accent-yellow: #ffd700;
+  --text-gray: #b5b5b5;
+  --footer-bottom-bg: #0d0d04;
+  /* =================product details constants ============= */
+    --primary-500: #ffda00;
+      --bg-gray: #f2f2f2;
+      --bg-light: #f8f9fa;
+      --text-dark: #333;
+      --text-muted: #777;
+      --radius: 12px;
 }
 
 body,html{

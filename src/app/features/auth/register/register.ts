@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '../../../../../node_modules/@angular/router';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-register',

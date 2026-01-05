@@ -5,10 +5,11 @@ import { ProductSection } from '../product/product-section/product-section';
 import { Banner } from '../../../shared/banner/banner';
 import { Categories } from './categories/categories';
 import { SupplierCarouserl } from './supplier-carouserl/supplier-carouserl';
+import { Map } from '../../location/components/map/map';
 
 @Component({
   selector: 'app-home',
-  imports: [HeroCarousel, ProductSection, Banner, Categories, SupplierCarouserl],
+  imports: [HeroCarousel, ProductSection, Banner, Categories, SupplierCarouserl, Map],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })

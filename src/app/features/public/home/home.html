@@ -1,16 +1,20 @@
 <app-hero-carousel></app-hero-carousel>
-<app-product-section title="القطع الأكثر مبيعاً" [products]="bestSellers"> </app-product-section>
-<app-banner
-  title="موردون موثوقون قريبون منك"
-  description="تواصل مع تشاليح معتمدة في مدينتك واحصل على القطعة المناسبة بسرعة."
->
-</app-banner>
-<app-categories></app-categories>
+<div class="container">
+  <app-product-section title="تمت إضافتها مؤخرًا" [products]="bestSellers"> </app-product-section>
 
-<app-product-section title="قطع موصى بها" [products]="recommended"> </app-product-section>
-<app-banner
-  title="خصومات على قطع التشليح"
-  description="وفر في سعر قطع الغيار المستعملة من تشاليح معتمدة لفترة محدودة."
->
-</app-banner>
-<app-supplier-carouserl></app-supplier-carouserl>
+  <app-product-section title="قطع موصى بها" [products]="recommended"> </app-product-section>
+  <app-banner
+    title="خصومات على قطع التشليح"
+    description="وفر في سعر قطع الغيار المستعملة من تشاليح معتمدة لفترة محدودة."
+  >
+  </app-banner>
+  <app-supplier-carouserl></app-supplier-carouserl>
+  <app-categories></app-categories>
+
+  <app-banner
+    title="موردون موثوقون قريبون منك"
+    description="تواصل مع تشاليح معتمدة في مدينتك واحصل على القطعة المناسبة بسرعة."
+  >
+  </app-banner>
+  <app-map></app-map>
+</div>

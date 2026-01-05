@@ -1,9 +1,9 @@
 
 .suppliers-section {
-  max-width: 1150px;
-  margin: 0 auto;
-  padding: 40px 20px;
+  margin: 0 0  0  auto ;
+  padding: 40px 0;
   direction: rtl;
+  max-width: 1265px;
 }
 
 .section-header {
@@ -25,14 +25,6 @@
   display: none;
 }
 
-.supplier-card {
-  background-color: var(--bg-gray);
-  border-radius: 15px;
-  padding: 20px;
-  min-width: 260px;
-  display: flex;
-  flex-direction: column;
-}
 
 .card-top {
   display: flex;
@@ -137,12 +129,6 @@
   border-radius: 12px;
   cursor: pointer;
 }
-.suppliers-section {
-  max-width: 1150px;
-  margin: 0 auto;
-  padding: 40px 20px;
-  direction: rtl;
-}
 
 .section-header {
   font-size: 22px;
@@ -168,7 +154,8 @@
 }
 
 .supplier-card {
-  min-width: 260px;
+  width: 27%;
+  min-width: 300px;
   scroll-snap-align: start;
   background-color: #f2f2f2;
   border-radius: 15px;

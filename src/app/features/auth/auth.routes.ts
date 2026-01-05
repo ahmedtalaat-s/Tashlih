@@ -1,10 +1,9 @@
 import { Routes } from '@angular/router';
-import { register } from 'module';
-import path from 'path';
 import { supplierRegisterGuardGuard } from '../../core/guards/supplier-register-guard-guard';
 export const authRoutes: Routes = [
   {
     path: 'register',
+    loadComponent: () => import('./register/register').then((c) => c.Register),
     children: [
       {
         path: 'choose-account',
