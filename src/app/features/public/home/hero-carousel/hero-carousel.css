@@ -99,7 +99,7 @@
 .btn-primary {
   background-color: var(--primary-500);
   border: none;
-  padding: 15px 35px;
+  padding: 0 35px;
   font-size: 1.1rem;
   font-weight: 700;
   border-radius: 12px;
