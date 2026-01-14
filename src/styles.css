@@ -114,6 +114,8 @@
         --text-muted: #757575;
         --bg-white: #ffffff;
         --radius: 12px;
+        /* =========settings========= */
+  --bg-color: #f9f9f9;
 }
 
 body,html{
@@ -121,11 +123,13 @@ body,html{
   padding: 0;
 }
 body {
-  font-family: var(--font-family-base);
   font-size: var(--body-lg);
   color: var(--secondary-900);
   -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+input,body{
+    font-family: var(--font-family-base);
 }
 
 h1 {
@@ -186,4 +190,13 @@ button{
   display: none;
   width: 0;
   height: 0;
+}
+
+@font-face {
+  font-family: "Saudi-Riyal";
+  src: url("/assets/fonts/Saudi-Riyal.ttf") format("truetype");
+}
+.sar-symbol {
+  font-family: "Saudi-Riyal";
+  font-size: 24px;
 }
