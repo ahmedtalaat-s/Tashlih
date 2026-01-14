@@ -106,6 +106,14 @@
       --text-dark: #333;
       --text-muted: #777;
       --radius: 12px;
+
+      /* customer orders */
+      --light-yellow: #fff9db;
+        --border-color: #e0e0e0;
+        --text-dark: #1a1a1a;
+        --text-muted: #757575;
+        --bg-white: #ffffff;
+        --radius: 12px;
 }
 
 body,html{

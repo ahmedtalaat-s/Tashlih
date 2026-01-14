@@ -1,0 +1,104 @@
+<div class="table-wrapper">
+  <div [class.four-cols]="currentOrdersBool" class="table-row table-head">
+    <div class="col-label">اسم القطعة</div>
+
+    <div class="col-label">
+      <lucide-icon [img]="WrenchIcon" class="icon"> </lucide-icon>
+      القطعة
+    </div>
+
+    <div class="col-label">
+      <lucide-icon [img]="BoxIcon" class="icon"> </lucide-icon>
+      الكمية
+    </div>
+
+    <div class="col-label">
+      <lucide-icon [img]="CalendarIcon" class="icon"> </lucide-icon>
+      التاريخ
+    </div>
+    @if (!currentOrdersBool) {
+    <div class="col-label">الإجراء</div>
+    }
+  </div>
+
+  <!-- Row -->
+  <div [class.four-cols]="currentOrdersBool" class="table-row">
+    <div class="part-name">فرامل أمامية</div>
+    <div class="cell-data">محرك</div>
+    <div class="cell-data">5</div>
+
+    <div class="cell-data">
+      31 يناير 2025
+      <lucide-icon [img]="CalendarIcon" class="icon muted"> </lucide-icon>
+    </div>
+    @if (!currentOrdersBool) {
+    <div>
+      <button class="reorder-btn">اطلب مجدداً</button>
+    </div>
+    }
+  </div>
+  <!-- Row -->
+  <div [class.four-cols]="currentOrdersBool" class="table-row">
+    <div class="part-name">فرامل أمامية</div>
+    <div class="cell-data">محرك</div>
+    <div class="cell-data">5</div>
+
+    <div class="cell-data">
+      31 يناير 2025
+      <lucide-icon [img]="CalendarIcon" class="icon muted"> </lucide-icon>
+    </div>
+    @if (!currentOrdersBool) {
+    <div>
+      <button class="reorder-btn">اطلب مجدداً</button>
+    </div>
+    }
+  </div>
+  <!-- Row -->
+  <div [class.four-cols]="currentOrdersBool" class="table-row">
+    <div class="part-name">فرامل أمامية</div>
+    <div class="cell-data">محرك</div>
+    <div class="cell-data">5</div>
+
+    <div class="cell-data">
+      31 يناير 2025
+      <lucide-icon [img]="CalendarIcon" class="icon muted"> </lucide-icon>
+    </div>
+    @if (!currentOrdersBool) {
+    <div>
+      <button class="reorder-btn">اطلب مجدداً</button>
+    </div>
+    }
+  </div>
+  <!-- Row -->
+  <div [class.four-cols]="currentOrdersBool" class="table-row">
+    <div class="part-name">فرامل أمامية</div>
+    <div class="cell-data">محرك</div>
+    <div class="cell-data">5</div>
+
+    <div class="cell-data">
+      31 يناير 2025
+      <lucide-icon [img]="CalendarIcon" class="icon muted"> </lucide-icon>
+    </div>
+    @if (!currentOrdersBool) {
+    <div>
+      <button class="reorder-btn">اطلب مجدداً</button>
+    </div>
+    }
+  </div>
+  <!-- Row -->
+  <div [class.four-cols]="currentOrdersBool" class="table-row">
+    <div class="part-name">فرامل أمامية</div>
+    <div class="cell-data">محرك</div>
+    <div class="cell-data">5</div>
+
+    <div class="cell-data">
+      31 يناير 2025
+      <lucide-icon [img]="CalendarIcon" class="icon muted"> </lucide-icon>
+    </div>
+    @if (!currentOrdersBool) {
+    <div>
+      <button class="reorder-btn">اطلب مجدداً</button>
+    </div>
+    }
+  </div>
+</div>
