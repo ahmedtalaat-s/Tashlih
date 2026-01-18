@@ -1,0 +1,6 @@
+@import '../favorites.css';
+
+.header-icon{
+  display: flex;
+  gap: 5px;
+}

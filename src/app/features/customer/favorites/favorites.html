@@ -1,0 +1,44 @@
+<div class="favorites-container">
+  <!-- Header -->
+  <div class="page-header">
+    <h1 class="page-title">المفضلة</h1>
+  </div>
+
+  <!-- Tabs -->
+  <div class="controls-bar">
+    <div class="tabs-group">
+      <button class="tab-btn" [class.active]="activeTab === 'parts'" (click)="setTab('parts')">
+        القطع
+      </button>
+
+      <button
+        class="tab-btn"
+        [class.active]="activeTab === 'suppliers'"
+        (click)="setTab('suppliers')"
+      >
+        الموردين
+      </button>
+    </div>
+
+    <div class="search-box">
+      <lucide-icon [img]="searchIcon" size="18"></lucide-icon>
+      <input type="text" [(ngModel)]="searchTerm" placeholder="ابحث عن اسم المورد" />
+    </div>
+  </div>
+
+  <!-- Tables -->
+  @switch (activeTab) { @case ('suppliers') {
+  <app-favorites-suppliers-table
+    [data]="suppliers"
+    [search]="searchTerm"
+    (delete)="deleteSupplier($event)"
+  ></app-favorites-suppliers-table>
+  } @case ('parts') {
+  <app-favorites-parts-table
+    [data]="parts"
+    [search]="searchTerm"
+    (delete)="deletePart($event)"
+    (viewDetails)="openPartDetails($event)"
+  ></app-favorites-parts-table>
+  } }
+</div>

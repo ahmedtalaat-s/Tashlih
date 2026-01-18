@@ -1,0 +1,50 @@
+<!-- Labels -->
+<div class="labels-row">
+  <div class="text-right">القطعة</div>
+  <div class="header-icon">
+    <lucide-icon [img]="wrenchIcon" size="16"></lucide-icon>
+    <span>نوع القطعة</span>
+  </div>
+
+  <div class="header-icon">
+    <lucide-icon [img]="boxIcon" size="16"></lucide-icon>
+    <span>الكمية</span>
+  </div>
+
+  <div class="header-icon">
+    <lucide-icon [img]="calendarIcon" size="16"></lucide-icon>
+    <span>التاريخ</span>
+  </div>
+
+  <div></div>
+  <div></div>
+</div>
+
+<!-- List -->
+<div class="fav-box">
+  @for (part of data; track part.id) {
+  <div class="fav-item">
+    <div class="part-info">
+      <div class="part-thumb"></div>
+      <span class="part-name">{{ part.name }}</span>
+    </div>
+
+    <div>{{ part.type }}</div>
+
+    <div>{{ part.quantity }}</div>
+
+    <div class="date-cell">
+      <lucide-icon [img]="calendarIcon" size="16"></lucide-icon>
+      {{ part.date }}
+    </div>
+
+    <button class="btn-details" (click)="viewDetails.emit(part.id)">تفاصيل القطعة</button>
+
+    <button class="delete-icon" (click)="delete.emit(part.id)">
+      <lucide-icon [img]="xIcon" size="18"></lucide-icon>
+    </button>
+  </div>
+  }
+</div>
+<!-- pagination  -->
+<app-pagination></app-pagination>

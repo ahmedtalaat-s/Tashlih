@@ -1,0 +1,39 @@
+<!-- Table Header -->
+<div class="grid-row list-header">
+  <div>المورد</div>
+  <div class="header-icon">
+    <lucide-icon [img]="wrenchIcon" size="16"></lucide-icon><span>تخصص المورد</span>
+  </div>
+  <div class="header-icon">
+    <lucide-icon [img]="calendarIcon" size="16"></lucide-icon><span>التاريخ</span>
+  </div>
+  <div></div>
+</div>
+
+<!-- List -->
+<div class="fav-list-box">
+  @for (item of data; track item.id) {
+  <div class="grid-row fav-item">
+    <div class="supplier-info">
+      <div class="supplier-img"></div>
+      <span class="supplier-name">{{ item.name }}</span>
+    </div>
+
+    <div class="specialization">{{ item.specialization }}</div>
+
+    <div class="date-info">
+      {{ item.date }}
+      <lucide-icon [img]="calendarIcon" size="16"></lucide-icon>
+    </div>
+
+    <div class="actions-col">
+      <button class="profile-btn">الملف الشخصي</button>
+      <button class="delete-btn" (click)="delete.emit(item.id)">
+        <lucide-icon [img]="xIcon" size="18"></lucide-icon>
+      </button>
+    </div>
+  </div>
+  }
+</div>
+<!-- pagination  -->
+<app-pagination></app-pagination>
