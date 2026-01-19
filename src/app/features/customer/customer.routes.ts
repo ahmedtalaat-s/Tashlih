@@ -13,4 +13,9 @@ export const routes: Routes = [
     path: 'favorites',
     loadComponent: () => import('./favorites/favorites').then((c) => c.Favorites),
   },
+  {
+    path: 'supplier-profile/:id',
+    loadComponent: () =>
+      import('./supplier-profile/supplier-profile').then((c) => c.SupplierProfile),
+  },
 ];

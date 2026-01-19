@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="page-title">الملف الشخصي</div>
+
+  <!-- Supplier Banner -->
+  <div class="supplier-banner">
+    <div class="banner-right">
+      <div class="profile-pic">
+        <lucide-icon [img]="imageIcon"></lucide-icon>
+      </div>
+      <div class="supplier-info">
+        <h1>{{ supplier.name }}</h1>
+        <div class="supplier-location">
+          <lucide-icon [img]="locationIcon"></lucide-icon>
+          {{ supplier.location }}
+        </div>
+      </div>
+    </div>
+    <div class="banner-actions">
+      <button class="circle-btn">
+        <lucide-icon [img]="heartIcon"></lucide-icon>
+      </button>
+      <button class="circle-btn">
+        <lucide-icon [img]="shareIcon"></lucide-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="profile-content">
+    <!-- Main Area -->
+    <section class="main-area">
+      <div class="about-section">
+        <h4>نبذة عن المورد</h4>
+        <p>{{ supplier.about }}</p>
+      </div>
+
+      <div class="section-header">
+        <h4>القطع المتوفرة حالياً</h4>
+        <div class="search-mini">
+          <lucide-icon [img]="searchIcon"></lucide-icon>
+          <input type="text" placeholder="ابحث عن القطعة" />
+        </div>
+      </div>
+
+      <div class="parts-grid">
+        @for (part of parts; track $index) {
+          <app-product-card [product]="part"></app-product-card>
+        }
+      </div>
+    </section>
+    <!-- Sidebar -->
+    <aside class="sidebar-card">
+      <h3>اطلب قطعتك الآن</h3>
+      <p>
+        تواصل مباشرة مع المورد للاستفسار عن السعر والتوافر. لا يوجد دفع إلكتروني، الاتفاق يتم
+        مباشرة.
+      </p>
+
+      <button class="btn-chat">
+        <lucide-icon [img]="chatIcon"></lucide-icon>
+        بدء محادثة مباشرة
+      </button>
+
+      <button class="btn-call">
+        <lucide-icon [img]="phoneIcon"></lucide-icon>
+        رقم التواصل
+      </button>
+    </aside>
+  </div>
+</div>

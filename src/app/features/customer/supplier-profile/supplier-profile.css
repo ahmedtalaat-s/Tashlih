@@ -1,0 +1,176 @@
+*{
+  direction: rtl;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.page-title {
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+.supplier-banner {
+  background: var(--bg-gray);
+  border-radius: var(--radius);
+  padding: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  row-gap:10px ;
+}
+.supplier-location{
+      display: flex;
+        align-items: center;
+        gap: 4px;
+}
+
+.banner-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.circle-btn {
+  width: 40px;
+  height: 40px;
+  background: #fff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+}
+
+.banner-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.profile-pic {
+  width: 100px;
+  height: 100px;
+  background: #d9d9d9;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-content {
+  display: grid;
+  grid-template-columns: 1fr 320px ;
+  gap: 30px;
+}
+
+.sidebar-card {
+  background: var(--bg-gray);
+  border: 1px solid #eee;
+  border-radius: var(--radius);
+  padding: 25px;
+  height: fit-content;
+}
+
+.btn-chat,
+.btn-call {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-chat {
+  margin: 20px 0 10px;
+  background-color: var(--primary-500);
+}
+
+.btn-call {
+  background: var(--secondary-500);
+  color: #fff;
+}
+
+.about-section {
+  background: var(--bg-gray);
+  padding: 20px;
+  border-radius: var(--radius);
+  margin-bottom: 30px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.search-mini {
+  position: relative;
+  width: 250px;
+}
+
+.search-mini input {
+  width: 100%;
+  padding: 8px 35px 8px 15px;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+.search-mini lucide-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.parts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 15px;
+}
+
+.part-card {
+  background: var(--bg-gray);
+  border-radius: 12px;
+  padding: 15px;
+  position: relative;
+}
+
+.fav-badge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: #fff;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.arrow-btn {
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  cursor: pointer;
+}
