@@ -1,0 +1,328 @@
+:root {
+  --primary-blue: #10375c;
+  --accent-yellow: #ffda00;
+  --bg-light: #f4f4f4;
+  --text-gray: #707070;
+  --radius: 12px;
+}
+
+*{direction: rtl;}
+.container {
+  padding: 20px;
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  flex-wrap: wrap-reverse;
+}
+
+.sidebar {
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.section-title {
+  font-size: 17px;
+  font-weight: bold;
+  color: black;
+  padding-bottom: 15px;
+}
+.location{
+  display: flex;
+}
+.card {
+  background: var(--bg-light);
+  padding: 15px;
+  border-radius: var(--radius);
+}
+.card lucide-icon {
+  color: var(--primary-500);
+}
+
+.supplier-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.icon-placeholder {
+  width: 80px;
+  height: 80px;
+  background: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.icon-placeholder lucide-icon {
+  color: #707070 !important;
+}
+
+.order-info .input,.order-info input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  text-align: center;
+  background-color: white;
+  display: inline-block;
+  font-size: 14px;
+}
+
+.price-row {
+  display: flex;
+  gap: 10px;
+}
+.supplier-details h3 , .supplier-details p{
+  font-size: 20px !important;
+  margin: 1px 0;
+}
+.supplier-details p {
+
+  display: flex;
+  gap: 5px;
+}
+label{
+  font-size: 16px;
+  padding: 10px 0;
+  display: inline-block;
+  color: var(--text-gray);
+}
+
+.btn-profile {
+  background: var(--primary-blue);
+  color: #fff;
+  border: none;
+  padding: 15px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.chat-container {
+  width: 100%;
+  flex: 1;
+  border: 1px solid #e0e0e0;
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 600px;
+}
+
+.messages-area {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 10px;
+}
+
+.msg {
+  word-wrap: break-word;
+  max-width: 70%;
+  padding: 12px 18px;
+  border-radius: 10px;
+}
+
+.msg.sent {
+  align-self: flex-end;
+  background: #fff9c4;
+}
+
+.msg.received {
+  align-self: flex-start;
+  background: #f1f1f1;
+}
+
+.msg-time {
+  font-size: 10px;
+  color: #999;
+  display: block;
+    text-align: left;
+}
+
+.image-msg {
+  width: 100px;
+  height: 100px;
+  background: #eee;
+  border-radius: 10px;
+}
+
+/* --- Base Styles (Mobile First / Desktop Default) --- */
+
+.input-area {
+  padding: 15px 20px;
+  border-top: 1px solid #eee;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  box-sizing: border-box;
+  /* Ensures padding doesn't affect width */
+  width: 100%;
+}
+
+.input-wrapper {
+  flex: 1;
+  background: #f2f2f2;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  min-width: 0;
+  /* Prevents flex-item overflow */
+}
+
+.input-wrapper input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 15px 0;
+  outline: none;
+  font-size: 16px;
+  /* Best for mobile input to prevent auto-zoom */
+  min-width: 0;
+}
+
+.input-wrapper input::placeholder {
+  font-size: 16px;
+  font-family: var(--font-family-base);
+}
+
+.btn-send {
+  background: #ffda00;
+  border: none;
+  height: 45px;
+  /* Fixed height for consistency */
+  width: 45px;
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  /* Prevents button from squishing */
+  transition: transform 0.1s ease;
+}
+
+.btn-send:active {
+  transform: scale(0.95);
+}
+
+.btn-attach {
+  border: none;
+  cursor: pointer;
+  height: fit-content;
+  padding: 8px;
+  border-radius: 8px;
+  background-color: var(--black-300, #e0e0e0);
+  flex-shrink: 0;
+}
+
+.splitter {
+  margin-inline: 10px;
+  height: 25px;
+  /* Shorter splitter looks cleaner on mobile */
+  border-left: 1px solid #ccc;
+}
+
+.penIcon {
+  color: var(--black-600, #666);
+  padding-left: 5px;
+  flex-shrink: 0;
+}
+
+.order-msg {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 15px;
+  width: 70%;
+  align-self: center;
+}
+
+.order-header {
+  background: #f4f4f4;
+  padding: 8px;
+  font-weight: 700;
+  text-align: center;
+  font-size: 13px;
+}
+
+.order-body {
+  padding: 12px;
+}
+
+.order-row span:first-child {
+  font-size: 11px;
+  color: #888;
+}
+
+.order-row span:last-child {
+  display: block;
+  margin-top: 4px;
+  font-weight: 700;
+}
+
+.order-prices {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.order-prices div {
+  flex: 1;
+}
+
+/* --- Responsive Breakpoints --- */
+
+/* For Mobile Devices (Phones) */
+@media (max-width: 480px) {
+  .input-area {
+    padding: 10px;
+    gap: 8px;
+  }
+
+  .input-wrapper {
+    padding: 0 8px;
+  }
+
+  .input-wrapper input {
+    padding: 12px 0;
+    font-size: 14px;
+  }
+
+  .input-wrapper input::placeholder {
+    font-size: 14px;
+  }
+
+  .btn-send {
+    height: 40px;
+    width: 40px;
+  }
+
+  .splitter {
+    margin-inline: 5px;
+    height: 20px;
+  }
+
+  /* Optionally hide the pen icon on very small screens to save space */
+  .penIcon {
+    display: none;
+  }
+  .msg{max-width: 90%;}
+  .order-msg{width: 100%;}
+}
+
+/* For Tablets and larger screens */
+@media (min-width: 768px) {
+  .input-wrapper input {
+    font-size: 18px;
+  }
+
+  .input-wrapper input::placeholder {
+    font-size: 18px;
+  }
+}

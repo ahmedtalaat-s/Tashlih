@@ -18,4 +18,8 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./supplier-profile/supplier-profile').then((c) => c.SupplierProfile),
   },
+  {
+    path: 'chat',
+    loadComponent: () => import('./chat/chat').then((c) => c.Chat),
+  },
 ];

@@ -1,0 +1,107 @@
+<div class="container">
+  <!-- Chat -->
+  <div class="chat-container">
+    <div class="messages-area">
+      @for (msg of messages; track msg.id) {
+        <!-- ORDER MESSAGE -->
+        @if (msg.type === 'order') {
+          <div class="msg order-msg">
+            <div class="order-header">معلومات الطلب</div>
+
+            <div class="order-body">
+              <div class="order-row">
+                <span>اسم القطعة</span>
+                <span>{{ msg.order?.partName }}</span>
+              </div>
+              <div class="order-row">
+                <span>سعر القطعة</span>
+                <span [innerHTML]="msg.order?.partPrice ?? 0 | saudiRiyal"></span>
+              </div>
+            </div>
+
+            <span class="msg-time">{{ msg.time }}</span>
+          </div>
+        }
+
+        <!-- IMAGE MESSAGE -->
+        @else if (msg.imageUrl) {
+          <div class="image-msg" [class.sent]="isSent(msg)">
+            <img [src]="msg.imageUrl" />
+            <span class="msg-time">{{ msg.time }}</span>
+          </div>
+        }
+
+        <!-- TEXT MESSAGE -->
+        @else {
+          <div class="msg" [class.sent]="isSent(msg)" [class.received]="!isSent(msg)">
+            {{ msg.text }}
+            <span class="msg-time">{{ msg.time }}</span>
+          </div>
+        }
+      }
+    </div>
+
+    <!-- Input -->
+    <div class="input-area">
+      <div class="input-wrapper">
+        <button class="btn-attach">
+          <span>
+            <lucide-icon [img]="imageIcon" [size]="21"></lucide-icon>
+          </span>
+        </button>
+        <span class="splitter"></span>
+        <lucide-icon [img]="pen" class="penIcon" [size]="17"></lucide-icon>
+        <input type="text" [(ngModel)]="messageText" placeholder="اكتب رسالتك هنا..." />
+      </div>
+      <button class="btn-send" (click)="onSend()">
+        <lucide-icon [img]="sendIcon"></lucide-icon>
+      </button>
+    </div>
+  </div>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div>
+      <div class="section-title">معلومات المورد</div>
+      <div class="card">
+        <div class="supplier-info">
+          <div class="icon-placeholder">
+            <lucide-icon [img]="imageIcon"></lucide-icon>
+          </div>
+          <div class="supplier-details">
+            <h3>{{ supplierName }}</h3>
+            <p>
+              <lucide-icon [img]="phoneIcon" [size]="16"></lucide-icon>
+              {{ supplierPhone }}
+            </p>
+          </div>
+        </div>
+        <p class="location">
+          <lucide-icon [img]="mapIcon" [size]="16"></lucide-icon>
+          {{ supplierLocation }}
+        </p>
+      </div>
+    </div>
+
+    <!-- <div>
+      <div class="section-title">معلومات الطلب</div>
+      <div class="card order-info">
+        <label>اسم القطعة</label>
+        <input type="text" [value]="partName" readonly />
+
+        <div class="price-row">
+          <div class="price-box">
+            <label>سعر القطعة</label>
+            <span class="input" [innerHTML]="+partPrice | saudiRiyal"></span>
+          </div>
+
+          <div class="price-box">
+            <label>اجمالي السعر</label>
+            <span class="input" [innerHTML]="+totalPrice | saudiRiyal"></span>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <button class="btn-profile">الملف الشخصي</button>
+  </div>
+</div>

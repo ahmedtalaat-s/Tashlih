@@ -66,6 +66,8 @@
   --color-white: #ffffff;
   --bg-gray: #f2f2f2;
   --text-brown: #3d3112;
+  --black-300:#B3B3B3;
+  --black-600:#666666;
   /* ================= TYPOGRAPHY ================= */
   --font-family-base: 'Tajawal', sans-serif;
 
@@ -198,7 +200,7 @@ button{
 }
 .sar-symbol {
   font-family: "Saudi-Riyal";
-  font-size: 24px;
+  font-size: inherit;
 }
 
 /* lucide icons */
