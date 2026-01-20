@@ -1,0 +1,293 @@
+
+*{
+  direction: rtl;
+}
+input[type="range"] {
+ direction: rtl;
+}
+.page-container {
+  display: flex;
+  max-width: 1300px;
+  margin: 20px auto;
+  padding: 0 15px;
+  gap: 40px;
+}
+
+/* Sidebar Styling */
+.sidebar {
+  flex: 0 0 280px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  height: fit-content;
+  border: 1px solid var(--black-100);
+}
+
+.filter-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.clear-all {
+  background: none;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.price-inputs {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.price-inputs input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.dropdown-filter {
+  padding: 15px 0;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.apply-btn {
+  width: 100%;
+  padding: 12px;
+  background: var(--primary-500);
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+/* Main Content Styling */
+.main-content {
+  flex: 1;
+}
+
+.results-header h2 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.results-header p {
+  color: #888;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+
+
+
+.price {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.card{
+  margin: 20px 0;
+}
+
+.view-btn {
+  background: var(--primary-500);
+  border: none;
+  border-radius: 5px;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 30px;
+  align-items: center;
+}
+
+.page-num {
+  padding: 8px 15px;
+  border: none;
+  background: #e0e0e0;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.page-num.active {
+  background: var(--primary-500);
+}
+
+.range-wrapper {
+  position: relative;
+  width: 100%;
+  height: 40px;
+  margin-top: 10px;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  outline: none;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  background-color: transparent;
+  pointer-events: none;
+  /* Allows clicking handles behind each other */
+}
+
+.slider-track {
+  width: 100%;
+  height: 5px;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  border-radius: 5px;
+  background-color: #e0e0e0;
+  /* Default track color */
+}
+
+/* Styling the handles (Thumbs) */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 18px;
+  width: 18px;
+  background-color: #000;
+  /* Black handles like in the image */
+  border-radius: 50%;
+  cursor: pointer;
+  pointer-events: auto;
+  /* Re-enables clicking for the handle itself */
+  border: 2px solid #fff;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Firefox support */
+input[type="range"]::-moz-range-thumb {
+  height: 18px;
+  width: 18px;
+  background-color: #000;
+  border-radius: 50%;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .page-container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    flex: none;
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+/* Container for the dropdown */
+.filter-dropdown {
+  border-top: 1px solid #eee;
+  padding: 10px 0;
+  cursor: pointer;
+}
+
+/* The clickable header */
+.filter-dropdown summary {
+  list-style: none;
+  /* Hide default arrow */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 5px 0;
+  color: #444;
+}
+
+/* Custom Chevron Arrow */
+.chevron::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-right: 2px solid #888;
+  border-bottom: 2px solid #888;
+  transform: rotate(45deg);
+  transition: transform 0.3s ease;
+  margin-left: 5px;
+}
+
+/* Rotate arrow when open */
+.filter-dropdown[open] .chevron::before {
+  transform: rotate(-135deg);
+}
+
+/* The hidden content area */
+.dropdown-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px 5px;
+  animation: slideDown 0.3s ease;
+}
+
+/* Individual Checkbox Styles */
+.dropdown-content label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: #666;
+  cursor: pointer;
+}
+
+.dropdown-content input[type="checkbox"] {
+  accent-color: var(--primary-500);
+  /* Uses the yellow from previous step */
+  width: 16px;
+  height: 16px;
+}
+
+/* Smooth opening animation */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hide marker for Firefox */
+.filter-dropdown summary::-webkit-details-marker {
+  display: none;
+}
+/* preming slider  */

@@ -1,0 +1,87 @@
+<div class="page-container">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="filter-header">
+      <span>فلاتر البحث</span>
+      <button class="clear-all">مسح الكل</button>
+    </div>
+
+    <!-- Price Range -->
+    <div class="filter-section">
+      <label>نطاق السعر (ريال)</label>
+
+      <div class="price-inputs">
+        <input type="text" [value]="minValue" readonly />
+        <input type="text" [value]="maxValue" readonly />
+      </div>
+
+      <div class="card">
+        <p-slider
+          [(ngModel)]="rangeValues"
+          [range]="true"
+          class=""
+          [min]="0"
+          [max]="1000"
+          class="price-slider"
+          (onChange)="onRangeChange()"
+        />
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <details class="filter-dropdown" open>
+      <summary>البراند <span class="chevron"></span></summary>
+      <div class="dropdown-content">
+        <label><input type="checkbox" checked /> تويوتا</label>
+        <label><input type="checkbox" /> هوندا</label>
+        <label><input type="checkbox" /> نيسان</label>
+      </div>
+    </details>
+
+    <details class="filter-dropdown">
+      <summary>الموديل <span class="chevron"></span></summary>
+      <div class="dropdown-content">
+        <label><input type="checkbox" checked /> كامري</label>
+        <label><input type="checkbox" /> كورولا</label>
+        <label><input type="checkbox" /> يارس</label>
+      </div>
+    </details>
+
+    <details class="filter-dropdown">
+      <summary>المدينة <span class="chevron"></span></summary>
+      <div class="dropdown-content">
+        <label><input type="checkbox" /> الرياض</label>
+        <label><input type="checkbox" /> جدة</label>
+        <label><input type="checkbox" /> الدمام</label>
+      </div>
+    </details>
+
+    <details class="filter-dropdown">
+      <summary>التصنيف <span class="chevron"></span></summary>
+      <div class="dropdown-content">
+        <label><input type="checkbox" /> محركات</label>
+        <label><input type="checkbox" /> قطع غيار</label>
+      </div>
+    </details>
+
+    <button class="apply-btn">تطبيق الفلاتر</button>
+  </aside>
+
+  <!-- Main -->
+  <main class="main-content">
+    <header class="results-header">
+      <h2>نتائج البحث لـ "كامري 2020"</h2>
+      <p>عرض 1-24 من أصل 150 نتيجة</p>
+    </header>
+
+    <!-- Products -->
+    <div class="product-grid">
+      @for (item of products; track $index) {
+        <app-product-card [product]="product"></app-product-card>
+      }
+    </div>
+
+    <!-- Pagination -->
+    <app-pagination></app-pagination>
+  </main>
+</div>

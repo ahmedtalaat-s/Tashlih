@@ -1,10 +1,13 @@
 <div class="product-card" dir="rtl">
   <button class="fav-btn">
-    <i-lucide [img]="heart"></i-lucide>
+    <lucide-icon [img]="heart"></lucide-icon>
   </button>
 
   <div class="prod-img-box">
-    <img [src]="product.image" [alt]="product.title" />
+    <img
+      [src]="product.image == '' ? '/assets/images/engine.svg' : product.image"
+      [alt]="product.title"
+    />
   </div>
 
   <h3>{{ product.title }}</h3>

@@ -22,4 +22,8 @@ export const routes: Routes = [
     path: 'chat',
     loadComponent: () => import('./chat/chat').then((c) => c.Chat),
   },
+  {
+    path: 'search',
+    loadComponent: () => import('./search-products/search-products').then((c) => c.SearchProducts),
+  },
 ];
