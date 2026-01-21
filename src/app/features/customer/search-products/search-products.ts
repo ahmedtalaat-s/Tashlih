@@ -8,8 +8,8 @@ import { SliderModule } from 'primeng/slider';
 import { SelectModule } from 'primeng/select';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { InputTextModule } from 'primeng/inputtext';
 import { PartSearchParams } from '../model/parts.model';
-import { filter } from 'rxjs';
 
 export interface FilterOption {
   name: string;
@@ -26,6 +26,7 @@ export interface FilterOption {
     SelectModule,
     RadioButtonModule,
     SelectButtonModule,
+    InputTextModule,
   ],
   templateUrl: './search-products.html',
   styleUrl: './search-products.css',
