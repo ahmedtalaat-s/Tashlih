@@ -1,72 +1,179 @@
 <div class="page-container">
-  <!-- Sidebar -->
-  <aside class="sidebar">
+  <aside class="sidebar" dir="rtl">
     <div class="filter-header">
       <span>فلاتر البحث</span>
-      <button class="clear-all">مسح الكل</button>
+      <button class="clear-all" (click)="clearAll()">مسح الكل</button>
     </div>
 
-    <!-- Price Range -->
+    <div class="filter-section mb-3">
+      <span class="p-input-icon-right w-full">
+        <i class="pi pi-search"></i>
+        <input
+          type="text"
+          pInputText
+          [(ngModel)]="filters.Keyword"
+          placeholder="بحث بالاسم..."
+          class="w-full"
+        />
+      </span>
+    </div>
+
     <div class="filter-section">
-      <label>نطاق السعر (ريال)</label>
-
+      <label class="font-bold">نطاق السعر (ريال)</label>
       <div class="price-inputs">
-        <input type="text" [value]="minValue" readonly />
-        <input type="text" [value]="maxValue" readonly />
+        <input type="text" [value]="filters.MinPrice" readonly />
+        <input type="text" [value]="filters.MaxPrice" readonly />
       </div>
-
       <div class="card">
         <p-slider
           [(ngModel)]="rangeValues"
           [range]="true"
-          class=""
           [min]="0"
-          [max]="1000"
+          [max]="10000"
           class="price-slider"
-          (onChange)="onRangeChange()"
-        />
+          (onChange)="onPriceChange()"
+        >
+        </p-slider>
       </div>
     </div>
 
-    <!-- Filters -->
     <details class="filter-dropdown" open>
-      <summary>البراند <span class="chevron"></span></summary>
+      <summary>بيانات المركبة <span class="chevron"></span></summary>
       <div class="dropdown-content">
-        <label><input type="checkbox" checked /> تويوتا</label>
-        <label><input type="checkbox" /> هوندا</label>
-        <label><input type="checkbox" /> نيسان</label>
+        <div class="field">
+          <label class="text-xs">الماركة</label>
+          <p-select
+            [options]="makes"
+            [(ngModel)]="filters.MakeId"
+            optionLabel="name"
+            optionValue="id"
+            [filter]="true"
+            filterBy="name"
+            [showClear]="true"
+            placeholder="اختر الماركة"
+            class="w-full"
+          ></p-select>
+        </div>
+        <div class="field">
+          <label class="text-xs">الموديل</label>
+          <p-select
+            [options]="models"
+            [(ngModel)]="filters.ModelId"
+            optionLabel="name"
+            optionValue="id"
+            [filter]="true"
+            filterBy="name"
+            [showClear]="true"
+            placeholder="اختر الموديل"
+            class="w-full"
+          ></p-select>
+        </div>
+        <div class="field">
+          <label class="text-xs">السنة</label>
+          <p-select
+            [options]="years"
+            [(ngModel)]="filters.Year"
+            [showClear]="true"
+            placeholder="السنة"
+            class="w-full"
+          ></p-select>
+        </div>
+        <div class="field">
+          <label class="text-xs">نوع المركبة</label>
+          <p-select
+            [options]="types"
+            [(ngModel)]="filters.VehicleTypeId"
+            optionLabel="name"
+            optionValue="id"
+            [showClear]="true"
+            placeholder="نوع المركبة"
+            class="w-full"
+          ></p-select>
+        </div>
       </div>
     </details>
 
     <details class="filter-dropdown">
-      <summary>الموديل <span class="chevron"></span></summary>
+      <summary>التصنيف والحالة <span class="chevron"></span></summary>
       <div class="dropdown-content">
-        <label><input type="checkbox" checked /> كامري</label>
-        <label><input type="checkbox" /> كورولا</label>
-        <label><input type="checkbox" /> يارس</label>
+        <div class="field">
+          <label class="text-xs">القسم</label>
+          <p-select
+            [options]="categories"
+            [(ngModel)]="filters.CategoryId"
+            optionLabel="name"
+            optionValue="id"
+            placeholder="اختر القسم"
+            class="w-full"
+          ></p-select>
+        </div>
+        <div class="field mt-2">
+          <label class="block mb-2 text-xs">حالة القطعة</label>
+          <div class="flex flex-column gap-2">
+            @for (cond of conditions; track cond.id) {
+              <div class="flex align-items-center gap-2">
+                <p-radioButton
+                  [name]="'cond'"
+                  [value]="cond.id"
+                  [(ngModel)]="filters.ConditionId"
+                  [inputId]="'c' + cond.id"
+                  class="custom-radio"
+                ></p-radioButton>
+                <label [for]="'c' + cond.id" class="cursor-pointer">{{ cond.name }}</label>
+              </div>
+            }
+          </div>
+        </div>
       </div>
     </details>
 
     <details class="filter-dropdown">
-      <summary>المدينة <span class="chevron"></span></summary>
+      <summary>الموقع <span class="chevron"></span></summary>
       <div class="dropdown-content">
-        <label><input type="checkbox" /> الرياض</label>
-        <label><input type="checkbox" /> جدة</label>
-        <label><input type="checkbox" /> الدمام</label>
+        <div class="field">
+          <p-select
+            [options]="cities"
+            [(ngModel)]="filters.CityId"
+            optionLabel="name"
+            optionValue="id"
+            [filter]="true"
+            filterBy="name"
+            placeholder="اختر المدينة"
+            [showClear]="true"
+            class="w-full"
+          ></p-select>
+        </div>
       </div>
     </details>
 
     <details class="filter-dropdown">
-      <summary>التصنيف <span class="chevron"></span></summary>
+      <summary>خيارات إضافية <span class="chevron"></span></summary>
       <div class="dropdown-content">
-        <label><input type="checkbox" /> محركات</label>
-        <label><input type="checkbox" /> قطع غيار</label>
+        <div class="flex flex-column gap-3">
+          <div class="boolean-filter">
+            <label class="text-xs block mb-1">الضمان</label>
+            <p-selectButton
+              [options]="boolOptions"
+              [(ngModel)]="filters.HasWarranty"
+              optionLabel="label"
+              optionValue="value"
+            ></p-selectButton>
+          </div>
+          <div class="boolean-filter">
+            <label class="text-xs block mb-1">التوصيل</label>
+            <p-selectButton
+              [options]="boolOptions"
+              [(ngModel)]="filters.DeliveryAvailable"
+              optionLabel="label"
+              optionValue="value"
+            ></p-selectButton>
+          </div>
+        </div>
       </div>
     </details>
 
-    <button class="apply-btn">تطبيق الفلاتر</button>
+    <button class="apply-btn" (click)="applyFilters()">تطبيق الفلاتر</button>
   </aside>
-
   <!-- Main -->
   <main class="main-content">
     <header class="results-header">

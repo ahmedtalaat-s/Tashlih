@@ -122,6 +122,25 @@
   /* search */
   --bg-light: #f4f7f6;
     --card-bg: #fffdf2;
+    /* perming */
+    /* Change the checked (selected) background and border color to green */
+      --p-radiobutton-checked-background: var(--primary-500) !important;
+      /* Green background when checked */
+      --p-radiobutton-checked-border-color: var(--primary-500) !important;
+      /* Green border when checked */
+
+      /* Optionally, change hover colors */
+      --p-radiobutton-checked-hover-background: var(--primary-600) !important;
+      --p-radiobutton-checked-hover-border-color: var(--primary-600) !important;
+
+      --p-select-focus-border-color: var(--primary-500) !important;
+      --p-select-option-selected-background:var(--primary-100) !important;
+      --p-select-option-selected-color:var(--primary-700) !important;
+
+      --p-select-option-selected-focus-background:var(--primary-100) !important;
+      --p-select-option-selected-focus-color:var(--primary-700) !important;
+      --p-inputtext-focus-border-color:var(--primary-500) !important;
+
 }
 
 body,html{
@@ -240,3 +259,9 @@ lucide-icon {
   background: #ffcf00;
   border-radius: 50%;
 }
+
+p-select{
+  display: flex;
+}
+
+

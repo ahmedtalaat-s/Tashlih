@@ -290,4 +290,59 @@ input[type="range"]::-moz-range-thumb {
 .filter-dropdown summary::-webkit-details-marker {
   display: none;
 }
-/* preming slider  */
+/* Sidebar Specific Enhancements */
+.sidebar .filter-section {
+  margin-bottom: 20px;
+}
+
+/* Ensure PrimeNG components fit the sidebar width */
+.sidebar .p-dropdown,
+.sidebar .p-inputtext,
+.sidebar .p-selectbutton {
+  width: 100% !important;
+  font-size: 0.85rem;
+}
+
+/* Fix radio button alignment for RTL */
+.sidebar .p-radiobutton {
+  margin-left: 10px;
+}
+
+/* Boolean Toggle styling to match primary-500 */
+.sidebar ::ng-deep .p-selectbutton .p-button.p-highlight {
+  background: var(--primary-500);
+  border-color: var(--primary-500);
+  color: #000;
+}
+
+/* Field spacing inside dropdown content */
+.sidebar .field {
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* PrimeNG Slider color override to match your brand */
+.sidebar ::ng-deep .p-slider .p-slider-range {
+  background: var(--primary-500);
+}
+
+.sidebar ::ng-deep .p-slider .p-slider-handle {
+  border: 2px solid var(--primary-500);
+  background: #fff;
+}
+
+/* Ensure the new p-select behaves correctly in the sidebar flex layout */
+.sidebar p-select {
+  display: block;
+  width: 100%;
+  display: flex;
+}
+
+.sidebar .p-select {
+  width: 100% !important;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
