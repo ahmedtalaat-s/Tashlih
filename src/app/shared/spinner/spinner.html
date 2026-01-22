@@ -1,0 +1,38 @@
+@if (visible) {
+  <div class="spinner-overlay" [class.full-screen]="fullScreen">
+    <div class="spinner-container">
+      <div class="spinner">
+        @if (useAvatar && avatarUrl) {
+          <!-- Animated Avatar Spinner -->
+          <div class="avatar-spinner">
+            <img [src]="avatarUrl" [alt]="'Loading'" class="spinner-avatar" />
+            <div class="avatar-pulse"></div>
+          </div>
+        } @else if (useAvatar) {
+          <!-- Animated Avatar Placeholder -->
+          <div class="avatar-spinner">
+            <div class="spinner-avatar-placeholder">
+              <svg class="netflix-logo-spinner" viewBox="0 0 100 100">
+                <path d="M20 20 L20 80 L50 50 L50 20 Z" fill="#E50914" class="logo-path-1" />
+                <path d="M50 20 L50 50 L80 80 L80 20 Z" fill="#E50914" class="logo-path-2" />
+              </svg>
+            </div>
+            <div class="avatar-pulse"></div>
+          </div>
+        } @else {
+          <!-- Netflix Logo Animated Spinner -->
+          <div class="netflix-logo-container">
+            <svg class="netflix-logo-spinner" viewBox="0 0 100 100">
+              <path d="M20 20 L20 80 L50 50 L50 20 Z" fill="#E50914" class="logo-path-1" />
+              <path d="M50 20 L50 50 L80 80 L80 20 Z" fill="#E50914" class="logo-path-2" />
+            </svg>
+            <div class="logo-pulse"></div>
+          </div>
+        }
+      </div>
+      @if (message) {
+        <p class="spinner-message">{{ message }}</p>
+      }
+    </div>
+  </div>
+}

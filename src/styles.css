@@ -141,6 +141,11 @@
       --p-select-option-selected-focus-color:var(--primary-700) !important;
       --p-inputtext-focus-border-color:var(--primary-500) !important;
 
+      /* spinner */
+      --primary-yellow: #ffda00;
+        --navy-blue: #113c5d;
+        --overlay-bg: rgba(255, 255, 255, 0.7);
+
 }
 
 body,html{

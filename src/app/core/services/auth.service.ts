@@ -28,6 +28,8 @@ export class AuthService {
   private router = inject(Router);
   destroyref = inject(DestroyRef);
 
+  isloggedIn = computed(() => this.userInfo() !== null);
+
   userInfo = signal<User | null>(null);
   role = computed(() => this.userInfo()?.userType);
   email = computed(() => this.userInfo()?.email);
@@ -57,7 +59,7 @@ export class AuthService {
               return response.user;
             }
             return null;
-          })
+          }),
         );
     }
   }
@@ -67,7 +69,7 @@ export class AuthService {
     return this.http
       .post<registerCustomerResponse>(
         `${API_CONSTSANTS.BASE_URL}${API_CONSTSANTS.END_POINTS.AUTH.REGISTER_CUSTOMER}`,
-        userData
+        userData,
       )
       .pipe(
         map((response) => {
@@ -75,7 +77,7 @@ export class AuthService {
             StorageHelper.setItem(APP_CONSTANTS.STORAGE_KEYS.PHONE_NUMBER, userData.phone);
           }
           return response;
-        })
+        }),
       );
   }
 
@@ -83,7 +85,7 @@ export class AuthService {
   sendOtpCode(phone: string, purpose: string): Observable<sendOtpResponse> {
     return this.http.post<sendOtpResponse>(
       `${API_CONSTSANTS.BASE_URL}${API_CONSTSANTS.END_POINTS.AUTH.SEND_OTP}`,
-      { phone, purpose }
+      { phone, purpose },
     );
   }
 
@@ -91,7 +93,7 @@ export class AuthService {
   verifyOtpCode(phone: string, otpCode: string): Observable<sendOtpResponse> {
     return this.http.post<sendOtpResponse>(
       `${API_CONSTSANTS.BASE_URL}${API_CONSTSANTS.END_POINTS.AUTH.VERIFY_OTP}`,
-      { phone, otpCode }
+      { phone, otpCode },
     );
   }
   //register supplier user
@@ -99,7 +101,7 @@ export class AuthService {
     const formData = this.getFormData(userData);
     return this.http.post<registerCustomerResponse>(
       `${API_CONSTSANTS.BASE_URL}${API_CONSTSANTS.END_POINTS.AUTH.REGISTER_SUPPLIER}`,
-      formData
+      formData,
     );
   }
 
@@ -140,7 +142,7 @@ export class AuthService {
     return this.http
       .post<LoginResponse>(
         `${API_CONSTSANTS.BASE_URL}${API_CONSTSANTS.END_POINTS.AUTH.LOGIN}`,
-        data
+        data,
       )
       .pipe(
         map((response) => {
@@ -150,7 +152,7 @@ export class AuthService {
             this.userInfo.set(response.user);
           }
           return response;
-        })
+        }),
       );
   }
 
@@ -159,7 +161,7 @@ export class AuthService {
     return this.http
       .post<LoginOtpResponse>(
         `${API_CONSTSANTS.BASE_URL}${API_CONSTSANTS.END_POINTS.AUTH.LOGIN_OTP}`,
-        data
+        data,
       )
       .pipe(
         map((response) => {
@@ -169,7 +171,7 @@ export class AuthService {
             this.userInfo.set(response.user);
           }
           return response;
-        })
+        }),
       );
   }
 

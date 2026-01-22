@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { IProductCard } from '../model/produtct';
 import { ProductCard } from '../product-card/product-card';
+import { Part } from '../../../../core/models/parts.model';
 
 @Component({
   selector: 'app-product-section',
@@ -10,5 +11,5 @@ import { ProductCard } from '../product-card/product-card';
 })
 export class ProductSection {
   @Input() title!: string;
-  @Input() products: IProductCard[] = [];
+  @Input() products: Part[] = [];
 }

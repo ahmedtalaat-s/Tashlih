@@ -40,3 +40,16 @@
     max-width: 1320px;
   }
 }
+
+.coming-soon-banner {
+  width: 100%;
+  height: 200px;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  color: #888;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+}

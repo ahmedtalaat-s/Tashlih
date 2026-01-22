@@ -1,15 +1,12 @@
 <header class="main-header" dir="rtl">
-  <!-- ================= Header Top ================= -->
   <div class="header-top">
     <div class="container top-container">
-      <!-- Logo -->
       <div class="logo-section">
         <div class="logo-placeholder">
-          <img src="/assets/images/icons/logo.png" alt="" />
+          <img src="/assets/images/icons/logo.png" alt="Logo" />
         </div>
       </div>
 
-      <!-- Search -->
       <div class="search-section order-mobile-2">
         <div class="search-box">
           <input type="text" placeholder="ابحث عن قطعة او مورد" />
@@ -19,49 +16,34 @@
         </div>
       </div>
 
-      <!-- User Actions -->
       <div class="user-actions order-mobile-1">
-        <div class="action-icons">
-          <a routerLink="/notifications" class="icon-btn">
-            <i-lucide [img]="Bell" class="lucideicon"></i-lucide>
-          </a>
-
-          <a routerLink="/wishlist" class="icon-btn">
-            <i-lucide [img]="Heart" class="lucideicon"></i-lucide>
-          </a>
-        </div>
-
-        <div class="user-profile">
-          <div class="user-info">
-            <div class="user-name-row">
-              <i-lucide [img]="ChevronDown" class="dropdown-icon lucideicon"></i-lucide>
-              <span class="user-name">أحمد سامي علي</span>
+        @if (isloggedIn()) {
+          <div class="user-profile">
+            <div class="user-avatar"></div>
+            <div class="user-info">
+              <div class="user-name-row">
+                <span class="user-name">{{ userInfo()?.name }}</span>
+                <i-lucide [img]="ChevronDown" class="dropdown-icon lucideicon"></i-lucide>
+              </div>
             </div>
-
-            <span class="user-location desktop-location">
-              <i-lucide [img]="MapPin" class="lucideicon"></i-lucide>
-              حي الفجر، برج الفجر، الرياض
-            </span>
           </div>
+        } @else {
+          <div class="auth-buttons">
+            <a routerLink="/auth/login" class="login-link">تسجيل الدخول</a>
+            <a routerLink="/auth/register/choose-account" class="signup-btn">حساب جديد</a>
+          </div>
+        }
 
-          <div class="user-avatar"></div>
-        </div>
-      </div>
-
-      <!-- Mobile Location -->
-      <div class="mobile-location-container order-mobile-3">
-        <span class="user-location">
-          <i-lucide [img]="MapPin" class="lucideicon"></i-lucide>
-          حي الفجر، برج الفجر، الرياض
-        </span>
+        <button class="mobile-menu-toggle" (click)="isMenuOpen = !isMenuOpen">
+          <i-lucide [img]="isMenuOpen ? X : Menu" class="lucideicon"></i-lucide>
+        </button>
       </div>
     </div>
   </div>
 
-  <!-- ================= Header Bottom ================= -->
-  <div class="header-bottom">
+  <div class="header-bottom" [class.mobile-show]="isMenuOpen">
     <div class="container bottom-container">
-      <button class="categories-btn">
+      <button class="categories-btn desktop-only">
         <i-lucide [img]="Menu" class="lucideicon"></i-lucide>
         جميع الأقسام
       </button>
@@ -69,16 +51,32 @@
       <nav class="main-nav">
         <ul class="nav-links">
           <li>
-            <a routerLink="/" routerLinkActive="active">الرئيسية</a>
+            <a routerLink="/home" routerLinkActive="active" (click)="isMenuOpen = false"
+              >الرئيسية</a
+            >
+          </li>
+          <li class="allcatgories-mobile">
+            <a routerLink="/customer/search" routerLinkActive="active" (click)="isMenuOpen = false"
+              >جميع الأقسام</a
+            >
           </li>
           <li>
-            <a routerLink="/orders">طلباتي</a>
+            <a routerLink="/customer/orders" routerLinkActive="active" (click)="isMenuOpen = false"
+              >طلباتي</a
+            >
           </li>
           <li>
-            <a routerLink="/suppliers">الموردين</a>
+            <a routerLink="/suppliers" routerLinkActive="active" (click)="isMenuOpen = false"
+              >الموردين</a
+            >
           </li>
           <li>
-            <a routerLink="/settings">الاعدادات</a>
+            <a
+              routerLink="/customer/settings"
+              routerLinkActive="active"
+              (click)="isMenuOpen = false"
+              >الاعدادات</a
+            >
           </li>
         </ul>
       </nav>

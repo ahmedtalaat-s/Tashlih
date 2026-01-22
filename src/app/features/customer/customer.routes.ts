@@ -26,4 +26,20 @@ export const routes: Routes = [
     path: 'search',
     loadComponent: () => import('./search-products/search-products').then((c) => c.SearchProducts),
   },
+  {
+    path: 'help',
+    loadComponent: () => import('./static-pages/help-center/help-center').then((m) => m.HelpCenter),
+  },
+  {
+    path: 'privacy-policy',
+    loadComponent: () =>
+      import('./static-pages/privacy-policy/privacy-policy').then((m) => m.PrivacyPolicy),
+  },
+  {
+    path: 'terms-and-conditions',
+    loadComponent: () =>
+      import('./static-pages/terms-and-conditions/terms-and-conditions').then(
+        (m) => m.TermsAndConditions,
+      ),
+  },
 ];

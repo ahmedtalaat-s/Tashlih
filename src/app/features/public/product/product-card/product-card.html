@@ -4,16 +4,12 @@
   </button>
 
   <div class="prod-img-box">
-    <img
-      [src]="product.image == '' ? '/assets/images/engine.svg' : product.image"
-      [alt]="product.title"
-    />
+    <img [src]="image().imageUrl" [alt]="product().nameAr" />
   </div>
 
-  <h3>{{ product.title }}</h3>
-
+  <h3>{{ product().nameAr }}</h3>
   <div class="card-footer">
-    <span class="price" [innerHTML]="product.price | saudiRiyal"> </span>
+    <span class="price" [innerHTML]="product().price | saudiRiyal"> </span>
 
     <button class="add-btn">
       <svg width="7" height="11" viewBox="0 0 7 11" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { HeroCarousel } from './hero-carousel/hero-carousel';
 import { IProductCard } from '../product/model/produtct';
 import { ProductSection } from '../product/product-section/product-section';
@@ -6,6 +6,8 @@ import { Banner } from '../../../shared/banner/banner';
 import { Categories } from './categories/categories';
 import { SupplierCarouserl } from './supplier-carouserl/supplier-carouserl';
 import { Map } from '../../location/components/map/map';
+import { PartsServices } from '../../../core/services/parts.service';
+import { Part } from '../../../core/models/parts.model';
 
 @Component({
   selector: 'app-home',
@@ -13,115 +15,24 @@ import { Map } from '../../location/components/map/map';
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
-export class Home {
-  bestSellers: IProductCard[] = [
-    {
-      id: 1,
-      title: 'محرك تويوتا كامري مستعمل',
-      image: '',
-      price: 120,
-      currency: 'ر.س',
-    },
-    {
-      id: 1,
-      title: 'محرك تويوتا كامري مستعمل',
-      image: '',
-      price: 120,
-      currency: 'ر.س',
-    },
-    {
-      id: 1,
-      title: 'محرك تويوتا كامري مستعمل',
-      image: '',
-      price: 120,
-      currency: 'ر.س',
-    },
-    {
-      id: 1,
-      title: 'محرك تويوتا كامري مستعمل',
-      image: '',
-      price: 120,
-      currency: 'ر.س',
-    },
-    {
-      id: 1,
-      title: 'محرك تويوتا كامري مستعمل',
-      image: '',
-      price: 120,
-      currency: 'ر.س',
-    },
-    {
-      id: 1,
-      title: 'محرك تويوتا كامري مستعمل',
-      image: '',
-      price: 120,
-      currency: 'ر.س',
-    },
-    {
-      id: 1,
-      title: 'محرك تويوتا كامري مستعمل',
-      image: '',
-      price: 120,
-      currency: 'ر.س',
-    },
-    {
-      id: 1,
-      title: 'محرك تويوتا كامري مستعمل',
-      image: '',
-      price: 120,
-      currency: 'ر.س',
-    },
-    {
-      id: 1,
-      title: 'محرك تويوتا كامري مستعمل',
-      image: '',
-      price: 120,
-      currency: 'ر.س',
-    },
-    {
-      id: 1,
-      title: 'محرك تويوتا كامري مستعمل',
-      image: '',
-      price: 120,
-      currency: 'ر.س',
-    },
-  ];
+export class Home implements OnInit {
+  private partsService = inject(PartsServices);
 
-  recommended: IProductCard[] = [
-    {
-      id: 2,
-      title: 'قير أوتوماتيك هيونداي',
-      image: '',
-      price: 200,
-      currency: 'ر.س',
-    },
-    {
-      id: 2,
-      title: 'قير أوتوماتيك هيونداي',
-      image: '',
-      price: 200,
-      currency: 'ر.س',
-    },
-    {
-      id: 2,
-      title: 'قير أوتوماتيك هيونداي',
-      image: '',
-      price: 200,
-      currency: 'ر.س',
-    },
-    {
-      id: 2,
-      title: 'قير أوتوماتيك هيونداي',
-      image: '',
-      price: 200,
-      currency: 'ر.س',
-    },
-    {
-      id: 2,
-      title: 'قير أوتوماتيك هيونداي',
-      image: '',
-      price: 200,
-      currency: 'ر.س',
-    },
-  ];
+  Latest!: Part[];
+  recommended!: Part[];
+
+  ngOnInit(): void {
+    this.loadLatestParts();
+    // this.loadRecommendedParts();
+  }
+  private loadLatestParts() {
+    this.partsService.getLatestParts(10).subscribe((response) => {
+      this.Latest = response.parts;
+    });
+  }
+  private loadRecommendedParts() {
+    this.partsService.getFeaturedParts(10).subscribe((response) => {
+      this.recommended = response.parts;
+    });
+  }
 }

@@ -13,6 +13,7 @@ import { errorInterceptor } from './core/interceptors/error-interceptor';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
+import { loadingInterceptor } from './core/interceptors/loading-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,7 +21,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideClientHydration(withEventReplay()),
-    provideHttpClient(withInterceptors([errorInterceptor]), withFetch()),
+    provideHttpClient(withInterceptors([errorInterceptor, loadingInterceptor]), withFetch()),
     MessageService,
     provideAnimationsAsync(),
     providePrimeNG({

@@ -1,8 +1,7 @@
-import { Component, Input } from '@angular/core';
-import { IProductCard } from '../model/produtct';
+import { Component, computed, input, Input } from '@angular/core';
 import { LucideAngularModule, Heart } from 'lucide-angular';
 import { SaudiRiyalPipe } from '../../../../core/pipes/saudi-riyal-pipe';
-
+import { Part, PartImage } from '../../../../core/models/parts.model';
 @Component({
   selector: 'app-product-card',
   imports: [SaudiRiyalPipe, LucideAngularModule],
@@ -12,5 +11,17 @@ import { SaudiRiyalPipe } from '../../../../core/pipes/saudi-riyal-pipe';
 export class ProductCard {
   readonly heart = Heart;
 
-  @Input() product!: IProductCard;
+  // @input() product!: Part;
+  product = input.required<Part>();
+  defaultImage: PartImage = {
+    id: 0,
+    imageUrl: '/assets/images/engine.svg',
+    thumbnailUrl: null,
+    isPrimary: true,
+    displayOrder: 0,
+  };
+
+  image = computed(() => {
+    return this.product().images.find((img) => img.isPrimary) || this.defaultImage;
+  });
 }

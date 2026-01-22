@@ -1,0 +1,97 @@
+/* Global Direction */
+:host {
+  display: block;
+  direction: rtl;
+}
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.help-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  color: #1a1a1a;
+  line-height: 1.6;
+  background-color: #ffffff;
+  padding: 60px 20px;
+}
+
+/* Header */
+.main-header {
+  margin-bottom: 50px;
+}
+
+.main-header h1 {
+  font-size: 46px;
+  font-weight: 900;
+  margin-bottom: 20px;
+}
+
+.description {
+  color: #555;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+/* Content Groups */
+.content-group {
+  margin-bottom: 45px;
+}
+
+.content-group h2 {
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+/* FAQ Items */
+.faq-block {
+  margin-bottom: 25px;
+}
+
+.faq-block h3 {
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.faq-block p {
+  color: #666;
+  font-size: 19px;
+}
+
+/* Simplified List */
+.simple-list {
+  list-style: none;
+  margin-top: 10px;
+}
+
+.simple-list li {
+  position: relative;
+  padding-right: 15px;
+  color: #666;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.simple-list li::before {
+  content: "•";
+  position: absolute;
+  right: 0;
+  color: #1a1a1a;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .help-container {
+    padding: 30px 15px;
+  }
+
+  .main-header h1 {
+    font-size: 40px;
+  }
+}
