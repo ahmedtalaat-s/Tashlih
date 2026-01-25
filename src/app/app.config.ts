@@ -14,6 +14,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
 import { loadingInterceptor } from './core/interceptors/loading-interceptor';
+import { provideTranslateService, provideTranslateLoader } from '@ngx-translate/core';
+import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -30,6 +32,14 @@ export const appConfig: ApplicationConfig = {
       theme: {
         preset: Aura,
       },
+    }),
+    provideTranslateService({
+      loader: provideTranslateHttpLoader({
+        prefix: '/assets/i18n/',
+        suffix: '.json',
+      }),
+      fallbackLang: 'ar',
+      lang: 'ar',
     }),
   ],
 };

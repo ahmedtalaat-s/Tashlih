@@ -1,5 +1,4 @@
 import { environment } from '../environment/environment';
-import { Login } from '../features/auth/login/login';
 
 export const API_CONSTSANTS = {
   BASE_URL: environment.API_URL,
@@ -54,6 +53,18 @@ export const API_CONSTSANTS = {
       BY_SUPPLIER: (supplierId: string | number) => `Parts/supplier/${supplierId}`,
       FEATURED: 'Parts/featured',
       LATEST: 'Parts/latest',
+    },
+    LOOKSUP: {
+      CATEGORIES: 'Lookups/part-categories',
+    },
+    SUPPLIERS: {
+      GET_BY_ID: (id: number | string) => `Suppliers/${id}`,
+
+      LIST: 'Suppliers/list',
+      NEARBY: 'Suppliers/nearby',
+      MY_STATISTICS: 'Suppliers/my-statistics',
+      DASHBOARD: 'Suppliers/dashboard',
+      SEARCH: 'Suppliers/search',
     },
   },
 };

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { API_CONSTSANTS } from '../../constants/api.constants';
 import { PartsResponse } from '../models/parts.model';
+import { CategoriesResponse } from '../models/categories.model';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,7 @@ export class PartsServices {
   private http = inject(HttpClient);
 
   private getPartsList(url: string, count: number = 10) {
-    return this.http.get<PartsResponse>(url, {
+    return this.http.get<PartsResponse>(API_CONSTSANTS.BASE_URL + url, {
       params: { count },
     });
   }
@@ -21,5 +22,15 @@ export class PartsServices {
 
   getLatestParts(count?: number) {
     return this.getPartsList(API_CONSTSANTS.END_POINTS.PARTS.LATEST, count);
+  }
+
+  // categroies
+  getPartCategories(hierarchical: boolean = false) {
+    return this.http.get<CategoriesResponse>(
+      API_CONSTSANTS.BASE_URL + API_CONSTSANTS.END_POINTS.LOOKSUP.CATEGORIES,
+      {
+        params: { hierarchical },
+      },
+    );
   }
 }

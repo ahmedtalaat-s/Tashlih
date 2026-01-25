@@ -1,2 +1,6 @@
 <router-outlet />
 <p-toast [position]="getPosition()" [life]="4000" [styleClass]="getclass()"></p-toast>
+<app-spinner
+  [visible]="spinnerService.loading()"
+  [message]="spinnerService.message()"
+></app-spinner>

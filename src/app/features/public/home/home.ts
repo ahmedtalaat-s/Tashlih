@@ -26,7 +26,7 @@ export class Home implements OnInit {
     // this.loadRecommendedParts();
   }
   private loadLatestParts() {
-    this.partsService.getLatestParts(10).subscribe((response) => {
+    this.partsService.getLatestParts(8).subscribe((response) => {
       this.Latest = response.parts;
     });
   }

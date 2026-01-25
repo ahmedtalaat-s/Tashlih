@@ -31,6 +31,8 @@
     "@angular/platform-server": "^20.3.0",
     "@angular/router": "^20.3.0",
     "@angular/ssr": "^20.3.7",
+    "@ngx-translate/core": "^17.0.0",
+    "@ngx-translate/http-loader": "^17.0.0",
     "@primeng/themes": "^21.0.2",
     "@primeuix/themes": "^2.0.2",
     "express": "^5.1.0",

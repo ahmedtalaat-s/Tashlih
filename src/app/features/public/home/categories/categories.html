@@ -1,128 +1,14 @@
 <section class="categories-container">
   <div class="container">
     <div class="categories-wrapper">
-      <div class="category-item">
-        <div class="category-circle">
-          <img src="/assets/images/icons/breaks.svg" alt="فرامل" />
+      @for (category of categories; track category.id) {
+        <div class="category-item">
+          <div class="category-circle">
+            <img [src]="category.icon" [alt]="getCategoryName(category)" />
+          </div>
+          <span class="category-label">{{ getCategoryName(category) }}</span>
         </div>
-        <span class="category-label">فرامل</span>
-      </div>
-
-      <div class="category-item">
-        <div class="category-circle">
-          <img src="/assets/images/icons/electricty.svg" alt="كهرباء" />
-        </div>
-        <span class="category-label">كهرباء</span>
-      </div>
-
-      <div class="category-item">
-        <div class="category-circle">
-          <img src="/assets/images/icons/oil.svg" alt="زيوت" />
-        </div>
-        <span class="category-label">زيوت</span>
-      </div>
-
-      <div class="category-item">
-        <div class="category-circle">
-          <img src="/assets/images/icons/flater.svg" alt="فلاتر" />
-        </div>
-        <span class="category-label">فلاتر</span>
-      </div>
-
-      <div class="category-item">
-        <div class="category-circle">
-          <img src="/assets/images/icons/breaks.svg" alt="فرامل" />
-        </div>
-        <span class="category-label">فرامل</span>
-      </div>
-
-      <div class="category-item">
-        <div class="category-circle">
-          <img src="/assets/images/icons/electricty.svg" alt="كهرباء" />
-        </div>
-        <span class="category-label">كهرباء</span>
-      </div>
-      <div class="category-item">
-        <div class="category-circle">
-          <img src="/assets/images/icons/breaks.svg" alt="فرامل" />
-        </div>
-        <span class="category-label">فرامل</span>
-      </div>
-
-      <div class="category-item">
-        <div class="category-circle">
-          <img src="/assets/images/icons/electricty.svg" alt="كهرباء" />
-        </div>
-        <span class="category-label">كهرباء</span>
-      </div>
-
-      <div class="category-item">
-        <div class="category-circle">
-          <img src="/assets/images/icons/oil.svg" alt="زيوت" />
-        </div>
-        <span class="category-label">زيوت</span>
-      </div>
-
-      <div class="category-item">
-        <div class="category-circle">
-          <img src="/assets/images/icons/flater.svg" alt="فلاتر" />
-        </div>
-        <span class="category-label">فلاتر</span>
-      </div>
-
-      <div class="category-item">
-        <div class="category-circle">
-          <img src="/assets/images/icons/breaks.svg" alt="فرامل" />
-        </div>
-        <span class="category-label">فرامل</span>
-      </div>
-
-      <div class="category-item">
-        <div class="category-circle">
-          <img src="/assets/images/icons/electricty.svg" alt="كهرباء" />
-        </div>
-        <span class="category-label">كهرباء</span>
-      </div>
-      <div class="category-item">
-        <div class="category-circle">
-          <img src="/assets/images/icons/flater.svg" alt="فلاتر" />
-        </div>
-        <span class="category-label">فلاتر</span>
-      </div>
-
-      <div class="category-item">
-        <div class="category-circle">
-          <img src="/assets/images/icons/breaks.svg" alt="فرامل" />
-        </div>
-        <span class="category-label">فرامل</span>
-      </div>
-
-      <div class="category-item">
-        <div class="category-circle">
-          <img src="/assets/images/icons/electricty.svg" alt="كهرباء" />
-        </div>
-        <span class="category-label">كهرباء</span>
-      </div>
-      <div class="category-item">
-        <div class="category-circle">
-          <img src="/assets/images/icons/flater.svg" alt="فلاتر" />
-        </div>
-        <span class="category-label">فلاتر</span>
-      </div>
-
-      <div class="category-item">
-        <div class="category-circle">
-          <img src="/assets/images/icons/breaks.svg" alt="فرامل" />
-        </div>
-        <span class="category-label">فرامل</span>
-      </div>
-
-      <div class="category-item">
-        <div class="category-circle">
-          <img src="/assets/images/icons/electricty.svg" alt="كهرباء" />
-        </div>
-        <span class="category-label">كهرباء</span>
-      </div>
+      }
     </div>
   </div>
 </section>
