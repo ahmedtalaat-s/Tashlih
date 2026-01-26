@@ -8,6 +8,7 @@ import { SupplierCarouserl } from './supplier-carouserl/supplier-carouserl';
 import { Map } from '../../location/components/map/map';
 import { PartsServices } from '../../../core/services/parts.service';
 import { Part } from '../../../core/models/parts.model';
+import { FavoritesService } from '../../../core/services/favorites.service';
 
 @Component({
   selector: 'app-home',
@@ -17,11 +18,14 @@ import { Part } from '../../../core/models/parts.model';
 })
 export class Home implements OnInit {
   private partsService = inject(PartsServices);
+  private favoritesService = inject(FavoritesService);
 
   Latest!: Part[];
   recommended!: Part[];
 
   ngOnInit(): void {
+    this.favoritesService.loadFavoriteParts()?.subscribe();
+    this.favoritesService.loadFavoriteSuppliers()?.subscribe();
     this.loadLatestParts();
     // this.loadRecommendedParts();
   }

@@ -16,6 +16,7 @@ import Aura from '@primeuix/themes/aura';
 import { loadingInterceptor } from './core/interceptors/loading-interceptor';
 import { provideTranslateService, provideTranslateLoader } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
+import { authInterceptor } from './core/interceptors/auth-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -23,7 +24,10 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideClientHydration(withEventReplay()),
-    provideHttpClient(withInterceptors([errorInterceptor, loadingInterceptor]), withFetch()),
+    provideHttpClient(
+      withInterceptors([authInterceptor, errorInterceptor, loadingInterceptor]),
+      withFetch(),
+    ),
     MessageService,
     provideAnimationsAsync(),
     providePrimeNG({

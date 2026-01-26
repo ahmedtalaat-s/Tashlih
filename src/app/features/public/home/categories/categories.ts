@@ -3,6 +3,7 @@ import { Category } from '../../../../core/models/categories.model';
 import { PartsServices } from '../../../../core/services/parts.service';
 import { LanguageService } from '../../../../core/services/language.service';
 import { log } from 'console';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-categories',
@@ -13,6 +14,7 @@ import { log } from 'console';
 export class Categories implements OnInit {
   private partsService = inject(PartsServices);
   private languageService = inject(LanguageService);
+  private router = inject(Router);
   categories!: Category[];
 
   ngOnInit(): void {
@@ -30,5 +32,9 @@ export class Categories implements OnInit {
       .map((value) => ({ value, sort: Math.random() }))
       .sort((a, b) => a.sort - b.sort)
       .map(({ value }) => value);
+  }
+
+  openSearchpage(categoryId: number) {
+    this.router.navigate(['/customer/search'], { queryParams: { categoryId } });
   }
 }

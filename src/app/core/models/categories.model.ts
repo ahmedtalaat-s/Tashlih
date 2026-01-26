@@ -21,4 +21,4 @@ export interface Category {
   children: Category[] | null;
 }
 
-export type CategoriesResponse = ApiResponse<Category[]>;
+export interface CategoriesResponse extends ApiResponse<Category[]> {}

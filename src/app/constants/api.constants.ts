@@ -66,5 +66,20 @@ export const API_CONSTSANTS = {
       DASHBOARD: 'Suppliers/dashboard',
       SEARCH: 'Suppliers/search',
     },
+    FAVORITES: {
+      PARTS: {
+        ADD: (partId: number | string) => `Favorites/parts/${partId}`,
+        REMOVE: (partId: number | string) => `Favorites/parts/${partId}`,
+        LIST: 'Favorites/parts',
+        CHECK: (partId: number | string) => `Favorites/parts/${partId}/check`,
+      },
+
+      SUPPLIERS: {
+        ADD: (supplierId: number | string) => `Favorites/suppliers/${supplierId}`,
+        REMOVE: (supplierId: number | string) => `Favorites/suppliers/${supplierId}`,
+        LIST: 'Favorites/suppliers',
+        CHECK: (supplierId: number | string) => `Favorites/suppliers/${supplierId}/check`,
+      },
+    },
   },
 };

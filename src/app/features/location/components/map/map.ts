@@ -3,8 +3,10 @@ import { Component, ElementRef, OnDestroy, OnInit, ViewChild, inject } from '@an
 import { isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID } from '@angular/core';
 import { environment } from '../../../../environment/environment';
-import { SupplierService } from '../../services/supplier-service';
+import { SupplierService } from '../../../../core/services/supplier.service';
 import { Marker, Popup } from 'mapbox-gl';
+import { NearbySupplier } from '../../../../core/models/supplier.model';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-map',
   imports: [],
@@ -19,6 +21,7 @@ export class Map implements OnInit, OnDestroy {
   private platformId = inject(PLATFORM_ID);
   private supplierService = inject(SupplierService);
   private mapboxgl: any; // hold the imported MapboxGL
+  private router = inject(Router);
 
   async ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
@@ -60,19 +63,23 @@ export class Map implements OnInit, OnDestroy {
   }
   //get the nearest suppliers for the clicked location
   getNearestSuppliers(lat: number, lng: number) {
-    this.supplierService.getNearestSuppliers(lat, lng).subscribe((suppliers) => {
-      this.showSuppliersOnMap(suppliers);
+    this.supplierService.getNearbySuppliers({ latitude: lat, longitude: lng }).subscribe((res) => {
+      console.log(res.suppliers);
+
+      this.showSuppliersOnMap(res.suppliers);
     });
   }
   //show the nearest supplier on map
-  showSuppliersOnMap(suppliers: any[]) {
+  showSuppliersOnMap(suppliers: NearbySupplier[]) {
     suppliers.forEach((supplier) => {
       const popup = new this.mapboxgl.Popup({
         closeButton: false,
         closeOnClick: false,
       }).setHTML(`
-        <strong>${supplier.name}</strong><br/>
-        ${supplier.address}
+        <strong>${supplier.businessNameAr}</strong><br/>
+        ${supplier.district}, ${supplier.city}<br/>
+        Rating: ${supplier.ratingAverage} ⭐<br/>
+        Parts Available: ${supplier.partsCount}
       `);
 
       const marker: Marker = new this.mapboxgl.Marker({ color: 'blue' })
@@ -89,8 +96,7 @@ export class Map implements OnInit, OnDestroy {
 
       // 🖱️ Click → navigate to supplier page
       marker.getElement().addEventListener('click', () => {
-        // this.router.navigate(['/suppliers', supplier.id]);
-        console.log(supplier.name);
+        this.router.navigate(['/customer/supplier-profile', supplier.id]);
       });
     });
   }

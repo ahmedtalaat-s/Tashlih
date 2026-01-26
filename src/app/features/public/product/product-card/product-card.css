@@ -9,6 +9,7 @@
   -moz-transition: all 0.4s;
   -ms-transition: all 0.4s;
   -o-transition: all 0.4s;
+  height: 100%;
 }
 /* --- Hover State: Elevation & Depth --- */
 .product-card:hover {
@@ -35,8 +36,24 @@
   cursor: pointer;
   border: none;
   z-index: 100;
+  /* Smooth transition for background and transform */
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+::ng-deep .fav-btn:hover svg{
+  color: #ff4d4d;
+  transform: scale(1.1);
+}
+
+/* Class to apply when favorited */
+::ng-deep .isfavorite svg{
+  color: #ff4d4d;
+  fill: #ff4d4d;
+  /* Red color for the icon */
+}
 .prod-img-box {
   background: #fdfbf0;
   border-radius: 10px;
