@@ -2,7 +2,7 @@
   <div class="header-top">
     <div class="container top-container">
       <div class="logo-section">
-        <div class="logo-placeholder">
+        <div class="logo-placeholder" routerLink="/home">
           <img src="/assets/images/icons/logo.png" alt="Logo" />
         </div>
       </div>
@@ -18,14 +18,36 @@
 
       <div class="user-actions order-mobile-1">
         @if (isloggedIn()) {
-          <div class="user-profile">
-            <div class="user-avatar"></div>
-            <div class="user-info">
-              <div class="user-name-row">
-                <span class="user-name">{{ userInfo()?.name }}</span>
-                <i-lucide [img]="ChevronDown" class="dropdown-icon lucideicon"></i-lucide>
+          <div class="user-profile-wrapper">
+            <div class="user-profile">
+              <div class="user-avatar">
+                @if (userInfo()?.avatarUrl) {
+                  <img [src]="userInfo()?.avatarUrl" alt="" />
+                }
+              </div>
+              <div class="user-info">
+                <div class="user-name-row">
+                  <span class="user-name">{{ userInfo()?.fullName }}</span>
+                  <i-lucide [img]="ChevronDown" class="dropdown-icon lucideicon"></i-lucide>
+                </div>
               </div>
             </div>
+            <ul class="profile-dropdown">
+              <li><a href="/profile">حسابي</a></li>
+              <li><a href="/settings">الإعدادات</a></li>
+              <li class="logout-item">
+                <button>تسجيل الخروج</button>
+              </li>
+            </ul>
+          </div>
+          <div class="action-icons">
+            <a routerLink="/notifications" class="icon-btn">
+              <i-lucide [img]="Bell" class="lucideicon"></i-lucide>
+            </a>
+
+            <a routerLink="/customer/favorites" class="icon-btn">
+              <i-lucide [img]="Heart" class="lucideicon"></i-lucide>
+            </a>
           </div>
         } @else {
           <div class="auth-buttons">
@@ -43,10 +65,31 @@
 
   <div class="header-bottom" [class.mobile-show]="isMenuOpen">
     <div class="container bottom-container">
-      <button class="categories-btn desktop-only">
-        <i-lucide [img]="Menu" class="lucideicon"></i-lucide>
-        جميع الأقسام
-      </button>
+      <div class="menu-wrapper">
+        <button class="categories-btn desktop-only">
+          <i-lucide [img]="Menu" class="lucideicon"></i-lucide>
+          جميع الأقسام
+        </button>
+        <ul class="categories-menu">
+          @for (category of categories; track category.id) {
+            @if (category.children && category.children.length > 0) {
+              <li class="category-item">
+                <div class="category-flex">
+                  <span> {{ category.nameAr }}</span
+                  ><span class="arrow"
+                    ><i-lucide [img]="ChevronLeft" class="lucideicon"></i-lucide
+                  ></span>
+                </div>
+                <ul class="sub-menu">
+                  @for (sub of category.children; track sub.id) {
+                    <li (click)="navigateToSearch(sub.id)">{{ sub.nameAr }}</li>
+                  }
+                </ul>
+              </li>
+            }
+          }
+        </ul>
+      </div>
 
       <nav class="main-nav">
         <ul class="nav-links">

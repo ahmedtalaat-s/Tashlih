@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, Input, OnInit, ViewChild } from '@angular/core';
 import {
   LucideAngularModule,
   Heart,
@@ -18,7 +18,7 @@ import { FavoritesService } from '../../../../core/services/favorites.service';
   templateUrl: './supplier-carouserl.html',
   styleUrl: './supplier-carouserl.css',
 })
-export class SupplierCarouserl implements OnInit {
+export class SupplierCarouserl {
   @ViewChild('carousel', { static: true })
   carousel!: ElementRef<HTMLDivElement>;
 
@@ -28,21 +28,11 @@ export class SupplierCarouserl implements OnInit {
   readonly ChevronLeftIcon = ChevronLeft;
   readonly ChevronRightIcon = ChevronRight;
 
-  suppliers: Supplier[] = [];
+  @Input() suppliers!: Supplier[];
 
-  private suppliersService = inject(SupplierService);
   private router = inject(Router);
   private authService = inject(AuthService);
   private favoritesService = inject(FavoritesService);
-
-  ngOnInit(): void {
-    this.loadSuppliers();
-  }
-  loadSuppliers() {
-    this.suppliersService.getSuppliersList('').subscribe((res) => {
-      this.suppliers = res.suppliers;
-    });
-  }
 
   openSupplierProfilePage(supplierId: number) {
     this.router.navigate(['/customer/supplier-profile', supplierId]);

@@ -28,9 +28,21 @@ export class AuthService {
   private router = inject(Router);
   destroyref = inject(DestroyRef);
 
-  isloggedIn = computed(() => this.userInfo() !== null);
+  isloggedIn = computed(() => {
+    // check memory first
+    if (this.userInfo()) return true;
 
-  userInfo = signal<User | null>(null);
+    // fallback: check storage
+    const storedUser = StorageHelper.getItem<User>(APP_CONSTANTS.STORAGE_KEYS.USER);
+    if (storedUser) {
+      this.userInfo.set(storedUser);
+      return true;
+    }
+
+    return false;
+  });
+
+  userInfo = signal<User | null>(StorageHelper.getItem<User>(APP_CONSTANTS.STORAGE_KEYS.USER));
   role = computed(() => this.userInfo()?.userType);
   email = computed(() => this.userInfo()?.email);
   phoneNumber = computed(() => this.userInfo()?.phone);

@@ -27,3 +27,7 @@
   padding: 0 5px;
   color: #ccc;
 }
+
+.p-paginator{
+  direction: ltr !important;
+}

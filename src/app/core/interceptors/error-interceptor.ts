@@ -21,7 +21,12 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
         toastService = injector!.get(ToastService);
       }
       if (error.status === 401) {
-        toastService.error('Unauthorized', 'Your session has expired. Please log in again.');
+        languageService?.defaultLanguage() === 'ar'
+          ? toastService.error(
+              'غير مصرح',
+              'انتهت جلسة العمل الخاصة بك. الرجاء تسجيل الدخول مرة أخرى.',
+            )
+          : toastService.error('Unauthorized', 'Your session has expired. Please log in again.');
       } else {
         const message = extractErrorMessage(error, languageService?.defaultLanguage() || 'ar');
         languageService?.defaultLanguage() === 'ar'
@@ -29,7 +34,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
           : toastService.error('Error', message);
       }
       return throwError(() => error);
-    })
+    }),
   );
 };
 

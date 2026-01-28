@@ -45,6 +45,18 @@
   justify-content: center;
   cursor: pointer;
   border: none;
+  transition: all 0.2s ease-in-out;
+}
+::ng-deep .heart-btn:hover svg {
+  color: #ff4d4d;
+  transform: scale(1.1);
+}
+
+/* Class to apply when favorited */
+::ng-deep .isfavorite svg {
+  color: #ff4d4d;
+  fill: #ff4d4d;
+  /* Red color for the icon */
 }
 
 .banner-right {
@@ -62,6 +74,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+}
+
+.profile-pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .profile-content {

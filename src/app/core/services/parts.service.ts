@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { API_CONSTSANTS } from '../../constants/api.constants';
-import { PartsResponse } from '../models/parts.model';
+import { PartResponse, PartsResponse } from '../models/parts.model';
 import { CategoriesResponse } from '../models/categories.model';
 
 @Injectable({
@@ -24,12 +24,27 @@ export class PartsServices {
     return this.getPartsList(API_CONSTSANTS.END_POINTS.PARTS.LATEST, count);
   }
 
+  getPartById(partId: number) {
+    return this.http.get<PartResponse>(
+      API_CONSTSANTS.BASE_URL + API_CONSTSANTS.END_POINTS.PARTS.GET_BY_ID(partId),
+    );
+  }
+
   // categroies
   getPartCategories(hierarchical: boolean = false) {
     return this.http.get<CategoriesResponse>(
       API_CONSTSANTS.BASE_URL + API_CONSTSANTS.END_POINTS.LOOKSUP.CATEGORIES,
       {
         params: { hierarchical },
+      },
+    );
+  }
+
+  getPartsBySupplierId(supplierId: number, page: number, pageSize: number = 10) {
+    return this.http.get<PartsResponse>(
+      API_CONSTSANTS.BASE_URL + API_CONSTSANTS.END_POINTS.PARTS.BY_SUPPLIER(supplierId),
+      {
+        params: { page, pageSize },
       },
     );
   }

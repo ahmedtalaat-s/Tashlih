@@ -5,18 +5,26 @@
   <div class="supplier-banner">
     <div class="banner-right">
       <div class="profile-pic">
-        <lucide-icon [img]="imageIcon"></lucide-icon>
+        @if (supplier?.logoUrl) {
+          <img [src]="supplier.logoUrl" alt="Supplier Logo" />
+        } @else {
+          <lucide-icon [img]="imageIcon"></lucide-icon>
+        }
       </div>
       <div class="supplier-info">
-        <h1>{{ supplier.name }}</h1>
+        <h1>{{ supplier.businessNameAr }}</h1>
         <div class="supplier-location">
           <lucide-icon [img]="locationIcon"></lucide-icon>
-          {{ supplier.location }}
+          {{ supplier.city }}, {{ supplier.district }}
         </div>
       </div>
     </div>
     <div class="banner-actions">
-      <button class="circle-btn">
+      <button
+        class="circle-btn heart-btn"
+        (click)="toggleFavorite()"
+        [class.isfavorite]="isFavorite(supplier.id)"
+      >
         <lucide-icon [img]="heartIcon"></lucide-icon>
       </button>
       <button class="circle-btn">
@@ -30,20 +38,20 @@
     <section class="main-area">
       <div class="about-section">
         <h4>نبذة عن المورد</h4>
-        <p>{{ supplier.about }}</p>
+        <p>{{ supplier.description }}</p>
       </div>
 
       <div class="section-header">
         <h4>القطع المتوفرة حالياً</h4>
         <div class="search-mini">
           <lucide-icon [img]="searchIcon"></lucide-icon>
-          <input type="text" placeholder="ابحث عن القطعة" />
+          <input type="text" placeholder="ابحث عن القطعة" (input)="filterParts($event)" />
         </div>
       </div>
 
       <div class="parts-grid">
-        @for (part of parts; track $index) {
-          <!-- <app-product-card [product]="part"></app-product-card> -->
+        @for (part of filteredparts; track $index) {
+          <app-product-card [product]="part"></app-product-card>
         }
       </div>
     </section>

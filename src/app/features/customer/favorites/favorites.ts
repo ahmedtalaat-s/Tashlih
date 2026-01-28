@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
-import { FavoriteSupplier } from '../model/favorite-supplier';
+import { Component, inject, PLATFORM_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FavoritesSuppliersTable } from './favorites-suppliers-table/favorites-suppliers-table';
 import { FavoritesPartsTable } from './favorites-parts-table/favorites-parts-table';
-import { FavoritePart } from '../model/favorite-part';
+import { FavoritePart } from '../../../core/models/parts.model';
+import { FavoriteSupplier } from '../../../core/models/supplier.model';
 import { LucideAngularModule, Search } from 'lucide-angular';
-
+import { FavoritesService } from '../../../core/services/favorites.service';
 type FavoritesTab = 'parts' | 'suppliers';
 
 @Component({
@@ -23,89 +23,57 @@ type FavoritesTab = 'parts' | 'suppliers';
 })
 export class Favorites {
   readonly searchIcon = Search;
-  openPartDetails($event: number) {
-    throw new Error('Method not implemented.');
+  private platform = inject(PLATFORM_ID);
+  private favoriteService = inject(FavoritesService);
+
+  ngOnInit(): void {
+    if (isPlatformBrowser(this.platform)) {
+      this.loadSuppliers();
+      this.loadParts();
+    }
   }
+
+  loadSuppliers() {
+    this.favoriteService.getFavoriteSuppliers().subscribe({
+      next: (res) => {
+        this.suppliers = res.suppliers;
+        this.suppliersCount = res.totalCount;
+      },
+    });
+  }
+
+  loadParts() {
+    this.favoriteService.getFavoriteParts().subscribe({
+      next: (res) => {
+        this.parts = res.parts;
+        this.partsCount = res.totalCount;
+      },
+    });
+  }
+
+  openPartDetails($event: number) {}
   activeTab: FavoritesTab = 'parts';
   searchTerm: string = '';
-
-  suppliers: FavoriteSupplier[] = [
-    {
-      id: 1,
-      name: 'مركز البركة',
-      specialization: 'شراء وبيع قطع غيار',
-      date: '31 يناير 2025',
-    },
-    {
-      id: 2,
-      name: 'مركز البركة',
-      specialization: 'شراء وبيع قطع غيار',
-      date: '31 يناير 2025',
-    },
-    {
-      id: 1,
-      name: 'مركز البركة',
-      specialization: 'شراء وبيع قطع غيار',
-      date: '31 يناير 2025',
-    },
-    {
-      id: 2,
-      name: 'مركز البركة',
-      specialization: 'شراء وبيع قطع غيار',
-      date: '31 يناير 2025',
-    },
-    {
-      id: 2,
-      name: 'مركز البركة',
-      specialization: 'شراء وبيع قطع غيار',
-      date: '31 يناير 2025',
-    },
-  ];
-  parts: FavoritePart[] = [
-    {
-      id: 1,
-      name: 'فرامل أمامية',
-      type: 'محرك',
-      quantity: 5,
-      date: '31 يناير 2025',
-    },
-    {
-      id: 2,
-      name: 'فلتر زيت',
-      type: 'محرك',
-      quantity: 2,
-      date: '28 يناير 2025',
-    },
-    {
-      id: 3,
-      name: 'بطارية',
-      type: 'كهرباء',
-      quantity: 1,
-      date: '25 يناير 2025',
-    },
-    {
-      id: 2,
-      name: 'فلتر زيت',
-      type: 'محرك',
-      quantity: 2,
-      date: '28 يناير 2025',
-    },
-    {
-      id: 3,
-      name: 'بطارية',
-      type: 'كهرباء',
-      quantity: 1,
-      date: '25 يناير 2025',
-    },
-  ];
+  suppliers!: FavoriteSupplier[];
+  suppliersCount!: number;
+  parts!: FavoritePart[];
+  partsCount!: number;
 
   setTab(tab: FavoritesTab) {
     this.activeTab = tab;
   }
   deleteSupplier(id: number) {
-    this.suppliers = this.suppliers.filter((s) => s.id !== id);
+    this.favoriteService.removeSupplier(id).subscribe({
+      next: (value) => {
+        this.suppliers = this.suppliers.filter((s) => s.id !== id);
+      },
+    });
   }
   deletePart(id: number) {
-    this.parts = this.parts.filter((s) => s.id !== id);
+    this.favoriteService.removePart(id).subscribe({
+      next: (value) => {
+        this.parts = this.parts.filter((s) => s.id !== id);
+      },
+    });
   }
 }

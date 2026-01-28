@@ -23,7 +23,13 @@ export class Map implements OnInit, OnDestroy {
   private mapboxgl: any; // hold the imported MapboxGL
   private router = inject(Router);
 
-  async ngOnInit() {
+  ngOnInit() {
+    setTimeout(() => {
+      this.initateMap();
+    }, 1500);
+  }
+
+  async initateMap() {
     if (isPlatformBrowser(this.platformId)) {
       // SSR check to ensure this runs in the browser as GL JS requires a browser environment
       this.mapboxgl = (await import('mapbox-gl')).default; // dynamically import mapbox-gl as the default export
@@ -47,7 +53,6 @@ export class Map implements OnInit, OnDestroy {
       });
     }
   }
-
   enableLocationSelection() {
     this.isSelectingLocation = true;
   }

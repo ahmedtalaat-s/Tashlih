@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { API_CONSTSANTS } from '../../constants/api.constants';
 import {
+  GetSupplierByIdResponse,
   nearbySupplierRequest,
   NearbySuppliersResponse,
   supplierListResponse,
@@ -15,7 +16,7 @@ export class SupplierService {
 
   // get supplier by id
   getSupplierById(id: number | string) {
-    return this.http.get<any>(
+    return this.http.get<GetSupplierByIdResponse>(
       `${API_CONSTSANTS.BASE_URL}${API_CONSTSANTS.END_POINTS.SUPPLIERS.GET_BY_ID(id)}`,
     );
   }

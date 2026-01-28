@@ -1,15 +1,24 @@
 import { HttpClient } from '@angular/common/http';
-import { computed, inject, Injectable, signal } from '@angular/core';
+import { computed, inject, Injectable, signal, PLATFORM_ID } from '@angular/core';
 import { API_CONSTSANTS } from '../../constants/api.constants';
 import { tap } from 'rxjs';
-import { AuthService } from './auth.service';
+import { isPlatformBrowser } from '@angular/common';
+import { FavoritePart, FavoritePartsResponse } from '../models/parts.model';
+import { FavoriteSuppliersResponse } from '../models/supplier.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FavoritesService {
   private http = inject(HttpClient);
-  private authservice = inject(AuthService);
+  private platformId = inject(PLATFORM_ID);
+
+  constructor() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.loadFavoriteParts().subscribe();
+      this.loadFavoriteSuppliers().subscribe();
+    }
+  }
 
   /* ===================== SIGNAL STATE ===================== */
 
@@ -23,29 +32,28 @@ export class FavoritesService {
   /* ===================== INIT ===================== */
 
   loadFavoriteParts() {
-    if (!this.authservice.isloggedIn()) {
-      this.favoritePartIds.set(new Set());
-      return;
-    }
     return this.http
-      .get<any[]>(`${API_CONSTSANTS.BASE_URL}${API_CONSTSANTS.END_POINTS.FAVORITES.PARTS.LIST}`)
+      .get<FavoritePartsResponse>(
+        `${API_CONSTSANTS.BASE_URL}${API_CONSTSANTS.END_POINTS.FAVORITES.PARTS.LIST}`,
+      )
       .pipe(
-        tap((parts) => {
-          this.favoritePartIds.set(new Set(parts.map((p) => p.id)));
+        tap((res) => {
+          this.favoritePartIds.set(new Set(res.parts.map((p: FavoritePart) => p.partId)));
+          if (isPlatformBrowser(this.platformId)) {
+            console.log('BROWSER LOG:', this.favoritePartIds());
+          }
         }),
       );
   }
 
   loadFavoriteSuppliers() {
-    if (!this.authservice.isloggedIn()) {
-      this.favoritePartIds.set(new Set());
-      return;
-    }
     return this.http
-      .get<any[]>(`${API_CONSTSANTS.BASE_URL}${API_CONSTSANTS.END_POINTS.FAVORITES.SUPPLIERS.LIST}`)
+      .get<FavoriteSuppliersResponse>(
+        `${API_CONSTSANTS.BASE_URL}${API_CONSTSANTS.END_POINTS.FAVORITES.SUPPLIERS.LIST}`,
+      )
       .pipe(
-        tap((suppliers) => {
-          this.favoriteSupplierIds.set(new Set(suppliers.map((s) => s.id)));
+        tap((res) => {
+          this.favoriteSupplierIds.set(new Set(res.suppliers.map((s) => s.supplierId)));
         }),
       );
   }
@@ -83,7 +91,7 @@ export class FavoritesService {
 
   // GET /api/Favorites/parts
   getFavoriteParts() {
-    return this.http.get(
+    return this.http.get<FavoritePartsResponse>(
       `${API_CONSTSANTS.BASE_URL}${API_CONSTSANTS.END_POINTS.FAVORITES.PARTS.LIST}`,
     );
   }
@@ -128,7 +136,7 @@ export class FavoritesService {
 
   // GET /api/Favorites/suppliers
   getFavoriteSuppliers() {
-    return this.http.get(
+    return this.http.get<FavoriteSuppliersResponse>(
       `${API_CONSTSANTS.BASE_URL}${API_CONSTSANTS.END_POINTS.FAVORITES.SUPPLIERS.LIST}`,
     );
   }

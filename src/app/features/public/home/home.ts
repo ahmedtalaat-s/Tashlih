@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { HeroCarousel } from './hero-carousel/hero-carousel';
 import { IProductCard } from '../product/model/produtct';
 import { ProductSection } from '../product/product-section/product-section';
@@ -9,6 +9,10 @@ import { Map } from '../../location/components/map/map';
 import { PartsServices } from '../../../core/services/parts.service';
 import { Part } from '../../../core/models/parts.model';
 import { FavoritesService } from '../../../core/services/favorites.service';
+import { SupplierService } from '../../../core/services/supplier.service';
+import { Supplier } from '../../../core/models/supplier.model';
+import { Category } from '../../../core/models/categories.model';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -18,15 +22,20 @@ import { FavoritesService } from '../../../core/services/favorites.service';
 })
 export class Home implements OnInit {
   private partsService = inject(PartsServices);
-  private favoritesService = inject(FavoritesService);
-
+  private suppliersService = inject(SupplierService);
+  private platform = inject(PLATFORM_ID);
   Latest!: Part[];
   recommended!: Part[];
+  suppliers: Supplier[] = [];
+  categories!: Category[];
 
   ngOnInit(): void {
-    this.favoritesService.loadFavoriteParts()?.subscribe();
-    this.favoritesService.loadFavoriteSuppliers()?.subscribe();
-    this.loadLatestParts();
+    if (isPlatformBrowser(this.platform)) {
+      this.loadLatestParts();
+      this.loadSuppliers();
+      this.loadCategoies();
+    }
+
     // this.loadRecommendedParts();
   }
   private loadLatestParts() {
@@ -38,5 +47,22 @@ export class Home implements OnInit {
     this.partsService.getFeaturedParts(10).subscribe((response) => {
       this.recommended = response.parts;
     });
+  }
+
+  loadSuppliers() {
+    this.suppliersService.getSuppliersList('').subscribe((res) => {
+      this.suppliers = res.suppliers;
+    });
+  }
+  loadCategoies() {
+    this.partsService.getPartCategories().subscribe((response) => {
+      this.categories = this.shuffleArray(response.data).slice(0, 18);
+    });
+  }
+  shuffleArray<T>(array: T[]): T[] {
+    return array
+      .map((value) => ({ value, sort: Math.random() }))
+      .sort((a, b) => a.sort - b.sort)
+      .map(({ value }) => value);
   }
 }

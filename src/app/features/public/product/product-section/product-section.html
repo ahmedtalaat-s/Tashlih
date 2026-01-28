@@ -4,12 +4,12 @@
 
     <div class="product-grid">
       @for (product of products; track $index) {
-      <app-product-card [product]="product"> </app-product-card>
+        <app-product-card [product]="product"> </app-product-card>
       }
     </div>
 
     <div class="center-btn">
-      <button class="btn-black">المزيد من المنتجات</button>
+      <button routerLink="/customer/search" class="btn-black">المزيد من المنتجات</button>
     </div>
   </div>
 </section>

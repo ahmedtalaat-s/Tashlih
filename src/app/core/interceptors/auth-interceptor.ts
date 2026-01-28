@@ -6,17 +6,17 @@ import { AuthService } from '../services/auth.service';
 import { APP_CONSTANTS } from '../../constants/app.constants';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  const token = StorageHelper.getItem(APP_CONSTANTS.STORAGE_KEYS.TOKEN);
-
+  const token = StorageHelper.getItem<string>('auth_token');
+  let authReq = req;
   if (token) {
-    req = req.clone({
+    authReq = req.clone({
       setHeaders: {
-        Authorization: `${token}`,
+        Authorization: `Bearer ${token}`,
       },
     });
   }
 
-  return next(req).pipe(
+  return next(authReq).pipe(
     catchError((error) => {
       return throwError(() => error);
     }),

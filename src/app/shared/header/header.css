@@ -47,6 +47,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 .logo-placeholder img{
   width: 100%;
@@ -209,6 +210,100 @@
   cursor: pointer;
   font-family: var(--font-family-base);
 }
+.categories-btn:hover{
+  border-bottom-left-radius:0 ;
+  border-bottom-right-radius: 0;
+}
+.menu-wrapper {
+  position: relative;
+  display: inline-block;
+  direction: rtl;
+  /* Sets right-to-left flow for Arabic */
+}
+
+/* Hide menus by default */
+.categories-menu,
+.sub-menu {
+  display: none;
+  position: absolute;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background: var(--primary-50);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  z-index: 1000;
+}
+.category-flex{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.sub-menu{
+height: fit-content !important;
+  width: max-content;
+  padding: 10px;
+  white-space: nowrap;
+}
+.sub-menu li{
+  padding: 5px 15px;
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+}
+.sub-menu li:hover{
+  transform: translateY(2px);
+  -webkit-transform: translateY(2px);
+  -moz-transform: translateY(2px);
+  -ms-transform: translateY(2px);
+  -o-transform: translateY(2px);
+  background-color: var(--hover-effect);
+}
+.menu-wrapper {
+  position: relative;
+  display: inline-block;
+  direction: rtl;
+  /* Sets right-to-left flow for Arabic */
+}
+.categories-menu {
+  top: 100%;
+  right: 0;
+}
+
+/* Reveal Categories on Button Hover */
+.menu-wrapper:hover .categories-menu {
+  display: block;
+}
+
+/* Individual Category Styling */
+.category-item {
+  padding: 12px 15px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+  position: relative;
+  /* Needed for sub-menu alignment */
+}
+
+/* Position the Sub-Menu to the left of the Category */
+.sub-menu {
+  top: 0;
+  right: 100%;
+  /* Moves it to the left of the parent in RTL */
+  height: 100%;
+  background: #f9f9f9;
+}
+
+/* Reveal Sub-Menu on Category Hover */
+.category-item:hover .sub-menu {
+  display: block;
+}
+
+/* Visual Hover Effect */
+.category-item:hover {
+  background-color: var(--hover-effect);
+}
 
 .categories-btn i-lucide {
   width: 18px;
@@ -266,6 +361,11 @@ i-lucide {
   .user-avatar {
     width: 40px;
     height: 40px;
+  }
+  .user-avatar img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .icon-btn {
@@ -380,5 +480,97 @@ i-lucide {
 
   .signup-btn {
     padding: 6px 12px;
+  }
+}
+
+
+/* =============== dropdown ================ */
+/* Container for hover/click area */
+.user-profile-wrapper {
+  position: relative;
+  cursor: pointer;
+}
+
+/* Hidden Menu Styling */
+.profile-dropdown {
+  display: none;
+  /* Hide by default */
+  position: absolute;
+  top: 110%;
+  /* Place it below the profile row */
+  left: 0;
+  /* Align to the left (or right:0 depending on preference) */
+  background-color: #fff;
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  padding: 8px 0;
+  z-index: 2000;
+  border: 1px solid #eee;
+}
+
+/* Show on Hover */
+.user-profile-wrapper:hover .profile-dropdown {
+  display: block;
+}
+
+/* List Item Styling */
+.profile-dropdown li a,
+.profile-dropdown li button {
+  display: block;
+  width: 100%;
+  padding: 10px 20px;
+  text-align: right;
+  text-decoration: none;
+  color: #333;
+  font-size: 0.95rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  /* Prevents text breaking */
+  font-family: inherit;
+}
+
+.profile-dropdown li:hover {
+  background-color: #f8f9fa;
+}
+
+/* Specific Logout Style */
+.logout-item {
+  border-top: 1px solid #eee;
+  margin-top: 5px;
+}
+
+.logout-item button {
+  color: #e74c3c !important;
+  /* Red color for logout */
+  font-weight: 600;
+}
+
+/* ================= Responsive Adjustments ================= */
+@media (max-width: 920px) {
+  .user-info {
+    display: none;
+    /* Hide name on tablet/mobile to save space */
+  }
+
+  .profile-dropdown {
+    left: auto;
+    right: 0;
+    /* Align to right edge on small screens */
+  }
+}
+
+@media (max-width: 480px) {
+
+  /* On very small screens, make the dropdown wider to be touch-friendly */
+  .profile-dropdown {
+    width: 200px;
+    position: fixed;
+    /* Optional: center it or make it a drawer */
+    top: 60px;
+    right: 10px;
   }
 }

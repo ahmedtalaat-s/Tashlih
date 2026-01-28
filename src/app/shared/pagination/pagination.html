@@ -1,26 +1,6 @@
-<div class="pagination">
-  <!-- Previous Page -->
-  <a class="page-num" (click)="nextPage()">
-    <lucide-icon [img]="ChevronRightIcon" class="icon"></lucide-icon>
-  </a>
-
-  <!-- Page Numbers -->
-  @for ( page of pages; track page) {
-  <a class="page-num" [class.active]="page === currentPage" (click)="selectPage(page)">
-    {{ page }}
-  </a>
-  }
-
-  <!-- Dots if there are more pages -->
-  @if (pages[pages.length - 1] < totalPages) {
-  <span class="page-dots">...</span>
-  <a class="page-num" (click)="selectPage(totalPages)">
-    {{ totalPages }}
-  </a>
-  }
-
-  <!-- Next Page -->
-  <a class="page-num" (click)="prevPage()">
-    <lucide-icon [img]="ChevronLeftIcon" class="icon"></lucide-icon>
-  </a>
-</div>
+<p-paginator
+  (onPageChange)="onPageChange($event)"
+  [first]="first"
+  [rows]="rowsPerPage"
+  [totalRecords]="totalRecords"
+/>

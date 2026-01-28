@@ -1,7 +1,7 @@
 <app-hero-carousel></app-hero-carousel>
 <div class="container">
   <app-product-section title="تمت إضافتها مؤخرًا" [products]="Latest"> </app-product-section>
-  <app-categories></app-categories>
+  <app-categories [categories]="categories"></app-categories>
   <!-- <app-product-section title="قطع موصى بها" [products]="recommended"> </app-product-section> -->
   <app-banner
     title="خصومات على قطع التشليح"
@@ -14,7 +14,7 @@
     description="تواصل مع تشاليح معتمدة في مدينتك واحصل على القطعة المناسبة بسرعة."
   >
   </app-banner>
-  <app-supplier-carouserl></app-supplier-carouserl>
+  <app-supplier-carouserl [suppliers]="suppliers"></app-supplier-carouserl>
 
   <app-map></app-map>
 </div>

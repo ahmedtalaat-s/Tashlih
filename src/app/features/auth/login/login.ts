@@ -5,6 +5,8 @@ import { LoginRequest } from '../../../core/models/auth.model';
 import { ToastService } from '../../../core/services/toast.service';
 import { LanguageService } from '../../../core/services/language.service';
 import { AuthService } from '../../../core/services/auth.service';
+import { Router } from '@angular/router';
+import { userInfo } from 'os';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +22,7 @@ export class Login {
   private toastService = inject(ToastService);
   private languageService = inject(LanguageService);
   private authService = inject(AuthService);
+  private router = inject(Router);
 
   loginForm = this.fb.group({
     phone: ['', [Validators.required, Validators.pattern(/^5\d{8}$/)]],
@@ -62,6 +65,10 @@ export class Login {
             this.languageService.defaultLanguage() === 'ar'
               ? this.toastService.success('تم تسجيل الدخول بنجاح', response.messageAr)
               : this.toastService.success('Login Successful', response.message);
+
+            response.user?.userType == 'customer'
+              ? this.router.navigate(['/home'])
+              : this.router.navigate(['auth/login']);
           }
         },
       });

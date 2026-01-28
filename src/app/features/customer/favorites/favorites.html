@@ -22,23 +22,27 @@
 
     <div class="search-box">
       <lucide-icon [img]="searchIcon" size="18"></lucide-icon>
-      <input type="text" [(ngModel)]="searchTerm" placeholder="ابحث عن اسم المورد" />
+      <input type="text" [(ngModel)]="searchTerm" placeholder="ابحث عن الاسم " />
     </div>
   </div>
 
   <!-- Tables -->
-  @switch (activeTab) { @case ('suppliers') {
-  <app-favorites-suppliers-table
-    [data]="suppliers"
-    [search]="searchTerm"
-    (delete)="deleteSupplier($event)"
-  ></app-favorites-suppliers-table>
-  } @case ('parts') {
-  <app-favorites-parts-table
-    [data]="parts"
-    [search]="searchTerm"
-    (delete)="deletePart($event)"
-    (viewDetails)="openPartDetails($event)"
-  ></app-favorites-parts-table>
-  } }
+  @switch (activeTab) {
+    @case ('suppliers') {
+      <app-favorites-suppliers-table
+        [data]="suppliers"
+        [totalCount]="suppliersCount"
+        [search]="searchTerm"
+        (delete)="deleteSupplier($event)"
+      ></app-favorites-suppliers-table>
+    }
+    @case ('parts') {
+      <app-favorites-parts-table
+        [data]="parts"
+        [totalCount]="partsCount"
+        [search]="searchTerm"
+        (delete)="deletePart($event)"
+      ></app-favorites-parts-table>
+    }
+  }
 </div>

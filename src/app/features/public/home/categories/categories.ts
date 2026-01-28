@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { Category } from '../../../../core/models/categories.model';
 import { PartsServices } from '../../../../core/services/parts.service';
 import { LanguageService } from '../../../../core/services/language.service';
@@ -11,27 +11,14 @@ import { Router } from '@angular/router';
   templateUrl: './categories.html',
   styleUrl: './categories.css',
 })
-export class Categories implements OnInit {
-  private partsService = inject(PartsServices);
+export class Categories {
   private languageService = inject(LanguageService);
   private router = inject(Router);
-  categories!: Category[];
-
-  ngOnInit(): void {
-    this.partsService.getPartCategories().subscribe((response) => {
-      this.categories = this.shuffleArray(response.data).slice(0, 27);
-    });
-  }
+  @Input() categories!: Category[];
 
   getCategoryName(category: Category): string {
     const lang = this.languageService.defaultLanguage();
     return lang === 'ar' ? category.nameAr : category.nameEn;
-  }
-  shuffleArray<T>(array: T[]): T[] {
-    return array
-      .map((value) => ({ value, sort: Math.random() }))
-      .sort((a, b) => a.sort - b.sort)
-      .map(({ value }) => value);
   }
 
   openSearchpage(categoryId: number) {

@@ -3,12 +3,16 @@ export type UserStatus = 'active' | 'inactive' | 'pending';
 
 export interface User {
   id: number;
-  name: string;
+  fullName: string;
   phone: string;
-  email: string | null;
-  userType: UserType;
-  status: UserStatus;
-  isVerified: boolean | null;
+  email: string;
+  avatarUrl: string | null;
+  userType: 'customer' | 'supplier' | 'admin' | string;
+  status: 'active' | 'inactive' | 'blocked' | string;
+  isVerified: boolean;
   verificationStatus: string | null;
-  businessName: string | null;
+  rejectionReason: string | null;
+  preferredLanguage: 'ar' | 'en' | string;
+  notificationsEnabled: boolean;
+  createdAt: string; // ISO Date string
 }

@@ -146,6 +146,14 @@
         --navy-blue: #113c5d;
         --overlay-bg: rgba(255, 255, 255, 0.7);
 
+
+        --hover-effect: #fffde7;
+
+        /* paginator */
+        --p-paginator-nav-button-selected-background:var(--primary-100) !important;
+        --p-paginator-nav-button-selected-color:var(--primary-600) !important;
+        --p-paginator-nav-button-focus-ring-color:var(--primary-500) !important;
+
 }
 
 body,html{

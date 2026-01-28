@@ -12,28 +12,34 @@
 
 <!-- List -->
 <div class="fav-list-box">
-  @for (item of data; track item.id) {
-  <div class="grid-row fav-item">
-    <div class="supplier-info">
-      <div class="supplier-img"></div>
-      <span class="supplier-name">{{ item.name }}</span>
-    </div>
+  @for (item of paginatedSuppliers; track item.id) {
+    <div class="grid-row fav-item">
+      <div class="supplier-info">
+        <div class="supplier-img"></div>
+        <span class="supplier-name">{{ item.supplierName }}</span>
+      </div>
 
-    <div class="specialization">{{ item.specialization }}</div>
+      <div class="specialization">{{ item.businessType }}</div>
 
-    <div class="date-info">
-      {{ item.date }}
-      <lucide-icon [img]="calendarIcon" size="16"></lucide-icon>
-    </div>
+      <div class="date-info">
+        {{ item.addedAt | date: 'dd MMMM yyyy' }}
+        <lucide-icon [img]="calendarIcon" size="16"></lucide-icon>
+      </div>
 
-    <div class="actions-col">
-      <button class="profile-btn">الملف الشخصي</button>
-      <button class="delete-btn" (click)="delete.emit(item.id)">
-        <lucide-icon [img]="xIcon" size="18"></lucide-icon>
-      </button>
+      <div class="actions-col">
+        <button class="profile-btn" (click)="navigateToSupplier(item.id)">الملف الشخصي</button>
+        <button class="delete-btn" (click)="delete.emit(item.id)">
+          <lucide-icon [img]="xIcon" size="18"></lucide-icon>
+        </button>
+      </div>
     </div>
-  </div>
   }
 </div>
 <!-- pagination  -->
-<app-pagination></app-pagination>
+@if (totalCount > 5) {
+  <app-pagination
+    [rowsPerPage]="rowsPerPage"
+    [totalRecords]="totalCount"
+    (pageChange)="onPageChange($event)"
+  ></app-pagination>
+}

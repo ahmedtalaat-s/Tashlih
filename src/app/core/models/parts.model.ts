@@ -78,3 +78,38 @@ export interface PartsResponse {
   parts: Part[];
   pagination: any; // can be updated if pagination object is known
 }
+export interface PartResponse {
+  success: boolean;
+  message: string | null;
+  messageAr: string | null;
+  part: Part;
+}
+
+export interface FavoritePartsResponse {
+  success: boolean;
+  message: string | null;
+  messageAr: string | null;
+  parts: FavoritePart[];
+  totalCount: number;
+}
+
+export interface FavoritePart {
+  id: number;
+  partId: number;
+  partName: string;
+  partImage: string | null;
+  price: number;
+  originalPrice: number;
+  currency: string;
+  condition: string;
+  conditionAr: string;
+  supplierId: number;
+  supplierName: string;
+  categoryName: string;
+  categoryNameEn: string;
+  quantity: number;
+  city: string;
+  isAvailable: boolean;
+  hasWarranty: boolean;
+  addedAt: string; // ISO Date string
+}

@@ -96,7 +96,6 @@ export class SearchProducts {
 
   // 8.booloptions
   boolOptions = [
-    { label: 'الكل', value: null },
     { label: 'نعم', value: true },
     { label: 'لا', value: false },
   ];
@@ -129,7 +128,6 @@ export class SearchProducts {
       MaxPrice: 1000,
       HasWarranty: null,
       DeliveryAvailable: null,
-      // IDs remain undefined so dropdowns show placeholders
     };
     this.rangeValues = [0, 1000];
   }
