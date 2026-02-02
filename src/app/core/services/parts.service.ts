@@ -1,8 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { API_CONSTSANTS } from '../../constants/api.constants';
 import { PartResponse, PartsResponse } from '../models/parts.model';
 import { CategoriesResponse } from '../models/categories.model';
+import { Observable } from 'rxjs';
+import { PartSearchParams, PartsSearchResponse } from '../../features/customer/model/parts.model';
 
 @Injectable({
   providedIn: 'root',
@@ -33,7 +35,7 @@ export class PartsServices {
   // categroies
   getPartCategories(hierarchical: boolean = false) {
     return this.http.get<CategoriesResponse>(
-      API_CONSTSANTS.BASE_URL + API_CONSTSANTS.END_POINTS.LOOKSUP.CATEGORIES,
+      API_CONSTSANTS.BASE_URL + API_CONSTSANTS.END_POINTS.LOOKUPS.CATEGORIES,
       {
         params: { hierarchical },
       },
@@ -46,6 +48,23 @@ export class PartsServices {
       {
         params: { page, pageSize },
       },
+    );
+  }
+
+  searchParts(params: PartSearchParams): Observable<PartsSearchResponse> {
+    let httpParams = new HttpParams();
+
+    // Only append params that are defined
+    Object.entries(params).forEach(([key, value]) => {
+      if (value !== null && value !== undefined) {
+        httpParams = httpParams.set(key, value.toString());
+      }
+    });
+    console.log(httpParams);
+
+    return this.http.get<PartsSearchResponse>(
+      API_CONSTSANTS.BASE_URL + API_CONSTSANTS.END_POINTS.PARTS.SEARCH,
+      { params: httpParams },
     );
   }
 }

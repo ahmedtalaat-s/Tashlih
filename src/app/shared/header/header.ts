@@ -17,10 +17,11 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { PartsServices } from '../../core/services/parts.service';
 import { Category } from '../../core/models/categories.model';
 import { isPlatformBrowser } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-header',
-  imports: [LucideAngularModule, RouterLink, RouterLinkActive],
+  imports: [LucideAngularModule, RouterLink, RouterLinkActive, FormsModule],
   templateUrl: './header.html',
   styleUrl: './header.css',
 })
@@ -47,6 +48,7 @@ export class Header {
   userInfo = computed(() => this.authservice.userInfo());
 
   isMenuOpen = false;
+  searchKey!: string;
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platform)) {
@@ -60,7 +62,14 @@ export class Header {
     });
   }
 
-  navigateToSearch(id: any) {
-    this.router.navigate(['/customer/search'], { queryParams: { subcategoryId: id } });
+  navigateToSearch(id: any, name: string) {
+    this.router.navigate(['/customer/search'], {
+      queryParams: { subcategoryId: id, subcategoryName: name },
+    });
+  }
+  SearchByKeyword() {
+    this.router.navigate(['/customer/search'], {
+      queryParams: { search: this.searchKey },
+    });
   }
 }

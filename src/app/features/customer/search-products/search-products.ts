@@ -9,7 +9,22 @@ import { SelectModule } from 'primeng/select';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputTextModule } from 'primeng/inputtext';
-import { PartSearchParams } from '../model/parts.model';
+import { PartSearchParams, PartsSearchResponse } from '../model/parts.model';
+import { LookupService } from '../../../core/services/lookup.service';
+import {
+  VehicleType,
+  Make,
+  City,
+  PartCondition,
+  WarrantyType,
+  Subcategory,
+  VehicleModel,
+  Year,
+} from '../../../core/models/lookups.model';
+import { Part } from '../../../core/models/parts.model';
+import { PartsServices } from '../../../core/services/parts.service';
+import { LucideAngularModule, Annoyed } from 'lucide-angular';
+import { ActivatedRoute } from '@angular/router';
 
 export interface FilterOption {
   name: string;
@@ -27,98 +42,153 @@ export interface FilterOption {
     RadioButtonModule,
     SelectButtonModule,
     InputTextModule,
+    LucideAngularModule,
   ],
   templateUrl: './search-products.html',
   styleUrl: './search-products.css',
 })
 export class SearchProducts {
-  // main filter
+  //icon
+  readonly Annoyed = Annoyed;
+  //service
+  private lookupsService = inject(LookupService);
+  private partsService = inject(PartsServices);
+  private route = inject(ActivatedRoute);
+
+  // ================= params =================
+  searchKey: string = '';
+  subcategoryId?: number;
+  subcategoryName?: string;
+  // ================= Filters =================
   filters: PartSearchParams = {
-    MinPrice: 1800,
+    MinPrice: 20,
     MaxPrice: 7800,
+    Page: 1,
+    PageSize: 16,
   };
+  products: Part[] = [];
+  pagination!: PartsSearchResponse['pagination'];
+  totalItems: number = 0;
 
   rangeValues: number[] = [this.filters.MinPrice ?? 0, this.filters.MaxPrice ?? 0];
 
-  // 1. Dynamic Year Generation (Current Year down to 1980)
-  years: number[] = Array.from(
-    { length: new Date().getFullYear() - 1980 + 1 },
-    (_, i) => new Date().getFullYear() - i,
-  );
+  // ================= Lookups =================
+  vehicleTypes: VehicleType[] = [];
+  subCategories: Subcategory[] = [];
+  makes: Make[] = [];
+  models: VehicleModel[] = [];
+  cities: City[] = [];
+  conditions: PartCondition[] = [];
+  warrantyTypes: WarrantyType[] = [];
+  years: Year[] = [];
 
-  // 2. Static Condition List (Maps to ConditionId)
-  conditions: FilterOption[] = [
-    { name: 'جديد', id: 1 },
-    { name: 'مستعمل', id: 2 },
-    { name: 'مجدد', id: 3 },
-  ];
-
-  // 3. Mock Data for Categories (Maps to CategoryId)
-  categories: FilterOption[] = [
-    { name: 'المحركات', id: 101 },
-    { name: 'قطع غيار خارجية', id: 102 },
-    { name: 'إكسسوارات', id: 103 },
-    { name: 'كهرباء', id: 104 },
-  ];
-
-  // 4. Mock Data for Cities (Maps to CityId)
-  cities: FilterOption[] = [
-    { name: 'الرياض', id: 1 },
-    { name: 'جدة', id: 2 },
-    { name: 'الدمام', id: 3 },
-    { name: 'مكة المكرمة', id: 4 },
-    { name: 'المدينة المنورة', id: 5 },
-  ];
-
-  // 5. Vehicle Makes (Maps to MakeId)
-  makes: FilterOption[] = [
-    { name: 'تويوتا', id: 10 },
-    { name: 'هوندا', id: 11 },
-    { name: 'نيسان', id: 12 },
-    { name: 'فورد', id: 13 },
-    { name: 'هيونداي', id: 14 },
-  ];
-
-  // 6. Vehicle Models (This usually updates based on MakeId)
-  models: FilterOption[] = [
-    { name: 'كامري', id: 201 },
-    { name: 'كورولا', id: 202 },
-    { name: 'اكورد', id: 203 },
-    { name: 'النترا', id: 204 },
-  ];
-
-  // 7. Vehicle Types (Maps to VehicleTypeId)
-  types: FilterOption[] = [
-    { name: 'سيدان', id: 1 },
-    { name: 'دفع رباعي', id: 2 },
-    { name: 'شاحنة', id: 3 },
-  ];
-
-  // 8.booloptions
+  // ================= Static =================
   boolOptions = [
     { label: 'نعم', value: true },
     { label: 'لا', value: false },
   ];
+  // ================= header =================
+  resultsHeader: string = '';
+  resultsSummary: string = '';
+  // ================= Lifecycle =================
+  ngOnInit(): void {
+    this.route.queryParams.subscribe((params) => {
+      this.searchKey = params['search'] || '';
+      this.subcategoryId = params['subcategoryId'] ? +params['subcategoryId'] : undefined;
+      this.subcategoryName = params['subcategoryName'] || '';
 
-  products = Array.from({ length: 16 });
-  product: IProductCard = {
-    id: 2,
-    title: 'قير أوتوماتيك هيونداي',
-    image: '',
-    price: 200,
-    currency: 'ر.س',
-  };
+      // Prepare filters based on params
+      this.filters = {
+        Keyword: this.searchKey,
+        VehicleSubcategoryId: this.subcategoryId,
+      };
 
+      // Update header dynamically
+      this.updateHeader();
+
+      this.search();
+    });
+
+    this.loadInitialLookups();
+  }
+  // ================= Loaders =================
+  private loadInitialLookups() {
+    this.lookupsService.getVehicleTypes().subscribe((res) => {
+      this.vehicleTypes = res.data;
+    });
+
+    this.lookupsService.getCities().subscribe((res) => {
+      this.cities = res.data;
+    });
+
+    this.lookupsService.getPartConditions().subscribe((res) => {
+      this.conditions = res.data;
+    });
+
+    this.lookupsService.getWarrantyTypes().subscribe((res) => {
+      this.warrantyTypes = res.data;
+    });
+
+    this.lookupsService.getYears().subscribe((res) => {
+      this.years = res.data;
+    });
+  }
+
+  // ================= Cascading Dropdowns =================
+  onVehicleTypeChange(vehicleTypeId: number) {
+    this.filters.VehicleTypeId = vehicleTypeId;
+    if (vehicleTypeId) {
+      this.lookupsService.getSubcategoriesByVehicleType(vehicleTypeId).subscribe((res) => {
+        this.subCategories = res.data;
+      });
+
+      this.lookupsService.getMakesByVehicleType(vehicleTypeId).subscribe((res) => {
+        this.makes = res.data;
+      });
+    } else {
+      this.subCategories = [];
+      this.makes = [];
+    }
+    this.models = [];
+    this.filters.MakeId = undefined;
+    this.filters.ModelId = undefined;
+  }
+
+  onMakeChange(makeId: number) {
+    this.filters.MakeId = makeId;
+    if (makeId) {
+      this.lookupsService.getModelsByMake(makeId).subscribe((res) => (this.models = res.data));
+    } else {
+      this.models = [];
+      this.filters.ModelId = undefined;
+    }
+  }
+  // ===== Search =====
+  search() {
+    this.partsService.searchParts(this.filters).subscribe({
+      next: (res) => {
+        this.products = res.parts ?? [];
+        this.pagination = res.pagination;
+        this.totalItems = res.pagination?.totalItems;
+        this.updateHeader();
+      },
+    });
+  }
+
+  // ================= Helpers =================
   onPriceChange() {
     this.filters.MinPrice = this.rangeValues[0];
     this.filters.MaxPrice = this.rangeValues[1];
   }
 
-  applyFilters() {}
+  applyFilters(): void {
+    this.filters.Page = 1;
+    this.search();
+  }
 
   clearAll() {
     this.resetFilters();
-    this.applyFilters(); // Refresh results
+    this.applyFilters();
   }
 
   private resetFilters() {
@@ -130,5 +200,23 @@ export class SearchProducts {
       DeliveryAvailable: null,
     };
     this.rangeValues = [0, 1000];
+    this.subCategories = [];
+    this.makes = [];
+    this.models = [];
+  }
+  onPageChange(page: number): void {
+    this.filters.Page = page;
+    this.search();
+  }
+  private updateHeader() {
+    if (this.subcategoryName) {
+      this.resultsHeader = `نتائج البحث في "${this.subcategoryName}"`;
+    } else if (this.searchKey) {
+      this.resultsHeader = `نتائج البحث لـ "${this.searchKey}"`;
+    } else {
+      this.resultsHeader = 'نتائج البحث';
+    }
+
+    this.resultsSummary = `عرض ${this.products.length} من أصل ${this.totalItems} نتيجة`;
   }
 }

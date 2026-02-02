@@ -2,7 +2,7 @@
   <div class="container">
     <div class="categories-wrapper">
       @for (category of categories; track category.id) {
-        <div class="category-item" (click)="openSearchpage(category.id)">
+        <div class="category-item" (click)="openSearchpage(category.id, getCategoryName(category))">
           <div class="category-circle">
             <img [src]="category.icon" [alt]="getCategoryName(category)" />
           </div>

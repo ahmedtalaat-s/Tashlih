@@ -21,7 +21,7 @@ export class Categories {
     return lang === 'ar' ? category.nameAr : category.nameEn;
   }
 
-  openSearchpage(categoryId: number) {
-    this.router.navigate(['/customer/search'], { queryParams: { categoryId } });
+  openSearchpage(subcategoryId: number, subcategoryName: string) {
+    this.router.navigate(['/customer/search'], { queryParams: { subcategoryId, subcategoryName } });
   }
 }

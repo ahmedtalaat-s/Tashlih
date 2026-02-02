@@ -9,7 +9,12 @@
 
       <div class="search-section order-mobile-2">
         <div class="search-box">
-          <input type="text" placeholder="ابحث عن قطعة او مورد" />
+          <input
+            type="text"
+            placeholder="ابحث عن قطعة او مورد"
+            [(ngModel)]="searchKey"
+            (keydown.enter)="SearchByKeyword()"
+          />
           <button class="search-btn">
             <i-lucide [img]="Search" class="lucideicon"></i-lucide>
           </button>
@@ -82,7 +87,7 @@
                 </div>
                 <ul class="sub-menu">
                   @for (sub of category.children; track sub.id) {
-                    <li (click)="navigateToSearch(sub.id)">{{ sub.nameAr }}</li>
+                    <li (click)="navigateToSearch(sub.id, sub.nameAr)">{{ sub.nameAr }}</li>
                   }
                 </ul>
               </li>

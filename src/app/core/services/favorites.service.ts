@@ -5,6 +5,8 @@ import { tap } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
 import { FavoritePart, FavoritePartsResponse } from '../models/parts.model';
 import { FavoriteSuppliersResponse } from '../models/supplier.model';
+import { StorageHelper } from '../../helpers/storage.helper';
+import { APP_CONSTANTS } from '../../constants/app.constants';
 
 @Injectable({
   providedIn: 'root',
@@ -15,8 +17,11 @@ export class FavoritesService {
 
   constructor() {
     if (isPlatformBrowser(this.platformId)) {
-      this.loadFavoriteParts().subscribe();
-      this.loadFavoriteSuppliers().subscribe();
+      const token = StorageHelper.getItem(APP_CONSTANTS.STORAGE_KEYS.TOKEN);
+      if (token) {
+        this.loadFavoriteParts().subscribe();
+        this.loadFavoriteSuppliers().subscribe();
+      }
     }
   }
 

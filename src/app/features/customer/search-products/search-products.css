@@ -41,7 +41,7 @@ input[type="range"] {
 .price-inputs {
   display: flex;
   gap: 10px;
-  margin-top: 10px;
+  margin: 10px 0;
 }
 
 .price-inputs input {
@@ -346,3 +346,35 @@ input[type="range"]::-moz-range-thumb {
   font-size: 0.9rem;
 }
 
+::ng-deep .radio-label{
+  display: inline-flex !important;
+}
+
+.no-products {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #555;
+}
+
+.no-products-img {
+  max-width: 180px;
+  margin-bottom: 1rem;
+  opacity: 0.8;
+}
+
+.no-products h3 {
+  margin: 0.5rem 0;
+  font-weight: 600;
+}
+
+.no-products p {
+  font-size: 14px;
+  margin-bottom: 1.5rem;
+}
+
+.btn-outline {
+  padding: 0.6rem 1.2rem;
+  border: 1px solid #ccc;
+  background: transparent;
+  cursor: pointer;
+}

@@ -54,8 +54,25 @@ export const API_CONSTSANTS = {
       FEATURED: 'Parts/featured',
       LATEST: 'Parts/latest',
     },
-    LOOKSUP: {
+    LOOKUPS: {
       CATEGORIES: 'Lookups/part-categories',
+      YEARS: 'Lookups/years',
+      CITIES: 'Lookups/cities',
+      PART_CONDITIONS: 'Lookups/part-conditions',
+      WARRANTY_TYPES: 'Lookups/warranty-types',
+      VEHICLE_TYPES: 'Lookups/vehicle-types',
+      SUBCATEGORIES: 'Lookups/subcategories',
+      VEHICLE_TYPE_SUBCATEGORIES: (vehicleTypeId: number | string) =>
+        `Lookups/vehicle-types/${vehicleTypeId}/subcategories`,
+
+      MAKES: 'Lookups/makes',
+
+      VEHICLE_TYPE_MAKES: (vehicleTypeId: number | string) =>
+        `Lookups/vehicle-types/${vehicleTypeId}/makes`,
+
+      MODELS: 'Lookups/models',
+
+      MAKE_MODELS: (makeId: number | string) => `Lookups/makes/${makeId}/models`,
     },
     SUPPLIERS: {
       GET_BY_ID: (id: number | string) => `Suppliers/${id}`,
