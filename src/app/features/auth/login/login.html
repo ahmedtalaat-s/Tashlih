@@ -48,26 +48,26 @@
               </div>
             </div>
             @if (loginForm.controls.phone.touched && loginForm.controls.phone.invalid) {
-            <small class="error">رقم الهاتف غير صحيح</small>
+              <small class="error">رقم الهاتف غير صحيح</small>
             }
           </div>
 
           <!-- Password -->
           @if (loginWithPassword()) {
-          <div class="form-group">
-            <div class="input-box">
-              <input
-                id="password"
-                type="password"
-                formControlName="password"
-                placeholder="كلمة المرور"
-                class="password-input"
-              />
+            <div class="form-group">
+              <div class="input-box">
+                <input
+                  id="password"
+                  type="password"
+                  formControlName="password"
+                  placeholder="كلمة المرور"
+                  class="password-input"
+                />
+              </div>
+              @if (loginForm.controls.password.touched && loginForm.controls.password.invalid) {
+                <small class="error">كلمة المرور مطلوبة (6 أحرف على الأقل)</small>
+              }
             </div>
-            @if (loginForm.controls.password.touched && loginForm.controls.password.invalid) {
-            <small class="error">كلمة المرور مطلوبة (6 أحرف على الأقل)</small>
-            }
-          </div>
           }
 
           <!-- Submit -->
@@ -81,7 +81,9 @@
           <!-- Signup -->
           <div class="signup-link">
             <span class="signup-text">ليس لدي حساب؟</span>
-            <button class="link-button">إنشاء الحساب</button>
+            <button class="link-button" routerLink="/auth/register/choose-account">
+              إنشاء الحساب
+            </button>
           </div>
         </form>
       </div>
@@ -116,5 +118,5 @@
 </div>
 
 @if (showOtp()) {
-<app-check-otpcode (verify)="handleOtpLogin($event)" (close)="closeOtp()"> </app-check-otpcode>
+  <app-check-otpcode (verify)="handleOtpLogin($event)" (close)="closeOtp()"> </app-check-otpcode>
 }

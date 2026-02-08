@@ -6,136 +6,92 @@
 
     <div class="main-layout">
       <!-- Sidebar -->
-      <div class="sidebar">
-        <!-- الحساب -->
-        <div class="category-box">
-          <div class="category-title">
-            <lucide-icon [img]="UserIcon" size="16"></lucide-icon> الحساب
-          </div>
-          <div class="menu-item">
-            <span>الملف الشخصي</span>
-            <lucide-icon [img]="ChevronLeftIcon" size="12" class="chevron"></lucide-icon>
-          </div>
-        </div>
+      <button class="menu-toggle" (click)="toggleSidebar()">
+        <lucide-icon [img]="MenuIcon" size="24"></lucide-icon>
+      </button>
 
-        <!-- الإشعارات -->
-        <div class="category-box">
-          <div class="category-title">
-            <lucide-icon [img]="BellIcon" size="16"></lucide-icon> الإشعارات
-          </div>
-          <div class="menu-item">
-            <span>جميع الاشعارات</span>
-            <lucide-icon [img]="ChevronLeftIcon" size="12" class="chevron"></lucide-icon>
-          </div>
-        </div>
+      <div class="sidebar-overlay" [class.active]="isSidebarOpen" (click)="toggleSidebar()"></div>
 
-        <!-- التواصل والدعم -->
-        <div class="category-box">
-          <div class="category-title">
-            <lucide-icon [img]="HeadsetIcon" size="16"></lucide-icon> التواصل والدعم
-          </div>
-          <div class="menu-item">
-            <span>مركز المساعدة</span>
-            <lucide-icon [img]="ChevronLeftIcon" size="12" class="chevron"></lucide-icon>
-          </div>
-        </div>
+      <div class="main-layout">
+        <div class="sidebar" [class.active]="isSidebarOpen">
+          <button class="close-sidebar" (click)="toggleSidebar()">
+            <lucide-icon [img]="XIcon" size="24"></lucide-icon>
+          </button>
 
-        <!-- الخصوصية والأمان -->
-        <div class="category-box">
-          <div class="category-title">
-            <lucide-icon [img]="ShieldIcon" size="16"></lucide-icon> الخصوصية والأمان
+          <div class="category-box">
+            <div class="category-title">
+              <lucide-icon [img]="UserIcon" size="16"></lucide-icon> الحساب
+            </div>
+            <div class="menu-item">
+              <span>الملف الشخصي</span>
+              <lucide-icon [img]="ChevronLeftIcon" size="12" class="chevron"></lucide-icon>
+            </div>
           </div>
-          <div class="menu-item">
-            <span>سياسة الخصوصية</span>
-            <lucide-icon [img]="ChevronLeftIcon" size="12" class="chevron"></lucide-icon>
-          </div>
-          <div class="menu-item">
-            <span>الشروط والأحكام</span>
-            <lucide-icon [img]="ChevronLeftIcon" size="12" class="chevron"></lucide-icon>
-          </div>
-        </div>
 
-        <!-- عام -->
-        <div class="category-box">
-          <div class="category-title">
-            <lucide-icon [img]="FileTextIcon" size="16"></lucide-icon> عام
+          <div class="category-box">
+            <div class="category-title">
+              <lucide-icon [img]="BellIcon" size="16"></lucide-icon> الإشعارات
+            </div>
+            <div class="menu-item">
+              <span>جميع الاشعارات</span>
+              <lucide-icon [img]="ChevronLeftIcon" size="12" class="chevron"></lucide-icon>
+            </div>
           </div>
-          <div class="menu-item">
-            <span>تقييم التطبيق</span>
-            <lucide-icon [img]="ChevronLeftIcon" size="12" class="chevron"></lucide-icon>
-          </div>
-          <div class="menu-item">
-            <span>مشاركة التطبيق</span>
-            <lucide-icon [img]="ChevronLeftIcon" size="12" class="chevron"></lucide-icon>
-          </div>
-          <div class="menu-item">
-            <span>لغة الموقع</span>
-            <span style="color: #888">
-              العربية <lucide-icon [img]="ChevronDownIcon" size="10"></lucide-icon>
-            </span>
-          </div>
-        </div>
 
-        <!-- Logout button -->
-        <button class="logout-btn">
-          <lucide-icon [img]="LogoutIcon" size="16" style="margin-left: 5px"></lucide-icon>
-          تسجيل الخروج
-        </button>
+          <div class="category-box">
+            <div class="category-title">
+              <lucide-icon [img]="HeadsetIcon" size="16"></lucide-icon> التواصل والدعم
+            </div>
+            <div class="menu-item">
+              <span>مركز المساعدة</span>
+              <lucide-icon [img]="ChevronLeftIcon" size="12" class="chevron"></lucide-icon>
+            </div>
+          </div>
+
+          <div class="category-box">
+            <div class="category-title">
+              <lucide-icon [img]="ShieldIcon" size="16"></lucide-icon> الخصوصية والأمان
+            </div>
+            <div class="menu-item">
+              <span>سياسة الخصوصية</span>
+              <lucide-icon [img]="ChevronLeftIcon" size="12" class="chevron"></lucide-icon>
+            </div>
+            <div class="menu-item">
+              <span>الشروط والأحكام</span>
+              <lucide-icon [img]="ChevronLeftIcon" size="12" class="chevron"></lucide-icon>
+            </div>
+          </div>
+
+          <div class="category-box">
+            <div class="category-title">
+              <lucide-icon [img]="FileTextIcon" size="16"></lucide-icon> عام
+            </div>
+            <div class="menu-item">
+              <span>تقييم التطبيق</span>
+              <lucide-icon [img]="ChevronLeftIcon" size="12" class="chevron"></lucide-icon>
+            </div>
+            <div class="menu-item">
+              <span>مشاركة التطبيق</span>
+              <lucide-icon [img]="ChevronLeftIcon" size="12" class="chevron"></lucide-icon>
+            </div>
+            <div class="menu-item">
+              <span>لغة الموقع</span>
+              <span style="color: #888">
+                العربية <lucide-icon [img]="ChevronDownIcon" size="10"></lucide-icon>
+              </span>
+            </div>
+          </div>
+
+          <button class="logout-btn">
+            <lucide-icon [img]="LogoutIcon" size="16" style="margin-left: 5px"></lucide-icon>
+            تسجيل الخروج
+          </button>
+        </div>
       </div>
 
       <!-- Content area -->
       <div class="content-area">
-        <!-- Profile Upload -->
-        <div class="profile-upload">
-          <div class="avatar-placeholder">
-            <lucide-icon [img]="UserIcon" size="40" color="#bbb"></lucide-icon>
-            <lucide-icon [img]="CameraIcon" size="12" class="camera-icon"></lucide-icon>
-          </div>
-          <p style="font-size: 12px; color: #666">اضف صورة شخصية</p>
-        </div>
-
-        <!-- Personal Information Form -->
-        <div class="form-section">
-          <span class="section-header">معلوماتك الشخصية</span>
-          <div class="input-group">
-            <!-- Name -->
-            <div class="input-field">
-              <lucide-icon [img]="UserIcon" size="16" class=""></lucide-icon>
-              <input type="text" [(ngModel)]="userName" />
-              <lucide-icon [img]="Pen" size="16" class="icon-muted"></lucide-icon>
-            </div>
-
-            <!-- Phone -->
-            <div class="input-field disabled">
-              <lucide-icon [img]="PhoneIcon" size="16" class="icon-muted"></lucide-icon>
-              <input type="text" [(ngModel)]="userPhone" disabled />
-            </div>
-
-            <!-- Email -->
-            <div class="input-field" style="grid-column: span 2">
-              <lucide-icon [img]="MailIcon" size="16" class=""></lucide-icon>
-              <input type="email" [(ngModel)]="userEmail" />
-              <lucide-icon [img]="Pen" size="16" class="icon-muted"></lucide-icon>
-            </div>
-          </div>
-        </div>
-
-        <!-- Address Section -->
-        <div class="form-section">
-          <span class="section-header">العنوان</span>
-          <div class="address-box">
-            <div class="address-placeholder">{{ address }}</div>
-            <button class="btn-add-address">
-              <lucide-icon [img]="MapPinIcon" size="16"></lucide-icon> اضف عنوان
-            </button>
-          </div>
-        </div>
-
-        <!-- Action Buttons -->
-        <div class="action-buttons">
-          <button class="btn-save">حفظ التعديلات</button>
-          <button class="btn-cancel">الغاء</button>
-        </div>
+        <router-outlet></router-outlet>
       </div>
     </div>
   </div>

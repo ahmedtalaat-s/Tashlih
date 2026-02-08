@@ -6,12 +6,12 @@
 
   <!-- Controls -->
   <div class="controls-bar">
-    <div class="search-wrapper">
+    <!-- <div class="search-wrapper">
       <lucide-icon [img]="SearchIcon" class="icon"> </lucide-icon>
 
       <input type="text" placeholder="ابحث عن القطعة" />
-    </div>
-    <div class="tabs-group">
+    </div> -->
+    <!-- <div class="tabs-group">
       <button
         [class.active]="currentOrdersBool()"
         (click)="currentOrdersBool.set(true)"
@@ -26,49 +26,26 @@
       >
         الطلبات السابقة
       </button>
-    </div>
+    </div> -->
 
     <div class="filters-group">
-      <span class="filter-label">الاختيارات:</span>
-
-      <select class="filter-select">
-        <option>الأحدث</option>
-      </select>
-
-      <select class="filter-select">
+      <!-- <select class="filter-select">
         <option>الكمية</option>
       </select>
       <select class="filter-select">
         <option>السعر</option>
-      </select>
+      </select> -->
 
-      <button class="reset-btn">إعادة تعيين</button>
+      <!-- <button class="reset-btn">إعادة تعيين</button> -->
     </div>
   </div>
 
   <!-- Table -->
-  @if (currentOrdersBool()) {
   <app-order-table [currentOrdersBool]="currentOrdersBool()"></app-order-table>
+  <!-- @if (currentOrdersBool()) {
   }@else{
   <app-order-table [currentOrdersBool]="currentOrdersBool()"></app-order-table>
-  }
-
-  <!-- Pagination -->
-  <div class="pagination">
-    <a class="page-num">
-      <lucide-icon [img]="ChevronRightIcon" class="icon"> </lucide-icon>
-    </a>
-
-    <a class="page-num active">1</a>
-    <a class="page-num">2</a>
-    <a class="page-num">3</a>
-
-    <span class="page-dots">...</span>
-
-    <a class="page-num">10</a>
-
-    <a class="page-num">
-      <lucide-icon [img]="ChevronLeftIcon" class="icon"> </lucide-icon>
-    </a>
-  </div>
+  } -->
 </div>
+<app-pagination [totalRecords]="10" [rowsPerPage]="5"></app-pagination>
+<div style="padding: 5px 0"></div>

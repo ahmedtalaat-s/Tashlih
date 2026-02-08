@@ -1,104 +1,88 @@
-<div class="table-wrapper">
-  <div [class.four-cols]="currentOrdersBool" class="table-row table-head">
-    <div class="col-label">اسم القطعة</div>
-
-    <div class="col-label">
-      <lucide-icon [img]="WrenchIcon" class="icon"> </lucide-icon>
-      القطعة
-    </div>
-
-    <div class="col-label">
-      <lucide-icon [img]="BoxIcon" class="icon"> </lucide-icon>
-      الكمية
-    </div>
-
-    <div class="col-label">
-      <lucide-icon [img]="CalendarIcon" class="icon"> </lucide-icon>
-      التاريخ
-    </div>
-    @if (!currentOrdersBool) {
-    <div class="col-label">الإجراء</div>
-    }
-  </div>
-
-  <!-- Row -->
-  <div [class.four-cols]="currentOrdersBool" class="table-row">
-    <div class="part-name">فرامل أمامية</div>
-    <div class="cell-data">محرك</div>
-    <div class="cell-data">5</div>
-
-    <div class="cell-data">
-      31 يناير 2025
-      <lucide-icon [img]="CalendarIcon" class="icon muted"> </lucide-icon>
-    </div>
-    @if (!currentOrdersBool) {
-    <div>
-      <button class="reorder-btn">اطلب مجدداً</button>
-    </div>
-    }
-  </div>
-  <!-- Row -->
-  <div [class.four-cols]="currentOrdersBool" class="table-row">
-    <div class="part-name">فرامل أمامية</div>
-    <div class="cell-data">محرك</div>
-    <div class="cell-data">5</div>
-
-    <div class="cell-data">
-      31 يناير 2025
-      <lucide-icon [img]="CalendarIcon" class="icon muted"> </lucide-icon>
-    </div>
-    @if (!currentOrdersBool) {
-    <div>
-      <button class="reorder-btn">اطلب مجدداً</button>
-    </div>
-    }
-  </div>
-  <!-- Row -->
-  <div [class.four-cols]="currentOrdersBool" class="table-row">
-    <div class="part-name">فرامل أمامية</div>
-    <div class="cell-data">محرك</div>
-    <div class="cell-data">5</div>
-
-    <div class="cell-data">
-      31 يناير 2025
-      <lucide-icon [img]="CalendarIcon" class="icon muted"> </lucide-icon>
-    </div>
-    @if (!currentOrdersBool) {
-    <div>
-      <button class="reorder-btn">اطلب مجدداً</button>
-    </div>
-    }
-  </div>
-  <!-- Row -->
-  <div [class.four-cols]="currentOrdersBool" class="table-row">
-    <div class="part-name">فرامل أمامية</div>
-    <div class="cell-data">محرك</div>
-    <div class="cell-data">5</div>
-
-    <div class="cell-data">
-      31 يناير 2025
-      <lucide-icon [img]="CalendarIcon" class="icon muted"> </lucide-icon>
-    </div>
-    @if (!currentOrdersBool) {
-    <div>
-      <button class="reorder-btn">اطلب مجدداً</button>
-    </div>
-    }
-  </div>
-  <!-- Row -->
-  <div [class.four-cols]="currentOrdersBool" class="table-row">
-    <div class="part-name">فرامل أمامية</div>
-    <div class="cell-data">محرك</div>
-    <div class="cell-data">5</div>
-
-    <div class="cell-data">
-      31 يناير 2025
-      <lucide-icon [img]="CalendarIcon" class="icon muted"> </lucide-icon>
-    </div>
-    @if (!currentOrdersBool) {
-    <div>
-      <button class="reorder-btn">اطلب مجدداً</button>
-    </div>
-    }
-  </div>
+<div class="filter-bar">
+  <button [class.active]="selectedStatus === 'all'" (click)="filter('all')">
+    {{ currentLang() == 'ar' ? 'الكل' : 'all' }}
+  </button>
+  @for (status of statuses; track status) {
+    <button [class.active]="selectedStatus === status" (click)="filter(status)">
+      {{ statusMap[status][currentLang()] }}
+    </button>
+  }
 </div>
+
+<div class="table-wrapper">
+  <div class="table-row table-head">
+    <div class="col-label">اسم القطعة</div>
+    <!-- <div class="col-label"><lucide-icon [img]="WrenchIcon" size="14"></lucide-icon> الفئة</div> -->
+    <div class="col-label"><lucide-icon [img]="BoxIcon" size="14"></lucide-icon> الكمية</div>
+    <div class="col-label"><lucide-icon [img]="CalendarIcon" size="14"></lucide-icon> التاريخ</div>
+    <div class="col-label">الحالة</div>
+    <div class="col-label">الإجراء</div>
+  </div>
+
+  @for (order of orders; track order.id) {
+    <div class="table-row">
+      <div class="part-name">{{ order.partName }}</div>
+      <!-- <div class="cell-data">{{ order.quantity }}</div> -->
+      <div class="cell-data">{{ order.quantity }}</div>
+      <div class="cell-data">
+        <lucide-icon [img]="CalendarIcon" class="icon muted"></lucide-icon>
+        {{ order.createdAt | date: 'dd MMMM yyyy' }}
+      </div>
+
+      <div class="cell-data">
+        <span class="status-badge" [ngClass]="statusMap[order.status].class">
+          {{ statusMap[order.status][currentLang()] }}
+        </span>
+      </div>
+
+      <div class="cell-actions">
+        @if (order.status === 'pending') {
+          <button class="action-btn cancel-link" (click)="cancelOrder(order)">إلغاء الطلب</button>
+        } @else if (order.status === 'completed') {
+          <button class="action-btn received-btn" (click)="markAsReceived(order)">
+            تم الاستلام
+          </button>
+        } @else {
+          <button class="reorder-btn">--</button>
+        }
+      </div>
+    </div>
+  }
+</div>
+
+<!-- cancel modal -->
+@if (isCancelModalOpen) {
+  <div class="modal-overlay" (click)="closeCancelModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <button class="close-x" (click)="closeCancelModal()">
+        <lucide-icon [img]="XIcon" size="20"></lucide-icon>
+      </button>
+
+      <div class="modal-header-title danger">إلغاء الطلب</div>
+
+      <div class="cancel-warning-box">
+        <span
+          ><lucide-icon [img]="TriangleAlert" size="40" class="warning-icon"></lucide-icon
+        ></span>
+        <p>هل أنت متأكد من رغبتك في إلغاء الطلب؟</p>
+        <small> الطلب: #{{ selectedOrder.partName }}</small>
+      </div>
+
+      <div class="notes-section">
+        <label for="cancelReason">سبب الإلغاء (اختياري)</label>
+        <textarea
+          id="cancelReason"
+          [(ngModel)]="cancelReason"
+          placeholder="لماذا تريد إلغاء هذا الطلب؟"
+          rows="3"
+        >
+        </textarea>
+      </div>
+
+      <div class="modal-footer-actions">
+        <button class="confirm-cancel-btn" (click)="confirmCancellation()">تأكيد الإلغاء</button>
+        <button class="back-btn" (click)="closeCancelModal()">العودة</button>
+      </div>
+    </div>
+  </div>
+}

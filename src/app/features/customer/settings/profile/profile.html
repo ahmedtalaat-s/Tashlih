@@ -1,0 +1,51 @@
+<!-- Profile Upload -->
+<div class="profile-upload">
+  <div class="avatar-placeholder">
+    <lucide-icon [img]="UserIcon" size="40" color="#bbb"></lucide-icon>
+    <lucide-icon [img]="CameraIcon" size="12" class="camera-icon"></lucide-icon>
+  </div>
+  <p style="font-size: 12px; color: #666">اضف صورة شخصية</p>
+</div>
+
+<!-- Personal Information Form -->
+<div class="form-section">
+  <span class="section-header">معلوماتك الشخصية</span>
+  <div class="input-group">
+    <!-- Name -->
+    <div class="input-field">
+      <lucide-icon [img]="UserIcon" size="16" class=""></lucide-icon>
+      <input type="text" [(ngModel)]="userName" />
+      <lucide-icon [img]="Pen" size="16" class="icon-muted"></lucide-icon>
+    </div>
+
+    <!-- Phone -->
+    <div class="input-field disabled">
+      <lucide-icon [img]="PhoneIcon" size="16" class="icon-muted"></lucide-icon>
+      <input type="text" [(ngModel)]="userPhone" disabled />
+    </div>
+
+    <!-- Email -->
+    <div class="input-field" style="grid-column: span 2">
+      <lucide-icon [img]="MailIcon" size="16" class=""></lucide-icon>
+      <input type="email" [(ngModel)]="userEmail" />
+      <lucide-icon [img]="Pen" size="16" class="icon-muted"></lucide-icon>
+    </div>
+  </div>
+</div>
+
+<!-- Address Section -->
+<div class="form-section">
+  <span class="section-header">العنوان</span>
+  <div class="address-box">
+    <div class="address-placeholder">{{ address }}</div>
+    <button class="btn-add-address">
+      <lucide-icon [img]="MapPinIcon" size="16"></lucide-icon> اضف عنوان
+    </button>
+  </div>
+</div>
+
+<!-- Action Buttons -->
+<div class="action-buttons">
+  <button class="btn-save">حفظ التعديلات</button>
+  <button class="btn-cancel">الغاء</button>
+</div>

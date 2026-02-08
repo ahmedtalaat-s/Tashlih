@@ -245,3 +245,93 @@ lucide-icon{
     grid-template-columns: 1fr;
   }
 }
+
+
+/* sidebar toggle in mobile */
+/* Toggle Button Hidden on Desktop */
+.menu-toggle {
+  display: none;
+  background: white;
+  border: 1px solid #eee;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.close-sidebar {
+  display: none;
+  background: none;
+  border: none;
+  margin-bottom: 15px;
+  cursor: pointer;
+  color: #888;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+    position: sticky;
+    top: 10px;
+    z-index: 10;
+  }
+
+  .close-sidebar {
+    display: block;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    /* Hidden by default */
+    width: 80%;
+    max-width: 300px;
+    height: 100vh;
+    background: white;
+    z-index: 1000;
+    padding: 20px;
+    transition: 0.3s ease-in-out;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+  }
+
+  .sidebar.active {
+    right: 0;
+    /* Slide in when active */
+  }
+
+  .sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 999;
+  }
+
+  .sidebar-overlay.active {
+    display: block;
+  }
+
+  .main-layout {
+    flex-direction: column;
+  }
+}
+
+/* Keep your existing desktop styles below */
+.main-layout {
+  display: flex;
+  gap: 30px;
+  min-width: 280px;
+}
+
+.sidebar {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}

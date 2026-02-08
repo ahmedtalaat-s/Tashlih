@@ -5,12 +5,12 @@ import { LoginRequest } from '../../../core/models/auth.model';
 import { ToastService } from '../../../core/services/toast.service';
 import { LanguageService } from '../../../core/services/language.service';
 import { AuthService } from '../../../core/services/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { userInfo } from 'os';
 
 @Component({
   selector: 'app-login',
-  imports: [CheckOtpcode, ReactiveFormsModule],
+  imports: [CheckOtpcode, ReactiveFormsModule, RouterLink],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
@@ -104,6 +104,10 @@ export class Login {
           this.languageService.defaultLanguage() === 'ar'
             ? this.toastService.success('تم تسجيل الدخول بنجاح', response.messageAr)
             : this.toastService.success('Login Successful', response.message);
+
+          response.user?.userType == 'customer'
+            ? this.router.navigate(['/home'])
+            : this.router.navigate(['auth/login']);
         }
       },
     });

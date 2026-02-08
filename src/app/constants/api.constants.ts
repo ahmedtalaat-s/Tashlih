@@ -1,6 +1,6 @@
 import { environment } from '../environment/environment';
 
-export const API_CONSTSANTS = {
+export const API_CONSTANTS = {
   BASE_URL: environment.API_URL,
   END_POINTS: {
     AUTH: {
@@ -97,6 +97,21 @@ export const API_CONSTSANTS = {
         LIST: 'Favorites/suppliers',
         CHECK: (supplierId: number | string) => `Favorites/suppliers/${supplierId}/check`,
       },
+    },
+    CUSTOMER_ORDERS: {
+      CREATE: 'CustomerOrders',
+      MY_ORDERS: 'CustomerOrders/my-orders',
+      DETAILS: (id: number | string) => `CustomerOrders/${id}`,
+      COMPLETE: (id: number | string) => `CustomerOrders/${id}/complete`,
+      CANCEL: (id: number | string) => `CustomerOrders/${id}/cancel`,
+    },
+    CUSTOMER_PROFILE: {
+      ME: 'CustomerProfile/me',
+      UPDATE_PROFILE: 'CustomerProfile/Update-Profile',
+      UPLOAD_PROFILE_IMAGE: 'CustomerProfile/Upload-Profile-Image',
+      DELETE_PROFILE_IMAGE: 'CustomerProfile/Delete-Profile-Image',
+      UPDATE_LOCATION: 'CustomerProfile/Update-Location',
+      CITIES: 'CustomerProfile/Cities',
     },
   },
 };

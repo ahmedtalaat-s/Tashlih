@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable, signal, PLATFORM_ID } from '@angular/core';
-import { API_CONSTSANTS } from '../../constants/api.constants';
+import { API_CONSTANTS } from '../../constants/api.constants';
 import { tap } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
 import { FavoritePart, FavoritePartsResponse } from '../models/parts.model';
@@ -39,7 +39,7 @@ export class FavoritesService {
   loadFavoriteParts() {
     return this.http
       .get<FavoritePartsResponse>(
-        `${API_CONSTSANTS.BASE_URL}${API_CONSTSANTS.END_POINTS.FAVORITES.PARTS.LIST}`,
+        `${API_CONSTANTS.BASE_URL}${API_CONSTANTS.END_POINTS.FAVORITES.PARTS.LIST}`,
       )
       .pipe(
         tap((res) => {
@@ -54,7 +54,7 @@ export class FavoritesService {
   loadFavoriteSuppliers() {
     return this.http
       .get<FavoriteSuppliersResponse>(
-        `${API_CONSTSANTS.BASE_URL}${API_CONSTSANTS.END_POINTS.FAVORITES.SUPPLIERS.LIST}`,
+        `${API_CONSTANTS.BASE_URL}${API_CONSTANTS.END_POINTS.FAVORITES.SUPPLIERS.LIST}`,
       )
       .pipe(
         tap((res) => {
@@ -67,10 +67,7 @@ export class FavoritesService {
 
   addPart(partId: number) {
     return this.http
-      .post(
-        `${API_CONSTSANTS.BASE_URL}${API_CONSTSANTS.END_POINTS.FAVORITES.PARTS.ADD(partId)}`,
-        {},
-      )
+      .post(`${API_CONSTANTS.BASE_URL}${API_CONSTANTS.END_POINTS.FAVORITES.PARTS.ADD(partId)}`, {})
       .pipe(
         tap(() => {
           this.favoritePartIds.update((set) => new Set(set).add(partId));
@@ -80,9 +77,7 @@ export class FavoritesService {
 
   removePart(partId: number) {
     return this.http
-      .delete(
-        `${API_CONSTSANTS.BASE_URL}${API_CONSTSANTS.END_POINTS.FAVORITES.PARTS.REMOVE(partId)}`,
-      )
+      .delete(`${API_CONSTANTS.BASE_URL}${API_CONSTANTS.END_POINTS.FAVORITES.PARTS.REMOVE(partId)}`)
       .pipe(
         tap(() => {
           this.favoritePartIds.update((set) => {
@@ -97,14 +92,14 @@ export class FavoritesService {
   // GET /api/Favorites/parts
   getFavoriteParts() {
     return this.http.get<FavoritePartsResponse>(
-      `${API_CONSTSANTS.BASE_URL}${API_CONSTSANTS.END_POINTS.FAVORITES.PARTS.LIST}`,
+      `${API_CONSTANTS.BASE_URL}${API_CONSTANTS.END_POINTS.FAVORITES.PARTS.LIST}`,
     );
   }
 
   // GET /api/Favorites/parts/{partId}/check
   checkPartFavorite(partId: number | string) {
     return this.http.get(
-      `${API_CONSTSANTS.BASE_URL}${API_CONSTSANTS.END_POINTS.FAVORITES.PARTS.CHECK(partId)}`,
+      `${API_CONSTANTS.BASE_URL}${API_CONSTANTS.END_POINTS.FAVORITES.PARTS.CHECK(partId)}`,
     );
   }
 
@@ -113,7 +108,7 @@ export class FavoritesService {
   addSupplier(supplierId: number) {
     return this.http
       .post(
-        `${API_CONSTSANTS.BASE_URL}${API_CONSTSANTS.END_POINTS.FAVORITES.SUPPLIERS.ADD(supplierId)}`,
+        `${API_CONSTANTS.BASE_URL}${API_CONSTANTS.END_POINTS.FAVORITES.SUPPLIERS.ADD(supplierId)}`,
         {},
       )
       .pipe(
@@ -126,7 +121,7 @@ export class FavoritesService {
   removeSupplier(supplierId: number) {
     return this.http
       .delete(
-        `${API_CONSTSANTS.BASE_URL}${API_CONSTSANTS.END_POINTS.FAVORITES.SUPPLIERS.REMOVE(supplierId)}`,
+        `${API_CONSTANTS.BASE_URL}${API_CONSTANTS.END_POINTS.FAVORITES.SUPPLIERS.REMOVE(supplierId)}`,
       )
       .pipe(
         tap(() => {
@@ -142,14 +137,14 @@ export class FavoritesService {
   // GET /api/Favorites/suppliers
   getFavoriteSuppliers() {
     return this.http.get<FavoriteSuppliersResponse>(
-      `${API_CONSTSANTS.BASE_URL}${API_CONSTSANTS.END_POINTS.FAVORITES.SUPPLIERS.LIST}`,
+      `${API_CONSTANTS.BASE_URL}${API_CONSTANTS.END_POINTS.FAVORITES.SUPPLIERS.LIST}`,
     );
   }
 
   // GET /api/Favorites/suppliers/{supplierId}/check
   checkSupplierFavorite(supplierId: number | string) {
     return this.http.get(
-      `${API_CONSTSANTS.BASE_URL}${API_CONSTSANTS.END_POINTS.FAVORITES.SUPPLIERS.CHECK(supplierId)}`,
+      `${API_CONSTANTS.BASE_URL}${API_CONSTANTS.END_POINTS.FAVORITES.SUPPLIERS.CHECK(supplierId)}`,
     );
   }
 

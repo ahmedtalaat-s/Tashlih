@@ -4,11 +4,24 @@ import { authGuard } from '../../core/guards/auth-guard';
 export const routes: Routes = [
   {
     path: 'orders',
+    canActivate: [authGuard],
     loadComponent: () => import('./client-orders/client-orders').then((c) => c.ClientOrders),
   },
   {
     path: 'settings',
+    canActivate: [authGuard],
     loadComponent: () => import('./settings/settings').then((c) => c.Settings),
+    children: [
+      {
+        path: '',
+        redirectTo: 'profile',
+        pathMatch: 'full',
+      },
+      {
+        path: 'profile',
+        loadComponent: () => import('./settings/profile/profile').then((c) => c.Profile),
+      },
+    ],
   },
   {
     path: 'favorites',
@@ -22,6 +35,7 @@ export const routes: Routes = [
   },
   {
     path: 'chat',
+    canActivate: [authGuard],
     loadComponent: () => import('./chat/chat').then((c) => c.Chat),
   },
   {

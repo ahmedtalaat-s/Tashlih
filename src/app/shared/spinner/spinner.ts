@@ -1,8 +1,9 @@
 import { Component, Input } from '@angular/core';
+import { LucideAngularModule, Settings } from 'lucide-angular';
 
 @Component({
   selector: 'app-spinner',
-  imports: [],
+  imports: [LucideAngularModule],
   templateUrl: './spinner.html',
   styleUrl: './spinner.css',
 })
@@ -12,4 +13,6 @@ export class Spinner {
   @Input() message: string = '';
   @Input() avatarUrl?: string;
   @Input() useAvatar: boolean = false;
+
+  readonly Settings = Settings;
 }

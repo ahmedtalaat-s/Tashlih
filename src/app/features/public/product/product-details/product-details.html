@@ -40,29 +40,16 @@
           </p>
         </div>
 
-        <div class="specs-row">
-          <div class="spec-item">
-            <span>{{ product.conditionAr }}</span>
-            <span class="spec-label">
-              الحالة <lucide-icon [img]="WrenchIcon" size="14"></lucide-icon>
-            </span>
-          </div>
-
-          <div class="spec-item">
-            <span>{{ product.quantity }}</span>
-            <span class="spec-label">
-              الكمية <lucide-icon [img]="BoxIcon" size="14"></lucide-icon>
-            </span>
-          </div>
-        </div>
-
-        <button class="chat-btn btn-yellow">
-          محادثة <lucide-icon [img]="ChatIcon" size="18"></lucide-icon>
+        <button class="chat-btn btn-yellow" (click)="openOrderModal()">
+          <span>طلب</span> <lucide-icon [img]="PlaneTakeoff" size="18"></lucide-icon>
         </button>
 
         <button class="chat-btn btn-white">
-          اتصال <lucide-icon [img]="PhoneIcon" size="18"></lucide-icon>
+          <span>محادثة</span> <lucide-icon [img]="ChatIcon" size="18"></lucide-icon>
         </button>
+        <!-- <button class="chat-btn btn-white">
+          اتصال <lucide-icon [img]="PhoneIcon" size="18"></lucide-icon>
+        </button> -->
       </div>
 
       <!-- MAIN IMAGE -->
@@ -87,7 +74,112 @@
         }
       </div>
     </main>
+    <section class="specs-grid-container">
+      <div class="specs-title">
+        <lucide-icon [img]="InfoIcon" size="20"></lucide-icon>
+        تفاصيل القطعة
+      </div>
 
+      <div class="specs-grid">
+        <div class="spec-card">
+          <div class="spec-icon-box"><lucide-icon [img]="TagIcon" size="18"></lucide-icon></div>
+          <div class="spec-info">
+            <span class="label">الفئة</span>
+            <span class="value">{{ product.categoryNameAr || 'قطع ميكانيكية' }}</span>
+          </div>
+        </div>
+
+        <div class="spec-card">
+          <div class="spec-icon-box"><lucide-icon [img]="BoxIcon" size="18"></lucide-icon></div>
+          <div class="spec-info">
+            <span class="label">الكمية</span>
+            <span class="value">{{ product.quantity }}</span>
+          </div>
+        </div>
+
+        <div class="spec-card">
+          <div class="spec-icon-box"><lucide-icon [img]="CarIcon" size="18"></lucide-icon></div>
+          <div class="spec-info">
+            <span class="label">الماركة</span>
+            <span class="value">{{ product.makeNameAr }}</span>
+          </div>
+        </div>
+
+        <div class="spec-card">
+          <div class="spec-icon-box"><lucide-icon [img]="CircleIcon" size="18"></lucide-icon></div>
+          <div class="spec-info">
+            <span class="label">الموديل</span>
+            <span class="value">{{ product.modelNameAr || 'كامري' }}</span>
+          </div>
+        </div>
+
+        <div class="spec-card">
+          <div class="spec-icon-box">
+            <lucide-icon [img]="CalendarIcon" size="18"></lucide-icon>
+          </div>
+          <div class="spec-info">
+            <span class="label">السنة</span>
+            <span class="value">{{ product.yearRange || '2018 - 2024' }}</span>
+          </div>
+        </div>
+
+        <div class="spec-card">
+          <div class="spec-icon-box">
+            <lucide-icon [img]="CheckCircleIcon" size="18"></lucide-icon>
+          </div>
+          <div class="spec-info">
+            <span class="label">الحالة</span>
+            <span class="value">{{ product.conditionAr || 'new' }}</span>
+          </div>
+        </div>
+
+        <div class="spec-card">
+          <div class="spec-icon-box">
+            <lucide-icon [img]="ShieldCheckIcon" size="18"></lucide-icon>
+          </div>
+          <div class="spec-info">
+            <span class="label">الضمان</span>
+            <span class="value">{{ product.warrantyDays || '30 يوم' }}</span>
+          </div>
+        </div>
+
+        <div class="spec-card">
+          <div class="spec-icon-box"><lucide-icon [img]="TruckIcon" size="18"></lucide-icon></div>
+          <div class="spec-info">
+            <span class="label">التوصيل</span>
+            <span class="value">{{ product.deliveryAvailable }}</span>
+          </div>
+        </div>
+
+        <div class="spec-card">
+          <div class="spec-icon-box"><lucide-icon [img]="HashIcon" size="18"></lucide-icon></div>
+          <div class="spec-info">
+            <span class="label">Part No.</span>
+            <span class="value">{{ product.partNumber || 'TY-OF-001' }}</span>
+          </div>
+        </div>
+
+        <div class="spec-card">
+          <div class="spec-icon-box"><lucide-icon [img]="MenuIcon" size="18"></lucide-icon></div>
+          <div class="spec-info">
+            <span class="label">OEM</span>
+            <span class="value">{{ product.oemNumber || 'OEM-TY-OF-001' }}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="supplier-card">
+      <div class="supplier-info">
+        <div class="supplier-icon">
+          <lucide-icon [img]="StoreIcon" size="24"></lucide-icon>
+        </div>
+        <div class="supplier-name">{{ product.supplierName || 'ورشة الايمان' }}</div>
+        <!-- <div class="supplier-location">{{ product. || 'الرياض' }}</div> -->
+      </div>
+
+      <lucide-icon [img]="ChevronLeftIcon" size="20" class="arrow-link"></lucide-icon>
+    </div>
     <!-- RELATED -->
     <div class="related-header">قطع أخرى لنفس المورد</div>
     <div class="related-grid">
@@ -95,6 +187,69 @@
         <app-product-card [product]="related"></app-product-card>
       }
     </div>
-    <!-- (جاهز تربطه endpoint لاحقًا) -->
+  </div>
+}
+
+<!-- //order modal  -->
+@if (isOrderModalOpen) {
+  <div class="modal-overlay" (click)="closeOrderModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <button class="close-x" (click)="closeOrderModal()">
+        <lucide-icon [img]="XIcon" size="20"></lucide-icon>
+      </button>
+
+      <div class="modal-header-title">إضافة للطلب</div>
+
+      <div class="product-preview">
+        <div class="preview-img-box">
+          @if (selectedImage) {
+            <img [src]="selectedImage" alt="product" />
+          } @else {
+            <lucide-icon [img]="ImageIcon" size="32"></lucide-icon>
+          }
+        </div>
+        <h3 class="preview-name">{{ product.nameAr }}</h3>
+        <div class="preview-price">
+          <span [innerHTML]="product.price | saudiRiyal"></span> <span> / للقطعة</span>
+        </div>
+      </div>
+
+      <div class="quantity-selector-row">
+        <span class="qty-label">الكمية المطلوبة</span>
+        <div class="quantity-controls">
+          <button
+            class="qty-btn plus"
+            (click)="increaseQty()"
+            [disabled]="orderQuantity >= product.quantity"
+          >
+            <lucide-icon [img]="PlusIcon" size="18"></lucide-icon>
+          </button>
+
+          <span class="qty-number">{{ orderQuantity }}</span>
+
+          <button class="qty-btn minus" (click)="decreaseQty()" [disabled]="orderQuantity <= 1">
+            <lucide-icon [img]="MinusIcon" size="18"></lucide-icon>
+          </button>
+        </div>
+      </div>
+      <div class="notes-section">
+        <label for="customerNotes">ملاحظات إضافية (اختياري)</label>
+        <textarea
+          id="customerNotes"
+          [(ngModel)]="customerNotes"
+          placeholder="اكتب ملاحظاتك هنا..."
+          rows="3"
+        >
+        </textarea>
+      </div>
+      <div class="total-row">
+        <span class="total-label">الإجمالي</span>
+        <div class="total-price">
+          <span [innerHTML]="product.price * orderQuantity | saudiRiyal"></span>
+        </div>
+      </div>
+
+      <button class="confirm-btn" (click)="confirmOrder()">تأكيد الطلب</button>
+    </div>
   </div>
 }

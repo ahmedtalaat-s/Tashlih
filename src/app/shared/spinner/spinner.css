@@ -111,9 +111,9 @@
   }
 
   100% {
-    transform: scale(1.5);
+    transform: scale(1.7);
     opacity: 0;
-  }
+}
 }
 
 /* التجاوب مع الجوال */
@@ -134,4 +134,18 @@
   .spinner-message {
     font-size: 14px;
   }
+}
+
+.gear-Icon{
+  animation: rotate 2.1s linear infinite;
+  -webkit-animation: rotate 2.1s linear infinite;
+}
+
+@keyframes rotate {
+  from{
+    transform: rotate(0deg);
+}
+to{
+    transform: rotate(360deg);
+}
 }

@@ -6,7 +6,7 @@ import { map, Observable, of } from 'rxjs';
 import { StorageHelper } from '../../helpers/storage.helper';
 import { APP_CONSTANTS } from '../../constants/app.constants';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { API_CONSTSANTS } from '../../constants/api.constants';
+import { API_CONSTANTS } from '../../constants/api.constants';
 import {
   getUserResponse,
   LoginOtpRequest,
@@ -18,7 +18,6 @@ import {
   sendOtpResponse,
   SupplierRegisterRequest,
 } from '../models/auth.model';
-import { response } from 'express';
 
 @Injectable({
   providedIn: 'root',
@@ -53,6 +52,7 @@ export class AuthService {
       this.getCurrentUser().pipe(takeUntilDestroyed(this.destroyref)).subscribe();
     }
   }
+  isCustomer = computed(() => this.role() == 'customer');
 
   // fetch current user info
   getCurrentUser(): Observable<User | null> {
@@ -62,7 +62,7 @@ export class AuthService {
       return of(user);
     } else {
       return this.http
-        .get<getUserResponse>(`${API_CONSTSANTS.BASE_URL}${API_CONSTSANTS.END_POINTS.AUTH.ME}`)
+        .get<getUserResponse>(`${API_CONSTANTS.BASE_URL}${API_CONSTANTS.END_POINTS.AUTH.ME}`)
         .pipe(
           map((response) => {
             if (response.success) {
@@ -80,7 +80,7 @@ export class AuthService {
   registerCustomer(userData: registerCustomerRequest): Observable<registerCustomerResponse> {
     return this.http
       .post<registerCustomerResponse>(
-        `${API_CONSTSANTS.BASE_URL}${API_CONSTSANTS.END_POINTS.AUTH.REGISTER_CUSTOMER}`,
+        `${API_CONSTANTS.BASE_URL}${API_CONSTANTS.END_POINTS.AUTH.REGISTER_CUSTOMER}`,
         userData,
       )
       .pipe(
@@ -96,7 +96,7 @@ export class AuthService {
   //send otp code to phone number
   sendOtpCode(phone: string, purpose: string): Observable<sendOtpResponse> {
     return this.http.post<sendOtpResponse>(
-      `${API_CONSTSANTS.BASE_URL}${API_CONSTSANTS.END_POINTS.AUTH.SEND_OTP}`,
+      `${API_CONSTANTS.BASE_URL}${API_CONSTANTS.END_POINTS.AUTH.SEND_OTP}`,
       { phone, purpose },
     );
   }
@@ -104,7 +104,7 @@ export class AuthService {
   // verify otp code
   verifyOtpCode(phone: string, otpCode: string): Observable<sendOtpResponse> {
     return this.http.post<sendOtpResponse>(
-      `${API_CONSTSANTS.BASE_URL}${API_CONSTSANTS.END_POINTS.AUTH.VERIFY_OTP}`,
+      `${API_CONSTANTS.BASE_URL}${API_CONSTANTS.END_POINTS.AUTH.VERIFY_OTP}`,
       { phone, otpCode },
     );
   }
@@ -112,7 +112,7 @@ export class AuthService {
   registerSupplier(userData: SupplierRegisterRequest): Observable<registerCustomerResponse> {
     const formData = this.getFormData(userData);
     return this.http.post<registerCustomerResponse>(
-      `${API_CONSTSANTS.BASE_URL}${API_CONSTSANTS.END_POINTS.AUTH.REGISTER_SUPPLIER}`,
+      `${API_CONSTANTS.BASE_URL}${API_CONSTANTS.END_POINTS.AUTH.REGISTER_SUPPLIER}`,
       formData,
     );
   }
@@ -152,10 +152,7 @@ export class AuthService {
   //login user
   login(data: LoginRequest): Observable<LoginResponse> {
     return this.http
-      .post<LoginResponse>(
-        `${API_CONSTSANTS.BASE_URL}${API_CONSTSANTS.END_POINTS.AUTH.LOGIN}`,
-        data,
-      )
+      .post<LoginResponse>(`${API_CONSTANTS.BASE_URL}${API_CONSTANTS.END_POINTS.AUTH.LOGIN}`, data)
       .pipe(
         map((response) => {
           if (response.success && response.token && response.user) {
@@ -172,7 +169,7 @@ export class AuthService {
   loginWithOtp(data: LoginOtpRequest): Observable<LoginOtpResponse> {
     return this.http
       .post<LoginOtpResponse>(
-        `${API_CONSTSANTS.BASE_URL}${API_CONSTSANTS.END_POINTS.AUTH.LOGIN_OTP}`,
+        `${API_CONSTANTS.BASE_URL}${API_CONSTANTS.END_POINTS.AUTH.LOGIN_OTP}`,
         data,
       )
       .pipe(
