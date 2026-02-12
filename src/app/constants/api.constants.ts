@@ -113,5 +113,10 @@ export const API_CONSTANTS = {
       UPDATE_LOCATION: 'CustomerProfile/Update-Location',
       CITIES: 'CustomerProfile/Cities',
     },
+    ADMIN: {
+      LOGIN: 'Admin/login',
+      PROFILE: 'Admin/profile',
+      PLANS: 'Admin/plans',
+    },
   },
 };

@@ -1,0 +1,37 @@
+.content{
+  display: block;
+  min-height: 100vh;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+
+
+.tab-item {
+  background: none;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  color: var(--text-muted);
+}
+
+.tab-item.active {
+  border-bottom: 3px solid var(--primary-500);
+  color: black;
+  font-weight: bold;
+}
+
+/* Tabs */
+.tabs {
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+}

@@ -34,7 +34,7 @@ export class CustomerRegisterForm {
       confirmPassword: ['', [Validators.required]],
       terms: [false, Validators.requiredTrue],
     },
-    { validators: this.matchPassword }
+    { validators: this.matchPassword },
   );
 
   submitted = signal(false);
@@ -102,6 +102,7 @@ export class CustomerRegisterForm {
             this.languageService.defaultLanguage() === 'ar'
               ? this.toasterService.success('تم التحقق من رمز التحقق', response.messageAr)
               : this.toasterService.success('OTP Verified Successfully', response.message);
+            this.router.navigate(['/']);
           }
         },
       });

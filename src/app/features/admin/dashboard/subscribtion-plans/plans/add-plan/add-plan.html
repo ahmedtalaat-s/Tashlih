@@ -1,0 +1,193 @@
+<div class="modal-overlay" (click)="onClose()">
+  <div class="modal-container" (click)="$event.stopPropagation()">
+    <header class="modal-header">
+      <h2>إضافة باقة جديدة</h2>
+    </header>
+
+    <form class="plan-form" [formGroup]="planForm" (ngSubmit)="onSubmit()">
+      <div class="form-grid">
+        <!-- Name Ar -->
+        <div class="form-group">
+          <label>* اسم الباقة (عربي)</label>
+          <input type="text" formControlName="NameAr" placeholder="مثال: الباقة الأساسية" />
+
+          @if (f['NameAr'].touched && f['NameAr'].errors?.['required']) {
+            <small class="error">اسم الباقة مطلوب</small>
+          }
+          @if (f['NameAr'].errors?.['minlength']) {
+            <small class="error">يجب ألا يقل عن 3 أحرف</small>
+          }
+        </div>
+
+        <!-- Name En -->
+        <div class="form-group">
+          <label>اسم الباقة (إنجليزي)</label>
+          <input type="text" dir="ltr" formControlName="NameEn" placeholder="Basic Plan" />
+        </div>
+
+        <!-- Description Ar -->
+        <div class="form-group">
+          <label>وصف الباقة (عربي)</label>
+          <textarea
+            rows="2"
+            formControlName="DescriptionAr"
+            placeholder="أدخل وصف الباقة باللغة العربية"
+          ></textarea>
+        </div>
+
+        <!-- Description En -->
+        <div class="form-group">
+          <label>وصف الباقة (إنجليزي)</label>
+          <textarea
+            rows="2"
+            dir="ltr"
+            formControlName="DescriptionEn"
+            placeholder="Enter plan description in English"
+          ></textarea>
+        </div>
+
+        <!-- Price -->
+        <div class="form-group">
+          <label>* السعر</label>
+          <input type="number" formControlName="Price" />
+
+          @if (f['Price'].touched && f['Price'].errors?.['required']) {
+            <small class="error">السعر مطلوب</small>
+          }
+          @if (f['Price'].errors?.['min']) {
+            <small class="error">السعر لا يمكن أن يكون أقل من 0</small>
+          }
+        </div>
+
+        <!-- Currency -->
+        <div class="form-group">
+          <label>* العملة</label>
+          <input type="text" formControlName="Currency" placeholder="SAR" />
+
+          @if (f['Currency'].touched && f['Currency'].errors?.['required']) {
+            <small class="error">العملة مطلوبة</small>
+          }
+          @if (f['Currency'].touched && f['Currency'].errors?.['pattern']) {
+            <small class="error"> العملة غير صحيحة </small>
+          }
+        </div>
+
+        <!-- Duration -->
+        <div class="form-group">
+          <label>* مدة الباقة (أيام)</label>
+          <input type="number" formControlName="DurationDays" />
+
+          @if (f['DurationDays'].touched && f['DurationDays'].errors?.['required']) {
+            <small class="error">المدة مطلوبة</small>
+          }
+          @if (f['DurationDays'].errors?.['min']) {
+            <small class="error">يجب أن تكون أكبر من 0</small>
+          }
+        </div>
+
+        <!-- Max Parts -->
+        <div class="form-group">
+          <label>الحد الأقصى للقطع</label>
+          <input type="number" formControlName="MaxParts" />
+        </div>
+
+        <!-- Max Images -->
+        <div class="form-group">
+          <label>* الحد الأقصى للصور لكل قطعة</label>
+          <input type="number" formControlName="MaxImagesPerPart" />
+
+          @if (f['MaxImagesPerPart'].touched && f['MaxImagesPerPart'].errors?.['required']) {
+            <small class="error">هذا الحقل مطلوب</small>
+          }
+          @if (f['MaxImagesPerPart'].errors?.['min']) {
+            <small class="error">يجب أن يكون 0 أو أكثر</small>
+          }
+        </div>
+
+        <!-- Max Shops -->
+        <div class="form-group">
+          <label>* الحد الأقصى للمتاجر</label>
+          <input type="number" formControlName="MaxShops" />
+
+          <!-- @if (f['maxShops'].touched && f['maxShops'].errors?.['required']) {
+        <small class="error">هذا الحقل مطلوب</small>
+      }
+      @if (f['maxShops'].errors?.['min']) {
+        <small class="error">يجب أن يكون 1 على الأقل</small>
+      } -->
+        </div>
+
+        <!-- Badge -->
+        <div class="form-group">
+          <label>نص الشارة</label>
+          <input type="text" formControlName="BadgeText" placeholder="مثال: الأكثر مبيعاً" />
+        </div>
+
+        <!-- Sort Order -->
+        <div class="form-group">
+          <label>* ترتيب العرض</label>
+          <input type="number" formControlName="SortOrder" />
+
+          @if (f['SortOrder'].touched && f['SortOrder'].errors?.['required']) {
+            <small class="error">ترتيب العرض مطلوب</small>
+          }
+        </div>
+
+        <!-- Switches -->
+        <div class="form-group status-toggles full-width">
+          <label class="switch-container">
+            <input type="checkbox" formControlName="IsActive" />
+            <span class="slider"></span>
+            تفعيل الباقة
+          </label>
+
+          <label class="switch-container">
+            <input type="checkbox" formControlName="IsPopular" />
+            <span class="slider"></span>
+            باقة مميزة
+          </label>
+        </div>
+      </div>
+
+      <!-- Upload Section -->
+      <div class="upload-section">
+        <label>لوجو الباقة</label>
+
+        <div class="upload-box" (click)="fileInput.click()">
+          <input
+            type="file"
+            #fileInput
+            hidden
+            accept="image/png, image/jpeg"
+            (change)="onFileSelected($event)"
+          />
+
+          <!-- لو مفيش صورة -->
+          @if (!imagePreview) {
+            <div class="upload-placeholder">
+              <i class="fa-regular fa-image"></i>
+              <p>اضغط لتحميل الصورة</p>
+              <span>PNG, JPG حتى 2MB</span>
+            </div>
+          }
+
+          <!-- لو فيه صورة -->
+          @if (imagePreview) {
+            <div class="preview-container">
+              <img [src]="imagePreview" alt="Plan Logo Preview" />
+              <button type="button" class="remove-image" (click)="removeImage($event)">✕</button>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="modal-actions">
+        <button type="submit" class="btn-submit">إضافة الباقة</button>
+
+        <button type="button" class="btn-cancel" (click)="onClose()">إلغاء</button>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- [disabled]="planForm.invalid" -->

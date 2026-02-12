@@ -1,0 +1,418 @@
+<div class="dashboard-container">
+  <button class="burger-icon" (click)="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
+  <aside class="sidebar" [class.display]="isSidebarOpen">
+    <button class="close-sidebar" (click)="toggleSidebar()">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <div class="logo">
+      <img src="assets/images/white-logo.svg" alt="Logo" />
+    </div>
+    <nav>
+      <ul>
+        <li
+          (click)="toggleSidebar()"
+          routerLink="/admin/dashboard/statistics"
+          routerLinkActive="active"
+        >
+          <a>
+            <svg
+              class="grid-icon"
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M7.49694 2.49805H3.33201C2.87196 2.49805 2.49902 2.87099 2.49902 3.33103V9.16194C2.49902 9.62198 2.87196 9.99492 3.33201 9.99492H7.49694C7.95699 9.99492 8.32993 9.62198 8.32993 9.16194V3.33103C8.32993 2.87099 7.95699 2.49805 7.49694 2.49805Z"
+                stroke="#E6E6E6"
+                stroke-width="1.66597"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M16.6595 2.49805H12.4946C12.0346 2.49805 11.6616 2.87099 11.6616 3.33103V5.82999C11.6616 6.29004 12.0346 6.66298 12.4946 6.66298H16.6595C17.1196 6.66298 17.4925 6.29004 17.4925 5.82999V3.33103C17.4925 2.87099 17.1196 2.49805 16.6595 2.49805Z"
+                stroke="#E6E6E6"
+                stroke-width="1.66597"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M16.6595 9.99609H12.4946C12.0346 9.99609 11.6616 10.369 11.6616 10.8291V16.66C11.6616 17.12 12.0346 17.493 12.4946 17.493H16.6595C17.1196 17.493 17.4925 17.12 17.4925 16.66V10.8291C17.4925 10.369 17.1196 9.99609 16.6595 9.99609Z"
+                stroke="#E6E6E6"
+                stroke-width="1.66597"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M7.49694 13.3281H3.33201C2.87196 13.3281 2.49902 13.7011 2.49902 14.1611V16.6601C2.49902 17.1201 2.87196 17.4931 3.33201 17.4931H7.49694C7.95699 17.4931 8.32993 17.1201 8.32993 16.6601V14.1611C8.32993 13.7011 7.95699 13.3281 7.49694 13.3281Z"
+                stroke="#E6E6E6"
+                stroke-width="1.66597"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            لوحة الإحصائيات</a
+          >
+        </li>
+        <li
+          (click)="toggleSidebar()"
+          routerLink="/admin/dashboard/suppliers"
+          routerLinkActive="active"
+        >
+          <a>
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clip-path="url(#clip0_1194_3214)">
+                <path
+                  d="M8.32991 12.4941H4.99796C4.11427 12.4941 3.26678 12.8452 2.64192 13.47C2.01706 14.0949 1.66602 14.9424 1.66602 15.8261V17.4921"
+                  stroke="#E6E6E6"
+                  stroke-width="1.66597"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M11.916 13.7694L12.6849 13.4512"
+                  stroke="#E6E6E6"
+                  stroke-width="1.66597"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M12.6849 11.5378L11.916 11.2188"
+                  stroke="#E6E6E6"
+                  stroke-width="1.66597"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M14.0373 10.1849L13.7183 9.41602"
+                  stroke="#E6E6E6"
+                  stroke-width="1.66597"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M14.0373 14.8047L13.7183 15.5744"
+                  stroke="#E6E6E6"
+                  stroke-width="1.66597"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M15.9502 10.1849L16.2692 9.41602"
+                  stroke="#E6E6E6"
+                  stroke-width="1.66597"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M16.2684 15.5744L15.9502 14.8047"
+                  stroke="#E6E6E6"
+                  stroke-width="1.66597"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M17.3027 11.5378L18.0724 11.2188"
+                  stroke="#E6E6E6"
+                  stroke-width="1.66597"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M17.3027 13.4512L18.0724 13.7702"
+                  stroke="#E6E6E6"
+                  stroke-width="1.66597"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M14.9936 14.994C16.3737 14.994 17.4925 13.8752 17.4925 12.4951C17.4925 11.1149 16.3737 9.99609 14.9936 9.99609C13.6135 9.99609 12.4946 11.1149 12.4946 12.4951C12.4946 13.8752 13.6135 14.994 14.9936 14.994Z"
+                  stroke="#E6E6E6"
+                  stroke-width="1.66597"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M7.49698 9.16194C9.33717 9.16194 10.8289 7.67018 10.8289 5.82999C10.8289 3.98981 9.33717 2.49805 7.49698 2.49805C5.6568 2.49805 4.16504 3.98981 4.16504 5.82999C4.16504 7.67018 5.6568 9.16194 7.49698 9.16194Z"
+                  stroke="#E6E6E6"
+                  stroke-width="1.66597"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </g>
+              <defs>
+                <clipPath id="clip0_1194_3214">
+                  <rect width="19.9917" height="19.9917" fill="white" />
+                </clipPath>
+              </defs>
+            </svg>
+            إدارة الموردين</a
+          >
+        </li>
+        <li
+          (click)="toggleSidebar()"
+          routerLink="/admin/dashboard/customers"
+          routerLinkActive="active"
+        >
+          <a>
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clip-path="url(#clip0_1194_3228)">
+                <path
+                  d="M13.3278 17.4921V15.8261C13.3278 14.9424 12.9768 14.0949 12.3519 13.47C11.7271 12.8452 10.8796 12.4941 9.99588 12.4941H4.99796C4.11427 12.4941 3.26678 12.8452 2.64192 13.47C2.01706 14.0949 1.66602 14.9424 1.66602 15.8261V17.4921"
+                  stroke="#E6E6E6"
+                  stroke-width="1.66597"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M13.3276 2.60547C14.0421 2.7907 14.6749 3.20794 15.1266 3.79169C15.5783 4.37545 15.8234 5.09267 15.8234 5.83079C15.8234 6.56891 15.5783 7.28614 15.1266 7.86989C14.6749 8.45365 14.0421 8.87088 13.3276 9.05611"
+                  stroke="#E6E6E6"
+                  stroke-width="1.66597"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M18.3256 17.4931V15.8272C18.3251 15.0889 18.0794 14.3718 17.627 13.7883C17.1747 13.2048 16.5415 12.7881 15.8267 12.6035"
+                  stroke="#E6E6E6"
+                  stroke-width="1.66597"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M7.49698 9.16194C9.33717 9.16194 10.8289 7.67018 10.8289 5.82999C10.8289 3.98981 9.33717 2.49805 7.49698 2.49805C5.6568 2.49805 4.16504 3.98981 4.16504 5.82999C4.16504 7.67018 5.6568 9.16194 7.49698 9.16194Z"
+                  stroke="#E6E6E6"
+                  stroke-width="1.66597"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </g>
+              <defs>
+                <clipPath id="clip0_1194_3228">
+                  <rect width="19.9917" height="19.9917" fill="white" />
+                </clipPath>
+              </defs>
+            </svg>
+
+            إدارة العملاء</a
+          >
+        </li>
+        <li (click)="toggleSidebar()" routerLink="/admin/dashboard/parts" routerLinkActive="active">
+          <a>
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clip-path="url(#clip0_1194_3235)">
+                <path
+                  d="M9.99984 15.8333L6.6915 17.8167C6.43228 17.9724 6.13558 18.0547 5.83317 18.0547C5.53076 18.0547 5.23406 17.9724 4.97484 17.8167L2.47484 16.3167C2.2288 16.1688 2.02511 15.96 1.88349 15.7103C1.74188 15.4607 1.66713 15.1787 1.6665 14.8917V12.1917C1.66713 11.9046 1.74188 11.6226 1.88349 11.373C2.02511 11.1233 2.2288 10.9145 2.47484 10.7667L5.83317 8.75M9.99984 15.8333V11.25M9.99984 15.8333L13.3082 17.8167C13.5674 17.9724 13.8641 18.0547 14.1665 18.0547C14.4689 18.0547 14.7656 17.9724 15.0248 17.8167L17.5248 16.3167C17.7709 16.1688 17.9746 15.96 18.1162 15.7103C18.2578 15.4607 18.3325 15.1787 18.3332 14.8917V12.1917C18.3325 11.9046 18.2578 11.6226 18.1162 11.373C17.9746 11.1233 17.7709 10.9145 17.5248 10.7667L14.1665 8.75M9.99984 11.25L5.83317 8.75M9.99984 11.25L5.83317 13.75M9.99984 11.25L14.1665 8.75M9.99984 11.25L14.1665 13.75M9.99984 11.25V6.66666M5.83317 8.75V5.10833C5.8338 4.8213 5.90854 4.53931 6.05016 4.28965C6.19178 4.04 6.39547 3.83115 6.6415 3.68333L9.1415 2.18333C9.40072 2.02759 9.69743 1.94531 9.99984 1.94531C10.3022 1.94531 10.599 2.02759 10.8582 2.18333L13.3582 3.68333C13.6042 3.83115 13.8079 4.04 13.9495 4.28965C14.0911 4.53931 14.1659 4.8213 14.1665 5.10833V8.75M5.83317 13.75L1.88317 11.375M5.83317 13.75V18.0583M14.1665 13.75L18.1165 11.375M14.1665 13.75V18.0583M9.99984 6.66666L6.04984 4.29166M9.99984 6.66666L13.9498 4.29166"
+                  stroke="#E6E6E6"
+                  stroke-width="1.66667"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </g>
+              <defs>
+                <clipPath id="clip0_1194_3235">
+                  <rect width="20" height="20" fill="white" />
+                </clipPath>
+              </defs>
+            </svg>
+            إدارة القطع</a
+          >
+        </li>
+        <li
+          (click)="toggleSidebar()"
+          routerLink="/admin/dashboard/requests"
+          routerLinkActive="active"
+        >
+          <a>
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clip-path="url(#clip0_1194_3239)">
+                <path
+                  d="M7.50016 9.99972L9.16683 11.6664L12.5002 8.33306M16.6668 10.8331C16.6668 14.9997 13.7502 17.0831 10.2835 18.2914C10.102 18.3529 9.90478 18.35 9.72516 18.2831C6.25016 17.0831 3.3335 14.9997 3.3335 10.8331V4.99972C3.3335 4.77871 3.42129 4.56675 3.57757 4.41047C3.73385 4.25419 3.94582 4.16639 4.16683 4.16639C5.8335 4.16639 7.91683 3.16639 9.36683 1.89972C9.54337 1.74889 9.76796 1.66602 10.0002 1.66602C10.2324 1.66602 10.457 1.74889 10.6335 1.89972C12.0918 3.17472 14.1668 4.16639 15.8335 4.16639C16.0545 4.16639 16.2665 4.25419 16.4228 4.41047C16.579 4.56675 16.6668 4.77871 16.6668 4.99972V10.8331Z"
+                  stroke="#E6E6E6"
+                  stroke-width="1.66667"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </g>
+              <defs>
+                <clipPath id="clip0_1194_3239">
+                  <rect width="20" height="20" fill="white" />
+                </clipPath>
+              </defs>
+            </svg>
+            طلبات التوثيق</a
+          >
+        </li>
+        <li
+          (click)="toggleSidebar()"
+          routerLink="/admin/dashboard/subscribtions"
+          routerLinkActive="active"
+        >
+          <a>
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clip-path="url(#clip0_1194_3243)">
+                <path
+                  d="M9.16291 18.1011C9.41617 18.2473 9.70346 18.3243 9.9959 18.3243C10.2883 18.3243 10.5756 18.2473 10.8289 18.1011L16.6598 14.7691C16.9128 14.6231 17.1229 14.413 17.2692 14.1601C17.4154 13.9072 17.4925 13.6202 17.4928 13.3281V6.66418C17.4925 6.37203 17.4154 6.08509 17.2692 5.83216C17.1229 5.57923 16.9128 5.36919 16.6598 5.22311L10.8289 1.89117C10.5756 1.74495 10.2883 1.66797 9.9959 1.66797C9.70346 1.66797 9.41617 1.74495 9.16291 1.89117L3.33201 5.22311C3.079 5.36919 2.86885 5.57923 2.72265 5.83216C2.57644 6.08509 2.49932 6.37203 2.49902 6.66418V13.3281C2.49932 13.6202 2.57644 13.9072 2.72265 14.1601C2.86885 14.413 3.079 14.6231 3.33201 14.7691L9.16291 18.1011Z"
+                  stroke="#E6E6E6"
+                  stroke-width="1.66597"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M9.99561 18.326V9.99609"
+                  stroke="#E6E6E6"
+                  stroke-width="1.66597"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M2.74072 5.83008L9.99603 9.99501L17.2513 5.83008"
+                  stroke="#E6E6E6"
+                  stroke-width="1.66597"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M6.24756 3.55664L13.7444 7.84652"
+                  stroke="#E6E6E6"
+                  stroke-width="1.66597"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </g>
+              <defs>
+                <clipPath id="clip0_1194_3243">
+                  <rect width="19.9917" height="19.9917" fill="white" />
+                </clipPath>
+              </defs>
+            </svg>
+            إدارة الإشتراكات</a
+          >
+        </li>
+        <li
+          (click)="toggleSidebar()"
+          routerLink="/admin/dashboard/information"
+          routerLinkActive="active"
+        >
+          <a>
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clip-path="url(#clip0_1194_3250)">
+                <path
+                  d="M17.5 4.16602C17.5 5.54673 14.1421 6.66602 10 6.66602C5.85786 6.66602 2.5 5.54673 2.5 4.16602M17.5 4.16602C17.5 2.7853 14.1421 1.66602 10 1.66602C5.85786 1.66602 2.5 2.7853 2.5 4.16602M17.5 4.16602V15.8327C17.5 16.4957 16.7098 17.1316 15.3033 17.6004C13.8968 18.0693 11.9891 18.3327 10 18.3327C8.01088 18.3327 6.10322 18.0693 4.6967 17.6004C3.29018 17.1316 2.5 16.4957 2.5 15.8327V4.16602M2.5 9.99935C2.5 10.6624 3.29018 11.2983 4.6967 11.7671C6.10322 12.236 8.01088 12.4993 10 12.4993C11.9891 12.4993 13.8968 12.236 15.3033 11.7671C16.7098 11.2983 17.5 10.6624 17.5 9.99935"
+                  stroke="#E6E6E6"
+                  stroke-width="1.66667"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </g>
+              <defs>
+                <clipPath id="clip0_1194_3250">
+                  <rect width="20" height="20" fill="white" />
+                </clipPath>
+              </defs>
+            </svg>
+            البيانات الأساسية</a
+          >
+        </li>
+        <li
+          (click)="toggleSidebar()"
+          routerLink="/admin/dashboard/history"
+          routerLinkActive="active"
+        >
+          <a>
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M2.5 10C2.5 11.4834 2.93987 12.9334 3.76398 14.1668C4.58809 15.4001 5.75943 16.3614 7.12987 16.9291C8.50032 17.4968 10.0083 17.6453 11.4632 17.3559C12.918 17.0665 14.2544 16.3522 15.3033 15.3033C16.3522 14.2544 17.0665 12.918 17.3559 11.4632C17.6453 10.0083 17.4968 8.50032 16.9291 7.12987C16.3614 5.75943 15.4001 4.58809 14.1668 3.76398C12.9334 2.93987 11.4834 2.5 10 2.5C7.90329 2.50789 5.89081 3.32602 4.38333 4.78333L2.5 6.66667M2.5 6.66667V2.5M2.5 6.66667H6.66667M10 5.83333V10L13.3333 11.6667"
+                stroke="#E6E6E6"
+                stroke-width="1.66667"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            سجل العمليات</a
+          >
+        </li>
+      </ul>
+    </nav>
+    <div class="logout">
+      <a>
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 20 20"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M13.3276 14.1599L17.4926 9.99501L13.3276 5.83008"
+            stroke="#E6E6E6"
+            stroke-width="1.66597"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M17.4929 9.99609H7.49707"
+            stroke="#E6E6E6"
+            stroke-width="1.66597"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M7.49694 17.4918H4.165C3.72315 17.4918 3.29941 17.3163 2.98698 17.0038C2.67454 16.6914 2.49902 16.2677 2.49902 15.8258V4.16402C2.49902 3.72218 2.67454 3.29843 2.98698 2.986C3.29941 2.67357 3.72315 2.49805 4.165 2.49805H7.49694"
+            stroke="#E6E6E6"
+            stroke-width="1.66597"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        تسجيل الخروج</a
+      >
+    </div>
+  </aside>
+
+  <main class="content">
+    <router-outlet />
+  </main>
+</div>

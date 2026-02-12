@@ -1,1 +1,434 @@
 @import url('../settings.css');
+
+* {
+  direction: rtl;
+  box-sizing: border-box;
+}
+
+.body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  margin: 0;
+  padding: 40px 0;
+}
+
+/* --- Animations --- */
+@keyframes fieldPop {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInActions {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes expandDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+    transform: scaleY(0.9);
+  }
+
+  to {
+    opacity: 1;
+    max-height: 500px;
+    transform: scaleY(1);
+  }
+}
+
+/* --- Layout --- */
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.main-layout {
+  display: flex;
+  gap: 30px;
+}
+
+/* --- Input Fields & States --- */
+.input-field,.password-input {
+  background: white;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+/* The "Pop" Effect when active/editing */
+.input-field:has(input:not(:disabled)),.password-input:has(input:focus) {
+  animation: fieldPop 0.3s ease-out;
+  border-color: var(--primary-300);
+  box-shadow: 0 4px 12px rgba(255, 197, 2, 0.15);
+}
+
+.input-field input,.password-input input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 15px;
+  background: transparent;
+  color: var(--text-main);
+}
+
+/* Visual Validation: Green icon for valid input */
+.input-field:has(input.ng-valid.ng-dirty) lucide-icon:first-child {
+  color: var(--success-500) !important;
+  filter: drop-shadow(0 0 2px var(--success-100));
+}
+
+/* --- Icons --- */
+.icon-muted {
+  color: #bbb;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* The Pen Spin & Scale */
+.icon-muted:hover {
+  color: var(--primary-600);
+  transform: rotate(15deg) scale(1.2);
+}
+
+/* --- Buttons --- */
+button {
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+/* Button Compression Effect */
+button:active {
+  transform: scale(0.96) !important;
+}
+
+.btn-save {
+  background-color: var(--primary-500);
+  color: var(--secondary-950);
+  border: none;
+  padding: 14px 40px;
+  border-radius: 12px;
+  font-weight: 700;
+  width: 100%;
+  margin-top: 15px;
+  box-shadow: 0 4px 0 var(--primary-700);
+}
+
+.btn-save:hover:not(:disabled) {
+  background-color: var(--primary-400);
+  transform: translateY(-1px);
+}
+
+.btn-save:active {
+  box-shadow: 0 1px 0 var(--primary-700);
+  transform: translateY(3px);
+}
+
+.field-actions {
+  display: flex;
+  gap: 8px;
+  animation: slideInActions 0.4s ease-out forwards;
+}
+
+.field-actions button:first-child {
+  background: var(--success-500);
+  color: white;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 8px;
+}
+
+.field-actions button:last-child {
+  background: white;
+  border: 1px solid var(--black-100);
+  color: var(--black-600);
+  padding: 6px 16px;
+  border-radius: 8px;
+}
+
+/* --- Address Section --- */
+.address-box {
+  display: flex;
+  flex-direction: column;
+  /* Better readability: text above button */
+  gap: 15px;
+}
+
+.address-placeholder {
+  background: white;
+  width: 100%;
+  padding: 15px;
+  border-radius: 12px;
+  color: var(--black-600);
+  border: 1px dashed #ddd;
+}
+
+.address-form {
+  display: grid;
+  gap: 12px;
+  animation: expandDown 0.4s ease-out forwards;
+  transform-origin: top;
+}
+
+.address-form input,
+.address-form select {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+/* --- Profile Upload --- */
+.avatar-placeholder {
+  width: 110px;
+  height: 110px;
+  background: linear-gradient(135deg, #eee 0%, #ddd 100%);
+  border-radius: 50%;
+  border: 4px solid white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Mobile Styles --- */
+@media (max-width: 768px) {
+  .main-layout {
+    flex-direction: column;
+  }
+
+  /* Vertical Stacking for Buttons */
+  .field-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .field-actions button {
+    width: 100%;
+    padding: 12px !important;
+    /* Larger tap targets */
+  }
+
+  .input-field {
+    padding: 16px;
+    /* Increased touch padding */
+  }
+
+  .sidebar {
+    position: fixed;
+    right: -100%;
+    width: 85%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    /* Glassmorphism */
+    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .sidebar.active {
+    right: 0;
+  }
+
+  .sidebar-overlay.active {
+    display: block;
+    backdrop-filter: blur(4px);
+    background: rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* Error Messages */
+.error-msg{
+  color: var(--error-500);
+  font-size: 11px;
+  margin-top: 5px;
+  display: block;
+  font-weight: bold;
+}
+
+.address{
+  display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Container Layout */
+.address-form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  direction: rtl;
+  /* Ensures Arabic text alignment */
+}
+
+/* Common Input & Select Styles */
+.form-input-bordered,
+.form-select-custom {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  background-color: #fff;
+}
+
+.form-input-bordered:focus,
+.form-select-custom:focus {
+  border-color: var(--primary-500);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Specific Select Styling */
+.form-select-custom {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: left 1rem center;
+  /* Adjusted for RTL */
+  background-size: 1em;
+  padding-left: 2.5rem;
+}
+
+/* Action Buttons Container */
+.field-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.full-width-actions {
+  width: 100%;
+}
+
+/* Buttons */
+.btn-confirm,
+.btn-discard {
+  flex: 1;
+  padding: 0.75rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.2s;
+}
+
+.btn-confirm {
+  background-color: #10b981;
+  color: white;
+}
+
+.btn-confirm:hover:not(:disabled) {
+  background-color: #059669;
+}
+
+.btn-confirm:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.btn-discard {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+.btn-discard:hover {
+  background-color: #e5e7eb;
+}
+
+.password-input-container{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.btn-save-main {
+  /* Layout & Spacing */
+  display: inline-block;
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+
+  /* Colors & Branding */
+  background-color: var(--primary-300);
+  /* Primary Blue */
+  color: black;
+
+  /* Smooth transitions */
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover & Active States */
+.btn-save-main:hover:not(:disabled) {
+  background-color: var(--primary-600);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+}
+
+.btn-save-main:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Disabled State - Matches your [disabled] logic */
+.btn-save-main:disabled {
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+  opacity: 0.7;
+  box-shadow: none;
+}
+
+
+.avatar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.camera-icon-wrapper,
+.delete-icon {
+  position: absolute;
+  bottom: 1px;
+  right: 1px;
+  background: #fff;
+  border-radius: 50%;
+  padding: 6px;
+  cursor: pointer;
+  border:none;
+  width: auto;
+  height: auto;
+}
+
+.delete-icon {
+  color: var(--error-500);
+}

@@ -1,0 +1,115 @@
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    direction: rtl;
+}
+
+
+/* Dashboard Layout */
+.dashboard-container {
+    display: flex;
+    width: 100%;
+    background-color: var(--black-50);
+}
+
+/* Sidebar */
+.sidebar {
+    width: 260px;
+    background-color: var(--secondary-900);
+    height: 100vh;
+    color: white;
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.sidebar .logo {
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar ul li a,.logout a {
+    color: #a0aeba;
+    text-decoration: none;
+    padding: 15px 25px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.sidebar ul li.active a, .sidebar ul li a:hover {
+    background-color: var(--primary-500);
+    color: var(--secondary-900);
+}
+.sidebar ul li.active a svg path, .sidebar ul li a:hover svg path {
+   stroke: var(--secondary-900);
+}
+
+path {
+  transition: stroke 0.3s ease;
+}
+
+.logout {
+    margin-bottom: auto;
+    border-top: 1px solid #1a2a3a;
+    /* padding: 30px 25px; */
+    padding-top: 25px;
+}
+
+/* Main Content Area */
+.content {
+  flex: 1;
+  padding: 30px;
+}
+
+.display{
+  display: block !important;
+}
+
+.burger-icon{
+  position: absolute;
+  border: none;
+  margin: 15px;
+}
+.burger-icon:hover{
+  background-color: var(text-muted);
+}
+
+    .close-sidebar {
+      display: none;
+    }
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: absolute;
+        display: none;
+      }
+             .close-sidebar {
+               display: block;
+               background: none;
+               border: none;
+               color: white;
+               font-size: 20px;
+               position: absolute;
+               top: 15px;
+               left: 15px;
+               cursor: pointer;
+             }
+}
+
+@media (max-width: 600px) {
+    .dashboard-container { flex-direction: column; }
+    .header { flex-direction: column; gap: 15px; text-align: center; }
+}

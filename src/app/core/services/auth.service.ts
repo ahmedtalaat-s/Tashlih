@@ -8,6 +8,7 @@ import { APP_CONSTANTS } from '../../constants/app.constants';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { API_CONSTANTS } from '../../constants/api.constants';
 import {
+  changePasswordResponse,
   getUserResponse,
   LoginOtpRequest,
   LoginOtpResponse,
@@ -18,6 +19,7 @@ import {
   sendOtpResponse,
   SupplierRegisterRequest,
 } from '../models/auth.model';
+import { Admin } from '../models/admin.model';
 
 @Injectable({
   providedIn: 'root',
@@ -48,7 +50,8 @@ export class AuthService {
   id = computed(() => this.userInfo()?.id);
   constructor() {
     const token = StorageHelper.getItem<string>(APP_CONSTANTS.STORAGE_KEYS.TOKEN);
-    if (token) {
+    const admin = StorageHelper.getItem<Admin>(APP_CONSTANTS.STORAGE_KEYS.ADMIN);
+    if (token && !admin) {
       this.getCurrentUser().pipe(takeUntilDestroyed(this.destroyref)).subscribe();
     }
   }
@@ -87,6 +90,11 @@ export class AuthService {
         map((response) => {
           if (response.success) {
             StorageHelper.setItem(APP_CONSTANTS.STORAGE_KEYS.PHONE_NUMBER, userData.phone);
+            if (response.token && response.user) {
+              StorageHelper.setItem(APP_CONSTANTS.STORAGE_KEYS.TOKEN, response.token);
+              StorageHelper.setItem(APP_CONSTANTS.STORAGE_KEYS.USER, response.user);
+              this.userInfo.set(response.user);
+            }
           }
           return response;
         }),
@@ -189,5 +197,15 @@ export class AuthService {
     this.userInfo.set(null);
     StorageHelper.clear();
     this.router.navigate(['/']);
+  }
+
+  changePassword(currentPassword: string, newPassword: string): Observable<changePasswordResponse> {
+    return this.http.post<changePasswordResponse>(
+      `${API_CONSTANTS.BASE_URL}${API_CONSTANTS.END_POINTS.AUTH.CHANGE_PASSWORD}`,
+      {
+        currentPassword: currentPassword,
+        newPassword: newPassword,
+      },
+    );
   }
 }

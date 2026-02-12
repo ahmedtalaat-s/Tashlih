@@ -1,0 +1,118 @@
+<div class="main-wrapper" dir="rtl">
+  <div class="right-panel">
+    <div></div>
+    <div class="content-area">
+      <div class="logo-container">
+        <img src="./assets/images/icons/logo.png" alt="Tashleeh Logo" />
+      </div>
+
+      <div class="content-wrapper">
+        <div class="text-section">
+          <h1 class="main-heading">لوحة تحكم المسؤول</h1>
+          <p class="description">يرجى تسجيل الدخول للمتابعة إلى لوحة التحكم</p>
+        </div>
+
+        <form class="form-section" [formGroup]="adminLoginForm" (ngSubmit)="submit()">
+          <div class="form-group">
+            <div class="input-box">
+              <input
+                id="email"
+                type="email"
+                formControlName="email"
+                placeholder="البريد الإلكتروني"
+                class="password-input"
+              />
+            </div>
+            @if (
+              adminLoginForm.controls['email'].touched && adminLoginForm.controls['email'].invalid
+            ) {
+              <small class="error">يرجى إدخال بريد إلكتروني صحيح</small>
+            }
+          </div>
+
+          <div class="form-group">
+            <div class="input-box">
+              <input
+                id="password"
+                [type]="showPassword() ? 'text' : 'password'"
+                formControlName="password"
+                placeholder="كلمة المرور"
+                class="password-input"
+              />
+              <button
+                type="button"
+                class="password-toggle"
+                (click)="togglePassword()"
+                [attr.aria-label]="showPassword() ? 'إخفاء كلمة المرور' : 'إظهار كلمة المرور'"
+              >
+                @if (showPassword()) {
+                  <!-- Eye Off -->
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M17.94 17.94A10.94 10.94 0 0 1 12 20
+             c-7 0-11-8-11-8
+             a21.81 21.81 0 0 1 5.06-6.88"
+                    />
+                    <path
+                      d="M9.9 4.24A9.12 9.12 0 0 1 12 4
+             c7 0 11 8 11 8
+             a21.81 21.81 0 0 1-4.87 6.36"
+                    />
+                    <path d="M14.12 14.12a3 3 0 1 1-4.24-4.24" />
+                    <path d="M1 1l22 22" />
+                  </svg>
+                } @else {
+                  <!-- Eye -->
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>
+                }
+              </button>
+            </div>
+            @if (
+              adminLoginForm.controls['password'].touched &&
+              adminLoginForm.controls['password'].getError('required')
+            ) {
+              <small class="error">كلمة المرور مطلوبة</small>
+            }
+            @if (
+              adminLoginForm.controls['password'].touched &&
+              adminLoginForm.controls['password'].getError('minlength')
+            ) {
+              <small class="error"> أدخل 6 أرقام على الأقل </small>
+            }
+          </div>
+
+          <button class="submit-button" type="submit" [disabled]="adminLoginForm.invalid">
+            تسجيل الدخول
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="copyright-text">جميع الحقوق محفوظة. <span class="brand">Tashleeh</span>©</div>
+      <!-- <button class="lang-switcher">English</button> -->
+    </div>
+  </div>
+
+  <div class="left-panel admin-bg">
+    <img src="./assets/images/login.svg" class="illustration" alt="Admin Illustration" />
+  </div>
+</div>

@@ -104,3 +104,14 @@ export interface LoginOtpResponse {
   expiresAt: string | null;
   user: User | null;
 }
+
+//change Password
+export interface changePasswordResponse {
+  success: boolean;
+  message: string;
+  messageAr: string;
+  token: string | null;
+  expiresAt: string | Date | null; // Depending on your date format
+  user: any | null; // You can replace 'any' with a User interface
+  otpCode: string | number | null;
+}

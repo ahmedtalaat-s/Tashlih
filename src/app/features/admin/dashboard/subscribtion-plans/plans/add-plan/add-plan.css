@@ -1,0 +1,269 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3000;
+  padding: 20px;
+  direction: rtl;
+}
+
+.modal-container {
+  background: #fff;
+  width: 100%;
+  max-width: 700px;
+  border-radius: 20px;
+  padding: 30px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: modalSlideUp 0.3s ease-out;
+}
+
+
+
+@keyframes modalSlideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-header h2 {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 25px;
+  font-weight: 800;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.full-width {
+  grid-column: span 2;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 12px 15px;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  background-color: #fcfcfc;
+  font-size: 0.95rem;
+  transition: border 0.2s;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #FFD700;
+}
+
+/* Upload Section */
+.upload-section {
+  margin-top: 20px;
+}
+
+.upload-box {
+  border: 2px dashed #eee;
+  border-radius: 15px;
+  padding: 30px;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.upload-box:hover {
+  background-color: #f9f9f9;
+  border-color: #FFD700;
+}
+
+.upload-box i {
+  font-size: 2rem;
+  color: #aaa;
+  margin-bottom: 10px;
+}
+
+.upload-box p {
+  margin: 5px 0;
+  font-weight: 600;
+  color: #666;
+}
+
+.upload-box span {
+  font-size: 0.8rem;
+  color: #999;
+}
+
+/* Actions */
+.modal-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.btn-submit {
+  flex: 2;
+  background-color: #FFD700;
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-cancel {
+  flex: 1;
+  background: none;
+  border: 1px solid #eee;
+  padding: 14px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .full-width {
+    grid-column: span 1;
+  }
+
+  .modal-actions {
+    flex-direction: column;
+  }
+}
+
+/* ... Previous Modal Styles ... */
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.full-width {
+  grid-column: span 2;
+}
+
+.status-toggles {
+  display: flex;
+  gap: 40px;
+  padding: 10px 5px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+/* Custom Toggle Switch Styling */
+.switch-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.switch-container input {
+  display: none;
+}
+
+.slider {
+  width: 34px;
+  height: 18px;
+  background-color: #ccc;
+  border-radius: 20px;
+  position: relative;
+  transition: .4s;
+}
+
+.slider:before {
+  content: "";
+  position: absolute;
+  height: 12px;
+  width: 12px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked+.slider {
+  background-color: #FFD700;
+}
+
+input:checked+.slider:before {
+  transform: translateX(16px);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+@media (max-width: 600px) {
+  .status-toggles {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+
+.error {
+  color: #e53935;
+  font-size: 12px;
+  margin-top: 4px;
+  display: block;
+}
+
+.preview-container {
+  position: relative;
+}
+
+.preview-container img {
+  width: 100%;
+  height: 150px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.remove-image {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: red;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}

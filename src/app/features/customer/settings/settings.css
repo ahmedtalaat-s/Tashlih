@@ -127,7 +127,7 @@ header h1 {
 .icon-muted{
   color: #888888;
 }
-.disabled , input:disabled{
+.disabled {
   background-color: var(--bg-color) !important;
 }
 

@@ -44,6 +44,8 @@ function extractErrorMessage(error: HttpErrorResponse, language: string): string
       error.error?.error?.messageAr ||
       error.error?.value?.messageAr ||
       error.error?.messageAr ||
+      error.error?.message ||
+      error.message ||
       'حدث خطأ غير متوقع. الرجاء المحاولة مرة أخرى لاحقًا.'
     );
   }

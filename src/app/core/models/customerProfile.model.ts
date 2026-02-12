@@ -31,6 +31,6 @@ export interface UpdateCustomerProfileRequest {
   street: string;
   cityId: number;
   postalCode: string;
-  latitude: number;
-  longitude: number;
+  latitude?: number;
+  longitude?: number;
 }

@@ -1,0 +1,51 @@
+<div class="plan-card">
+  @if (plan.isPopular) {
+    <div class="popular-tag">الأكثر شيوعاً</div>
+  }
+
+  <div class="plan-header">
+    <div class="logo-container" *ngIf="plan.logoUrl">
+      <img [src]="plan.logoUrl" />
+    </div>
+    <h3>{{ plan.nameAr }}</h3>
+    <!-- <span class="en-title">{{ plan.nameEn }}</span> -->
+
+    <div class="price">
+      @if (plan.price > 0) {
+        <span [innerHTML]="plan.price | saudiRiyal"></span>
+        <!-- <span>{{ plan.currency }}</span> -->
+      } @else {
+        مجانية
+      }
+    </div>
+
+    <p class="duration">لمدة {{ plan.durationDays }} يوم</p>
+  </div>
+
+  <div class="plan-body">
+    <p class="description">{{ plan.descriptionAr }}</p>
+
+    <div class="spec-row">
+      <span>الحد الأقصى للقطع:</span>
+      <strong>{{ plan.maxParts }}</strong>
+    </div>
+    <div class="spec-row">
+      <span>الصور لكل قطعة:</span>
+      <strong>{{ plan.maxImagesPerPart }}</strong>
+    </div>
+    <div class="spec-row">
+      <span>عدد المتاجر:</span>
+      <strong>{{ plan.maxShops }}</strong>
+    </div>
+
+    <div class="status-row">
+      <span>الحالة</span>
+      <span class="badge success">فعالة</span>
+    </div>
+  </div>
+
+  <div class="plan-footer">
+    <button class="edit-btn" (click)="onEdit()">تعديل</button>
+    <button class="delete-btn" (click)="onDelete()">حذف</button>
+  </div>
+</div>
