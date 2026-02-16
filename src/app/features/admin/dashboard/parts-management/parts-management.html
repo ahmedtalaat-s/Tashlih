@@ -1,1 +1,31 @@
-<p>parts-management works!</p>
+<div class="container">
+  <header class="header">
+    <h1>إدارة القطع</h1>
+  </header>
+
+  <nav class="tabs-wrapper">
+    <ul class="tabs">
+      <li routerLink="categories" routerLinkActive="active">التصنيفات</li>
+
+      <li routerLink="vehicles" routerLinkActive="active">أنواع المركبات</li>
+
+      <li routerLink="subcategories" routerLinkActive="active">الفئات الفرعية</li>
+
+      <li routerLink="manufacturers" routerLinkActive="active">الشركات المصنعة</li>
+
+      <li routerLink="models" routerLinkActive="active">الموديلات</li>
+
+      <li routerLink="cities" routerLinkActive="active">المدن</li>
+
+      <li routerLink="part-conditions" routerLinkActive="active">حالات القطع</li>
+
+      <li routerLink="warranties" routerLinkActive="active">انواع الضمان</li>
+
+      <li routerLink="years" routerLinkActive="active">السنوات</li>
+    </ul>
+  </nav>
+
+  <div class="content-card">
+    <router-outlet />
+  </div>
+</div>

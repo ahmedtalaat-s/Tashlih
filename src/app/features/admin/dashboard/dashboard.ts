@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { PlanCard } from './subscribtion-plans/plans/plan-card/plan-card';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { StorageHelper } from '../../../helpers/storage.helper';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,5 +14,11 @@ export class Dashboard {
 
   toggleSidebar() {
     this.isSidebarOpen = !this.isSidebarOpen;
+  }
+
+  private router = inject(Router);
+  logout() {
+    StorageHelper.clear();
+    this.router.navigate(['/admin/login']);
   }
 }

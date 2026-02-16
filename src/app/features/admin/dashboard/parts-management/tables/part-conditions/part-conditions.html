@@ -1,0 +1,78 @@
+<div class="table-toolbar">
+  <div class="toolbar-right">
+    <div class="search-box">
+      <i class="fa fa-search"></i>
+      <input
+        #search
+        type="text"
+        placeholder="بحث في حالات القطع..."
+        (input)="filterPartConditions(search.value)"
+      />
+    </div>
+
+    <div style="font-size: 13px; color: var(--text-muted); font-weight: 600">
+      إجمالي: {{ filteredPartConditions.length }} عناصر
+    </div>
+  </div>
+
+  <button class="add-btn" (click)="toggleAddModal()">
+    <i class="fa fa-plus"></i>
+    إضافة حالة قطعة جديدة
+  </button>
+</div>
+
+<div class="table-responsive">
+  <table>
+    <thead>
+      <tr>
+        <th width="100">المعرف</th>
+        <th>اسم حالة القطعة</th>
+        <th width="150">الإجراءات</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (condition of filteredPartConditions; track condition.id) {
+        <tr>
+          <td>
+            <span class="id-badge">{{ $index + 1 }}</span>
+          </td>
+
+          <td style="font-weight: 600">
+            {{ condition.nameAr }}
+          </td>
+
+          <td class="actions">
+            <button class="btn-action btn-edit" (click)="editPartCondition(condition)">
+              <i class="fa-regular fa-pen-to-square"></i>
+            </button>
+
+            <button class="btn-action btn-delete" (click)="deletePartCondition(condition)">
+              <i class="fa-regular fa-trash-can"></i>
+            </button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+@if (openAddModalBool) {
+  <app-add-edit-part-condition
+    (close)="toggleAddModal()"
+    (submitPartCondition)="loadPartConditions()"
+  ></app-add-edit-part-condition>
+}
+
+@if (openEditModalBool) {
+  <app-add-edit-part-condition
+    [mode]="'edit'"
+    [PartCondition]="selectedEditPartCondition"
+    (close)="toggleEditModal()"
+    (submitPartCondition)="loadPartConditions()"
+  ></app-add-edit-part-condition>
+}
+
+@if (openDeleteModalBool) {
+  <app-delete-modal (confirm)="confirmDelete()" (cancel)="toggledeleteModal()"></app-delete-modal>
+}

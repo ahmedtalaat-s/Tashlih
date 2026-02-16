@@ -108,6 +108,7 @@
       --bg-light: #f8f9fa;
       --text-dark: #333;
       --text-muted: #777;
+      --text-main: #1a2b4b;
       --radius: 12px;
 
       /* customer orders */
@@ -116,6 +117,7 @@
         --text-dark: #1a1a1a;
         --text-muted: #757575;
         --bg-white: #ffffff;
+        --white-color: #ffffff;
         --radius: 12px;
         /* =========settings========= */
   --bg-color: #f9f9f9;
@@ -156,6 +158,9 @@
 
         /* transition */
       --transition: all 0.3s ease;
+      /* admin */
+  --border-: #edf2f7;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 body,html{
@@ -295,3 +300,5 @@ p-select{
   width: 0;
   height: 0;
 }
+
+

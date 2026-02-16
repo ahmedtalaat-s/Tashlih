@@ -1,0 +1,53 @@
+<div class="body">
+  <div class="modal-overlay" (click)="onClose()">
+    <div class="modal-container" (click)="$event.stopPropagation()">
+      <h2 class="modal-title">
+        @if (mode === 'add') {
+          إضافة نوع مركبة جديد
+        } @else {
+          تعديل نوع المركبة
+        }
+      </h2>
+
+      <form [formGroup]="vehicleTypeForm" (ngSubmit)="onSubmit()">
+        <!-- Arabic Name -->
+        <div class="form-group">
+          <label>اسم نوع المركبة (بالعربي)</label>
+          <input type="text" formControlName="nameAr" placeholder="ادخل اسم نوع المركبة بالعربي" />
+
+          @if (f['nameAr'].touched && f['nameAr'].errors?.['required']) {
+            <small class="error">الاسم بالعربي مطلوب</small>
+          }
+        </div>
+
+        <!-- English Name -->
+        <div class="form-group" dir="ltr">
+          <label style="text-align: left; display: block"> Vehicle Type Name (English) </label>
+
+          <input
+            type="text"
+            formControlName="nameEn"
+            placeholder="Enter vehicle type name in English"
+          />
+
+          @if (f['nameEn'].touched && f['nameEn'].errors?.['required']) {
+            <small class="error">English name is required</small>
+          }
+        </div>
+
+        <!-- Buttons -->
+        <div class="button-group">
+          <button type="submit" class="btn-submit">
+            @if (mode === 'add') {
+              إضافة
+            } @else {
+              حفظ التعديلات
+            }
+          </button>
+
+          <button type="button" class="btn-cancel" (click)="onClose()">إلغاء</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

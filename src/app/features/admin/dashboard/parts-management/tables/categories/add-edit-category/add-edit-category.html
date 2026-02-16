@@ -1,0 +1,80 @@
+<div class="body">
+  <div class="modal-overlay" (click)="onClose()">
+    <div class="modal-container" (click)="$event.stopPropagation()">
+      <h2 class="modal-title">
+        @if (mode === 'add') {
+          إضافة تصنيف جديد
+        } @else {
+          تعديل التصنيف
+        }
+      </h2>
+
+      <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+        <!-- Arabic Name -->
+        <div class="form-group">
+          <label>إضافة التصنيف (بالعربي)</label>
+          <input type="text" formControlName="NameAr" placeholder="اسم التصنيف بالعربي" />
+
+          @if (f['NameAr'].touched && f['NameAr'].errors?.['required']) {
+            <small class="error">الاسم بالعربي مطلوب</small>
+          }
+        </div>
+
+        <!-- English Name -->
+        <div class="form-group" dir="ltr">
+          <label style="text-align: left; display: block"> Category Name (English) </label>
+          <input type="text" formControlName="NameEn" placeholder="Category name in English" />
+
+          @if (f['NameEn'].touched && f['NameEn'].errors?.['required']) {
+            <small class="error">English name is required</small>
+          }
+        </div>
+
+        <!-- Upload -->
+        <div class="form-group">
+          <label>الأيقونة</label>
+
+          <div class="upload-area" (click)="fileInput.click()">
+            <input
+              type="file"
+              #fileInput
+              hidden
+              accept="image/*"
+              (change)="onFileSelected($event)"
+            />
+
+            <!-- No Image -->
+            @if (!imagePreview) {
+              <div class="upload-content">
+                <img src="https://img.icons8.com/ios/50/999999/image-file.png" />
+                <p>اضغط لتحميل الايقونة</p>
+                <span>PNG, JPG حتى 2MB</span>
+              </div>
+            }
+
+            <!-- Preview -->
+            @if (imagePreview) {
+              <div class="preview-container">
+                <img [src]="imagePreview" alt="Preview" />
+                <button type="button" class="remove-btn" (click)="removeImage($event)">✕</button>
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="button-group">
+          <button type="submit" class="btn-submit">
+            @if (mode === 'add') {
+              إضافة
+            } @else {
+              حفظ التعديلات
+            }
+          </button>
+
+          <button type="button" class="btn-cancel" (click)="onClose()">إلغاء</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

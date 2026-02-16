@@ -1,0 +1,69 @@
+<div class="table-toolbar">
+  <div class="toolbar-right">
+    <div class="search-box">
+      <i class="fa fa-search"></i>
+      <input
+        #search
+        type="text"
+        placeholder="بحث في التصنيفات..."
+        (input)="filterCategories(search.value)"
+      />
+    </div>
+    <div style="font-size: 13px; color: var(--text-muted); font-weight: 600">
+      إجمالي: {{ filteredCategories.length }} عناصر
+    </div>
+  </div>
+
+  <button class="add-btn" (click)="toggleAddModal()">
+    <i class="fa fa-plus"></i>
+    إضافة تصنيف جديد
+  </button>
+</div>
+<div class="table-responsive">
+  <table>
+    <thead>
+      <tr>
+        <th width="100">المعرف</th>
+        <th>الاسم</th>
+        <th>الايقونة</th>
+        <th width="150">الإجراءات</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (category of filteredCategories; track category.id) {
+        <tr>
+          <td>
+            <span class="id-badge">{{ $index + 1 }}</span>
+          </td>
+          <td style="font-weight: 600">{{ category.nameAr }}</td>
+          <td><img [src]="category.icon" alt="" /></td>
+          <td class="actions">
+            <button class="btn-action btn-edit" (click)="editCategory(category)">
+              <i class="fa-regular fa-pen-to-square"></i>
+            </button>
+            <button class="btn-action btn-delete" (click)="deleteCategory(category)">
+              <i class="fa-regular fa-trash-can"></i>
+            </button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+@if (openAddModalBool) {
+  <app-add-edit-category
+    (close)="toggleAddModal()"
+    (submitCategory)="loadCategories()"
+  ></app-add-edit-category>
+}
+@if (openEditModalBool) {
+  <app-add-edit-category
+    [mode]="'edit'"
+    [category]="selectedEditCategory"
+    (close)="toggleEditModal()"
+    (submitCategory)="loadCategories()"
+  ></app-add-edit-category>
+}
+@if (openDeleteModalBool) {
+  <app-delete-modal (confirm)="confirmDelete()" (cancel)="toggledeleteModal()"></app-delete-modal>
+}

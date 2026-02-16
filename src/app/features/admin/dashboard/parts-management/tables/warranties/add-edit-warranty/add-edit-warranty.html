@@ -1,0 +1,65 @@
+<div class="body">
+  <div class="modal-overlay" (click)="onClose()">
+    <div class="modal-container" (click)="$event.stopPropagation()">
+      <h2 class="modal-title">
+        @if (mode === 'add') {
+          إضافة حالة ضمان جديدة
+        } @else {
+          تعديل حالة الضمان
+        }
+      </h2>
+
+      <form [formGroup]="warrantyForm" (ngSubmit)="onSubmit()">
+        <!-- Arabic Name -->
+        <div class="form-group">
+          <label>اسم الحالة (بالعربي)</label>
+          <input type="text" formControlName="nameAr" placeholder="ادخل اسم الحالة بالعربي" />
+
+          @if (f['nameAr'].touched && f['nameAr'].errors?.['required']) {
+            <small class="error">الاسم بالعربي مطلوب</small>
+          }
+        </div>
+
+        <!-- English Name -->
+        <div class="form-group" dir="ltr">
+          <label style="text-align: left; display: block"> Condition Name (English) </label>
+          <input
+            type="text"
+            formControlName="nameEn"
+            placeholder="Enter condition name in English"
+          />
+
+          @if (f['nameEn'].touched && f['nameEn'].errors?.['required']) {
+            <small class="error">English name is required</small>
+          }
+        </div>
+
+        <!-- Days -->
+        <div class="form-group">
+          <label>عدد الأيام</label>
+          <input type="number" formControlName="days" placeholder="ادخل عدد أيام الضمان" min="1" />
+
+          @if (f['days'].touched && f['days'].errors?.['required']) {
+            <small class="error">عدد الأيام مطلوب</small>
+          }
+          @if (f['days'].touched && f['days'].errors?.['min']) {
+            <small class="error">عدد الأيام لا يمكن أن يكون أقل من 1</small>
+          }
+        </div>
+
+        <!-- Buttons -->
+        <div class="button-group">
+          <button type="submit" class="btn-submit">
+            @if (mode === 'add') {
+              إضافة
+            } @else {
+              حفظ التعديلات
+            }
+          </button>
+
+          <button type="button" class="btn-cancel" (click)="onClose()">إلغاء</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

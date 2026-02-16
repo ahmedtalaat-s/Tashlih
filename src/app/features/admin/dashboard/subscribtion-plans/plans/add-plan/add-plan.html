@@ -1,7 +1,11 @@
 <div class="modal-overlay" (click)="onClose()">
   <div class="modal-container" (click)="$event.stopPropagation()">
     <header class="modal-header">
-      <h2>إضافة باقة جديدة</h2>
+      @if (mode === 'add') {
+        إضافة باقة جديدة
+      } @else {
+        تعديل الباقة
+      }
     </header>
 
     <form class="plan-form" [formGroup]="planForm" (ngSubmit)="onSubmit()">
@@ -183,7 +187,13 @@
 
       <!-- Actions -->
       <div class="modal-actions">
-        <button type="submit" class="btn-submit">إضافة الباقة</button>
+        <button type="submit" class="btn-submit">
+          @if (mode === 'add') {
+            إضافة الباقة
+          } @else {
+            حفظ التعديلات
+          }
+        </button>
 
         <button type="button" class="btn-cancel" (click)="onClose()">إلغاء</button>
       </div>

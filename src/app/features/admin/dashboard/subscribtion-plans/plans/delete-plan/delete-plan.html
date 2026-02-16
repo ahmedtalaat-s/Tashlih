@@ -1,0 +1,22 @@
+<div class="modal-overlay" (click)="onCancel()">
+  <div class="modal-container delete-modal" (click)="$event.stopPropagation()">
+    <div class="modal-body">
+      <div class="warning-icon">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+      </div>
+      <h2>تأكيد الحذف</h2>
+      <p>
+        هل أنت متأكد من رغبتك في حذف باقة <strong>{{ planName }}</strong
+        >؟
+      </p>
+      <p class="warning-text">لا يمكن التراجع عن هذه الخطوة بعد إتمامها.</p>
+    </div>
+
+    <div class="modal-actions">
+      <button type="button" class="btn-delete" (click)="onConfirm()">
+        <i class="fa-solid fa-trash-can"></i> تأكيد الحذف
+      </button>
+      <button type="button" class="btn-cancel" (click)="onCancel()">إلغاء</button>
+    </div>
+  </div>
+</div>

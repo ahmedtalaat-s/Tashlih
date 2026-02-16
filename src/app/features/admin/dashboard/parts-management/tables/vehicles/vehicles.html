@@ -1,0 +1,67 @@
+<div class="table-toolbar">
+  <div class="toolbar-right">
+    <div class="search-box">
+      <i class="fa fa-search"></i>
+      <input
+        #search
+        type="text"
+        placeholder="بحث في المركبات..."
+        (input)="filterVehicleType(search.value)"
+      />
+    </div>
+    <div style="font-size: 13px; color: var(--text-muted); font-weight: 600">
+      إجمالي: {{ filteredvehicles.length }} عناصر
+    </div>
+  </div>
+
+  <button class="add-btn" (click)="toggleAddModal()">
+    <i class="fa fa-plus"></i>
+    إضافة مركبه جديده
+  </button>
+</div>
+<div class="table-responsive">
+  <table>
+    <thead>
+      <tr>
+        <th width="100">المعرف</th>
+        <th>الاسم</th>
+        <th width="150">الإجراءات</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (vehicle of filteredvehicles; track vehicle.id) {
+        <tr>
+          <td>
+            <span class="id-badge">{{ $index + 1 }}</span>
+          </td>
+          <td style="font-weight: 600">{{ vehicle.nameAr }}</td>
+          <td class="actions">
+            <button class="btn-action btn-edit" (click)="editVehicleType(vehicle)">
+              <i class="fa-regular fa-pen-to-square"></i>
+            </button>
+            <button class="btn-action btn-delete" (click)="deleteVehicleType(vehicle)">
+              <i class="fa-regular fa-trash-can"></i>
+            </button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+@if (openAddModalBool) {
+  <app-add-edit-vehicles
+    (close)="toggleAddModal()"
+    (submitVehicleType)="loadVehicles()"
+  ></app-add-edit-vehicles>
+}
+@if (openEditModalBool) {
+  <app-add-edit-vehicles
+    [mode]="'edit'"
+    [vehicleType]="selectedEditVehicleType"
+    (close)="toggleEditModal()"
+    (submitVehicleType)="loadVehicles()"
+  ></app-add-edit-vehicles>
+}
+@if (openDeleteModalBool) {
+  <app-delete-modal (confirm)="confirmDelete()" (cancel)="toggledeleteModal()"></app-delete-modal>
+}

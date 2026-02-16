@@ -1,0 +1,80 @@
+<div class="table-toolbar">
+  <div class="toolbar-right">
+    <div class="search-box">
+      <i class="fa fa-search"></i>
+      <input
+        #search
+        type="text"
+        placeholder="بحث في الفئات الفرعية..."
+        (input)="filterSubcategories(search.value)"
+      />
+    </div>
+
+    <div style="font-size: 13px; color: var(--text-muted); font-weight: 600">
+      إجمالي: {{ filteredSubcategories.length }} عناصر
+    </div>
+  </div>
+
+  <button class="add-btn" (click)="toggleAddModal()">
+    <i class="fa fa-plus"></i>
+    إضافة فئة فرعية جديدة
+  </button>
+</div>
+
+<div class="table-responsive">
+  <table>
+    <thead>
+      <tr>
+        <th width="100">المعرف</th>
+        <th>الاسم</th>
+        <th width="150">الإجراءات</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (subcategory of filteredSubcategories; track subcategory.id) {
+        <tr>
+          <td>
+            <span class="id-badge">{{ $index + 1 }}</span>
+          </td>
+
+          <td style="font-weight: 600">
+            {{ subcategory.nameAr }}
+          </td>
+
+          <td class="actions">
+            <button class="btn-action btn-edit" (click)="editSubcategory(subcategory)">
+              <i class="fa-regular fa-pen-to-square"></i>
+            </button>
+
+            <button class="btn-action btn-delete" (click)="deleteSubcategory(subcategory)">
+              <i class="fa-regular fa-trash-can"></i>
+            </button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+@if (openAddModalBool) {
+  <app-add-edit-subcategory
+    [vehicleTypes]="vehicleTypes"
+    (close)="toggleAddModal()"
+    (submitSubcategory)="loadSubcategories()"
+  ></app-add-edit-subcategory>
+}
+
+@if (openEditModalBool) {
+  <app-add-edit-subcategory
+    [vehicleTypes]="vehicleTypes"
+    [mode]="'edit'"
+    [subcategory]="selectedEditSubcategory"
+    (close)="toggleEditModal()"
+    (submitSubcategory)="loadSubcategories()"
+  ></app-add-edit-subcategory>
+}
+
+@if (openDeleteModalBool) {
+  <app-delete-modal (confirm)="confirmDelete()" (cancel)="toggledeleteModal()"></app-delete-modal>
+}

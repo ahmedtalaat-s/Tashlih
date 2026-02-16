@@ -5,7 +5,11 @@
 @if (plans.length > 0) {
   <div class="plans-grid">
     @for (plan of plans; track plan.id) {
-      <app-plan-card [plan]="plan"></app-plan-card>
+      <app-plan-card
+        [plan]="plan"
+        (edit)="editPlan(plan)"
+        (delete)="deletePlan(plan)"
+      ></app-plan-card>
     }
   </div>
 } @else {
@@ -17,4 +21,19 @@
 }
 @if (openAddModalBool) {
   <app-add-plan (close)="toggleAddModal()" (added)="loadPlans()"></app-add-plan>
+}
+@if (openEditModalBool) {
+  <app-add-plan
+    [mode]="'edit'"
+    [plan]="selectedEditPlan"
+    (close)="toggleEditModal()"
+    (added)="loadPlans()"
+  ></app-add-plan>
+}
+@if (openDeleteModalBool) {
+  <app-delete-plan
+    [planName]="selectedDeletePlan.nameAr"
+    (confirm)="confirmDelete()"
+    (cancel)="toggledeleteModal()"
+  ></app-delete-plan>
 }

@@ -1,6 +1,6 @@
-import { Component, Output, EventEmitter, inject } from '@angular/core';
+import { Component, Output, EventEmitter, inject, Input } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { PlanRequest } from '../../../../../../core/models/admin.model';
+import { Plan, PlanRequest } from '../../../../../../core/models/admin.model';
 import { SubscribtionPlansService } from '../../../../../../core/services/admin/subscribtion.plans.service';
 
 @Component({
@@ -10,6 +10,9 @@ import { SubscribtionPlansService } from '../../../../../../core/services/admin/
   styleUrl: './add-plan.css',
 })
 export class AddPlan {
+  @Input() plan: Plan | null = null;
+  @Input() mode: 'add' | 'edit' = 'add';
+
   @Output() close = new EventEmitter<void>();
   @Output() added = new EventEmitter<void>();
 
@@ -22,6 +25,10 @@ export class AddPlan {
 
   ngOnInit(): void {
     this.initForm();
+
+    if (this.mode === 'edit' && this.plan) {
+      this.patchForm();
+    }
   }
 
   initForm() {
@@ -68,9 +75,26 @@ export class AddPlan {
     planRequest.MaxShops = 1;
     console.log(planRequest);
 
+    if (this.mode == 'add') {
+      this.addPlan(planRequest);
+    } else {
+      this.editPlan(planRequest);
+    }
+  }
+
+  addPlan(planRequest: PlanRequest) {
     this.planService.createPlan(planRequest).subscribe({
-      next: (res) => {
-        console.log(res);
+      next: () => {
+        this.planForm.reset();
+        this.removeImage();
+        this.added.emit();
+        this.close.emit();
+      },
+    });
+  }
+  editPlan(planRequest: PlanRequest) {
+    this.planService.updatePlan(this.plan?.id ?? 0, planRequest).subscribe({
+      next: () => {
         this.planForm.reset();
         this.removeImage();
         this.added.emit();
@@ -109,5 +133,30 @@ export class AddPlan {
     }
     this.imagePreview = null;
     this.selectedFile = null;
+  }
+
+  // patch the from for edit
+  patchForm() {
+    this.planForm.patchValue({
+      NameAr: this.plan?.nameAr,
+      NameEn: this.plan?.nameEn,
+      DescriptionAr: this.plan?.descriptionAr,
+      DescriptionEn: this.plan?.descriptionEn,
+      Price: this.plan?.price,
+      Currency: this.plan?.currency,
+      DurationDays: this.plan?.durationDays,
+      MaxParts: this.plan?.maxParts,
+      MaxImagesPerPart: this.plan?.maxImagesPerPart,
+      MaxShops: this.plan?.maxShops,
+      BadgeText: this.plan?.badgeText,
+      SortOrder: 0,
+      IsActive: true,
+      IsPopular: this.plan?.isPopular,
+    });
+
+    // عرض الصورة القديمة
+    if (this.plan?.logoUrl) {
+      this.imagePreview = this.plan?.logoUrl;
+    }
   }
 }

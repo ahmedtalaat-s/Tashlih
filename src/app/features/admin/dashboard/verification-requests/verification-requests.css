@@ -1,0 +1,213 @@
+/* Global Reset for the section */
+.pending-requests-section {
+  direction: rtl;
+  padding: var(--gap-lg);
+  font-family: var(--font-family-base);
+  color: var(--color-text-primary);
+}
+
+/* --- Header & Title --- */
+.dashboard-header {
+  margin-bottom: var(--gap-lg);
+}
+
+.title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-sm);
+  margin-bottom: 8px;
+}
+
+.main-title {
+  font-size: var(--subheading-md);
+  color: var(--secondary-500);
+  margin: 0;
+  font-weight: 700;
+}
+
+.count-badge {
+  background-color: var(--primary-500);
+  color: var(--text-brown);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: var(--caption-sm);
+}
+
+.description {
+  color: var(--text-lighter-gray);
+  font-size: var(--caption);
+  margin: 0;
+}
+
+/* --- Table Layout --- */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  /* Handles responsiveness on mobile */
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-gray);
+}
+
+.verification-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 900px;
+  /* Ensures table doesn't look cramped */
+  background: var(--color-white);
+}
+
+/* --- Table Headers --- */
+.verification-table th {
+  background-color: #fcfcfc;
+  /* Subtle off-white for header */
+  color: var(--text-light-gray);
+  text-align: right;
+  padding: 18px 16px;
+  font-size: var(--caption);
+  font-weight: 500;
+  border-bottom: 1px solid var(--border-gray);
+}
+
+/* --- Table Cells --- */
+.verification-table td {
+  padding: 20px 16px;
+  border-bottom: 1px solid var(--black-50);
+  vertical-align: middle;
+  color: var(--color-text-secondary);
+  font-size: var(--caption);
+}
+
+.vendor-bold {
+  color: var(--secondary-500) !important;
+  font-weight: 700;
+}
+
+.date-text {
+  color: var(--text-lighter-gray);
+}
+
+/* --- Buttons & Actions --- */
+
+/* View Documents Button (Navy) */
+.btn-navy-outline {
+  background-color: var(--secondary-500);
+  color: var(--color-white);
+  border: none;
+  padding: 0 16px;
+  height: 38px;
+  border-radius: var(--radius-s);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: var(--caption-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: var(--transition);
+}
+
+.btn-navy-outline:hover {
+  background-color: var(--secondary-600);
+  transform: translateY(-1px);
+}
+
+.btn-navy-outline svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+/* Action Button Group (Accept/Reject) */
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  transition: 0.3s;
+  height: auto;
+}
+.action-group {
+  display: flex;
+  gap: var(--gap-sm);
+}
+
+.btn-status {
+  height: 38px;
+  padding: 0 20px;
+  border-radius: var(--radius-s);
+  cursor: pointer;
+  font-weight: 500;
+  font-family: inherit;
+  font-size: var(--caption-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: var(--transition);
+  border: 1px solid transparent;
+}
+
+/* Success State (Accept) */
+.btn-status-success {
+  background-color: var(--success-50);
+  color: var(--success-700);
+  border-color: var(--success-100);
+  padding: 8px 20px;
+}
+
+.btn-status-success:hover {
+  background-color: var(--success-100);
+  color: var(--success-800);
+}
+
+/* Error State (Reject) */
+.btn-status-error {
+  background-color: var(--error-50);
+  color: var(--error-700);
+  border-color: var(--error-100);
+  padding: 8px 20px;
+}
+
+.btn-status-error:hover {
+  background-color: var(--error-100);
+  color: var(--error-800);
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+  .pending-requests-section {
+    padding: var(--gap-md);
+  }
+
+  .main-title {
+    font-size: var(--body-lg);
+  }
+
+  .table-responsive {
+    margin-top: var(--gap-md);
+  }
+}
+
+/* Styling the scrollbar for the table (Optional) */
+.table-responsive::-webkit-scrollbar {
+  height: 6px;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+  background: var(--bg-gray);
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+  background: var(--black-300);
+  border-radius: 10px;
+}
+
+
+::ng-deep .p-paginator{
+  background: none !important;
+}

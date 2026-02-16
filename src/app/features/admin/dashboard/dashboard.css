@@ -69,6 +69,7 @@ path {
 .content {
   flex: 1;
   padding: 30px;
+  min-height: 100vh
 }
 
 .display{

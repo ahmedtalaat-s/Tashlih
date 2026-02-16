@@ -1,0 +1,75 @@
+<div class="table-toolbar">
+  <div class="toolbar-right">
+    <div class="search-box">
+      <i class="fa fa-search"></i>
+      <input
+        #search
+        type="text"
+        placeholder="بحث في المدن..."
+        (input)="filterCities(search.value)"
+      />
+    </div>
+
+    <div style="font-size: 13px; color: var(--text-muted); font-weight: 600">
+      إجمالي: {{ filteredCities.length }} عناصر
+    </div>
+  </div>
+
+  <button class="add-btn" (click)="toggleAddModal()">
+    <i class="fa fa-plus"></i>
+    إضافة مدينة جديدة
+  </button>
+</div>
+
+<div class="table-responsive">
+  <table>
+    <thead>
+      <tr>
+        <th width="100">المعرف</th>
+        <th>اسم المدينة</th>
+        <th width="150">الإجراءات</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (city of filteredCities; track city.id) {
+        <tr>
+          <td>
+            <span class="id-badge">{{ $index + 1 }}</span>
+          </td>
+
+          <td style="font-weight: 600">
+            {{ city.nameAr }}
+          </td>
+
+          <td class="actions">
+            <button class="btn-action btn-edit" (click)="editCity(city)">
+              <i class="fa-regular fa-pen-to-square"></i>
+            </button>
+
+            <button class="btn-action btn-delete" (click)="deleteCity(city)">
+              <i class="fa-regular fa-trash-can"></i>
+            </button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+@if (openAddModalBool) {
+  <app-add-edit-city (close)="toggleAddModal()" (submitCity)="loadCities()"></app-add-edit-city>
+}
+
+@if (openEditModalBool) {
+  <app-add-edit-city
+    [mode]="'edit'"
+    [city]="selectedEditCity"
+    (close)="toggleEditModal()"
+    (submitCity)="loadCities()"
+  ></app-add-edit-city>
+}
+
+@if (openDeleteModalBool) {
+  <app-delete-modal (confirm)="confirmDelete()" (cancel)="toggledeleteModal()"></app-delete-modal>
+}

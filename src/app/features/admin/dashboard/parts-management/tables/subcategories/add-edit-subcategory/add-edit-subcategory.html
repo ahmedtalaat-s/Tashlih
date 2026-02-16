@@ -1,0 +1,76 @@
+<div class="body">
+  <div class="modal-overlay" (click)="onClose()">
+    <div class="modal-container" (click)="$event.stopPropagation()">
+      <h2 class="modal-title">
+        @if (mode === 'add') {
+          إضافة فئة فرعية جديدة
+        } @else {
+          تعديل الفئة الفرعية
+        }
+      </h2>
+
+      <form [formGroup]="subcategoryForm" (ngSubmit)="onSubmit()">
+        <!-- Arabic Name -->
+        <div class="form-group">
+          <label>اسم الفئة الفرعية (بالعربي)</label>
+          <input
+            type="text"
+            formControlName="nameAr"
+            placeholder="ادخل اسم الفئة الفرعية بالعربي"
+          />
+
+          @if (f['nameAr'].touched && f['nameAr'].errors?.['required']) {
+            <small class="error">الاسم بالعربي مطلوب</small>
+          }
+        </div>
+
+        <!-- English Name -->
+        <div class="form-group" dir="ltr">
+          <label style="text-align: left; display: block"> Subcategory Name (English) </label>
+
+          <input
+            type="text"
+            formControlName="nameEn"
+            placeholder="Enter subcategory name in English"
+          />
+
+          @if (f['nameEn'].touched && f['nameEn'].errors?.['required']) {
+            <small class="error">English name is required</small>
+          }
+        </div>
+
+        <!-- Vehicle Type Select -->
+        <div class="form-group">
+          <label>نوع المركبة</label>
+
+          <select formControlName="vehicleTypeId" class="form-select">
+            <option value="" disabled>اختر نوع المركبة</option>
+
+            @for (type of vehicleTypes; track type.id) {
+              <option [value]="type.id">
+                {{ type.nameAr }}
+              </option>
+            }
+          </select>
+
+          @if (f['vehicleTypeId'].touched && f['vehicleTypeId'].errors?.['required']) {
+            <small class="error">يجب اختيار نوع مركبة</small>
+          }
+        </div>
+
+        <!-- Buttons -->
+        <div class="button-group">
+          <button type="submit" class="btn-submit">
+            @if (mode === 'add') {
+              إضافة
+            } @else {
+              حفظ التعديلات
+            }
+          </button>
+
+          <button type="button" class="btn-cancel" (click)="onClose()">إلغاء</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

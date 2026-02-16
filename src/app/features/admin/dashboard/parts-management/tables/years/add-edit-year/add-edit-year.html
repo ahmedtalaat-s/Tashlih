@@ -1,0 +1,41 @@
+<div class="body">
+  <div class="modal-overlay" (click)="onClose()">
+    <div class="modal-container" (click)="$event.stopPropagation()">
+      <h2 class="modal-title">
+        @if (mode === 'add') {
+          إضافة سنة جديدة
+        } @else {
+          تعديل السنة
+        }
+      </h2>
+
+      <form [formGroup]="yearForm" (ngSubmit)="onSubmit()">
+        <!-- Year Input -->
+        <div class="form-group">
+          <label>السنة</label>
+          <input type="number" formControlName="year" placeholder="ادخل السنة" min="0" />
+
+          @if (f['year'].touched && f['year'].errors?.['required']) {
+            <small class="error">السنة مطلوبة</small>
+          }
+          @if (f['year'].touched && f['year'].errors?.['min']) {
+            <small class="error">السنة لا يمكن أن تكون أقل من 0</small>
+          }
+        </div>
+
+        <!-- Buttons -->
+        <div class="button-group">
+          <button type="submit" class="btn-submit">
+            @if (mode === 'add') {
+              إضافة
+            } @else {
+              حفظ التعديلات
+            }
+          </button>
+
+          <button type="button" class="btn-cancel" (click)="onClose()">إلغاء</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

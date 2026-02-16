@@ -45,6 +45,72 @@ export const routes: Routes = [
         path: 'parts',
         loadComponent: () =>
           import('./dashboard/parts-management/parts-management').then((r) => r.PartsManagement),
+        children: [
+          {
+            path: 'categories',
+            loadComponent: () =>
+              import('./dashboard/parts-management/tables/categories/categories').then(
+                (c) => c.Categories,
+              ),
+          },
+          {
+            path: 'subcategories',
+            loadComponent: () =>
+              import('./dashboard/parts-management/tables/subcategories/subcategories').then(
+                (c) => c.Subcategories,
+              ),
+          },
+          {
+            path: 'vehicles',
+            loadComponent: () =>
+              import('./dashboard/parts-management/tables/vehicles/vehicles').then(
+                (c) => c.Vehicles,
+              ),
+          },
+          {
+            path: 'manufacturers',
+            loadComponent: () =>
+              import('./dashboard/parts-management/tables/manufacturers/manufacturers').then(
+                (c) => c.Manufacturers,
+              ),
+          },
+          {
+            path: 'models',
+            loadComponent: () =>
+              import('./dashboard/parts-management/tables/models/models').then((c) => c.Models),
+          },
+          {
+            path: 'cities',
+            loadComponent: () =>
+              import('./dashboard/parts-management/tables/cities/cities').then((c) => c.Cities),
+          },
+          {
+            path: 'part-conditions',
+            loadComponent: () =>
+              import('./dashboard/parts-management/tables/part-conditions/part-conditions').then(
+                (c) => c.PartConditions,
+              ),
+          },
+          {
+            path: 'warranties',
+            loadComponent: () =>
+              import('./dashboard/parts-management/tables/warranties/warranties').then(
+                (c) => c.Warranties,
+              ),
+          },
+          {
+            path: 'years',
+            loadComponent: () =>
+              import('./dashboard/parts-management/tables/years/years').then((c) => c.Years),
+          },
+
+          // default redirect
+          {
+            path: '',
+            redirectTo: 'categories',
+            pathMatch: 'full',
+          },
+        ],
       },
       {
         path: 'requests',

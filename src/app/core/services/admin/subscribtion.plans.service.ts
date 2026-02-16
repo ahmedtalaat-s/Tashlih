@@ -42,7 +42,9 @@ export class SubscribtionPlansService {
 
     if (data.NameEn) formData.append('NameEn', data.NameEn);
     if (data.DescriptionAr) formData.append('DescriptionAr', data.DescriptionAr);
+    if (data.DescriptionEn) formData.append('DescriptionEn', data.DescriptionEn);
 
+    formData.append('Currency', data.Currency);
     formData.append('Price', data.Price.toString());
     formData.append('DurationDays', data.DurationDays.toString());
 

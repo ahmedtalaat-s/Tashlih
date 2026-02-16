@@ -1,0 +1,53 @@
+<div class="body">
+  <div class="modal-overlay" (click)="onClose()">
+    <div class="modal-container" (click)="$event.stopPropagation()">
+      <h2 class="modal-title">
+        @if (mode === 'add') {
+          إضافة حالة قطعة جديدة
+        } @else {
+          تعديل حالة القطعة
+        }
+      </h2>
+
+      <form [formGroup]="conditionForm" (ngSubmit)="onSubmit()">
+        <!-- Arabic Name -->
+        <div class="form-group">
+          <label>اسم الحالة (بالعربي)</label>
+          <input type="text" formControlName="nameAr" placeholder="ادخل اسم الحالة بالعربي" />
+
+          @if (f['nameAr'].touched && f['nameAr'].errors?.['required']) {
+            <small class="error">الاسم بالعربي مطلوب</small>
+          }
+        </div>
+
+        <!-- English Name -->
+        <div class="form-group" dir="ltr">
+          <label style="text-align: left; display: block"> Condition Name (English) </label>
+
+          <input
+            type="text"
+            formControlName="nameEn"
+            placeholder="Enter condition name in English"
+          />
+
+          @if (f['nameEn'].touched && f['nameEn'].errors?.['required']) {
+            <small class="error">English name is required</small>
+          }
+        </div>
+
+        <!-- Buttons -->
+        <div class="button-group">
+          <button type="submit" class="btn-submit">
+            @if (mode === 'add') {
+              إضافة
+            } @else {
+              حفظ التعديلات
+            }
+          </button>
+
+          <button type="button" class="btn-cancel" (click)="onClose()">إلغاء</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
