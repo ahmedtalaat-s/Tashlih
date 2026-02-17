@@ -1,0 +1,152 @@
+<!-- <div class="modal-overlay" (click)="onClose()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2 class="modal-title">تفاصيل طلب التوثيق</h2>
+      <button class="close-modal" (close)="onClose()">&times;</button>
+    </div>
+
+    <div class="modal-body">
+      <div class="business-profile">
+        <div class="business-avatar">
+          <svg viewBox="0 0 24 24" width="32">
+            <path
+              d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"
+              fill="currentColor"
+            />
+          </svg>
+        </div>
+        <div class="business-info">
+          <h3>{{ supplier?.businessNameAr }}</h3>
+          <p class="submission-date">
+            بتاريخ: {{ supplier?.verificationSubmittedAt | date: 'mediumDate' }}
+          </p>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <div class="info-grid">
+        <div class="info-item">
+          <label>الاسم الكامل</label>
+          <p>{{ supplier?.fullName }}</p>
+        </div>
+        <div class="info-item">
+          <label>رقم الهاتف</label>
+          <p>{{ supplier?.phone?.split('+966')?.at(1) }}</p>
+        </div>
+        <div class="info-item">
+          <label>البريد الإلكتروني</label>
+          <p>{{ supplier?.email }}</p>
+        </div>
+        <div class="info-item">
+          <label>رقم السجل التجاري</label>
+          <p>{{ supplier?.commercialRegister }}</p>
+        </div>
+      </div>
+
+      <div class="document-viewer">
+        <div class="tabs-header">
+          <button class="tab-btn" [class.active]="activeTab === 'id'" (click)="setTab('id')">
+            الهوية الوطنية
+          </button>
+          <button class="tab-btn" [class.active]="activeTab === 'cr'" (click)="setTab('cr')">
+            السجل التجاري
+          </button>
+        </div>
+
+        <div class="image-display-area">
+          @if (activeTab === 'id') {
+            <div class="animate-fade">
+              <img [src]="supplier?.idFrontUrl" alt="ID" class="document-img" />
+            </div>
+          }
+          @if (activeTab === 'cr') {
+            <div class="animate-fade">
+              <img [src]="supplier?.commercialRegisterImageUrl" alt="CR" class="document-img" />
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn-status btn-status-success">قبول الطلب</button>
+      <button class="btn-status btn-status-error">رفض الطلب</button>
+    </div>
+  </div>
+</div> -->
+
+<div class="modal-full-overlay">
+  <div class="modal-container">
+    <header class="modal-header">
+      <h2 class="header-title">وثائق التوثيق - {{ supplier?.businessNameAr }}</h2>
+      <button class="close-x" (click)="onClose()">&times;</button>
+    </header>
+
+    <section class="info-summary-bar">
+      <div class="summary-item">
+        <label>اسم المالك</label>
+        <span>{{ supplier?.fullName }}</span>
+      </div>
+      <div class="summary-item">
+        <label>المدينة</label>
+        <span>{{ supplier?.city }}</span>
+      </div>
+      <div class="summary-item">
+        <label>رقم الهاتف</label>
+        <span dir="ltr">{{ supplier?.phone }}</span>
+      </div>
+    </section>
+
+    <main class="viewer-main">
+      <div class="viewer-controls">
+        <div class="tabs-group">
+          <button class="tab-item" [class.active]="activeTab === 'id'" (click)="setTab('id')">
+            الهوية الوطنية <i class="icon-id"></i>
+          </button>
+          <button class="tab-item" [class.active]="activeTab === 'cr'" (click)="setTab('cr')">
+            السجل التجاري <i class="icon-doc"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="slider-wrapper">
+        <button class="nav-arrow prev" (click)="prevImage()">
+          <span>‹</span>
+        </button>
+
+        <div class="document-canvas">
+          <div class="image-wrapper animate-fade">
+            @if (activeTab === 'id') {
+              <img [src]="supplier?.idFrontUrl" alt="ID Document" />
+            } @else {
+              <img [src]="supplier?.commercialRegisterImageUrl" alt="CR Document" />
+            }
+          </div>
+          <div class="image-counter">{{ activeTab == 'id' ? 1 : 2 }} / 2</div>
+        </div>
+
+        <button class="nav-arrow next" (click)="nextImage()">
+          <span>›</span>
+        </button>
+      </div>
+    </main>
+
+    <footer class="modal-footer">
+      <button class="action-btn btn-approve" (click)="accept()">
+        قبول <i class="icon-check">✓</i>
+      </button>
+      <button class="action-btn btn-reject" (click)="toggleModal()">
+        رفض <i class="icon-cross">×</i>
+      </button>
+    </footer>
+  </div>
+</div>
+
+@if (openModalBool) {
+  <app-reject-request
+    [supplierId]="supplierId"
+    (close)="toggleModal()"
+    (submitRejection)="onReject($event)"
+  ></app-reject-request>
+}

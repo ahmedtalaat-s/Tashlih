@@ -3,10 +3,11 @@ import { PaginationInfo, SupplierListItem } from '../../../../core/models/admin.
 import { AdminSupplierService } from '../../../../core/services/admin/admin.supplier.service';
 import { Pagination } from '../../../../shared/pagination/pagination';
 import { DatePipe, isPlatformBrowser } from '@angular/common';
+import { VerifyDocs } from './verify-docs/verify-docs';
 
 @Component({
   selector: 'app-verification-requests',
-  imports: [Pagination, DatePipe],
+  imports: [Pagination, DatePipe, VerifyDocs],
   templateUrl: './verification-requests.html',
   styleUrl: './verification-requests.css',
 })
@@ -38,6 +39,25 @@ export class VerificationRequests {
 
   onPageChange(page: number) {
     this.page = page + 1;
+    this.loadSuppliers();
+  }
+
+  // handle verify modal
+  openModalBool = false;
+  toggleModal() {
+    this.openModalBool = !this.openModalBool;
+  }
+
+  selectedSupplierId!: any;
+  selectSupplier(id: any) {
+    this.selectedSupplierId = id;
+    console.log(this.selectedSupplierId);
+
+    this.toggleModal();
+  }
+
+  accepted() {
+    this.toggleModal();
     this.loadSuppliers();
   }
 }

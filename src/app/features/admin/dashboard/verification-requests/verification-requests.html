@@ -16,36 +16,51 @@
           <th>المدينة</th>
           <th>تاريخ الطلب</th>
           <th>عرض الوثائق</th>
-          <th>الإجراءات</th>
+          <!-- <th>الإجراءات</th> -->
         </tr>
       </thead>
       <tbody>
-        @for (supplier of suppliers; track supplier.id) {
-          <tr>
-            <td class="vendor-bold">{{ supplier.businessNameAr }}</td>
-            <td>{{ supplier.fullName }}</td>
-            <td>{{ supplier.city }}</td>
-            <td class="date-text">{{ supplier.createdAt | date: 'dd mm yyyy' }}</td>
-            <td>
-              <button class="btn-navy-outline">
-                <span>عرض الوثائق</span>
-                <i class="doc-icon"></i>
-              </button>
-            </td>
-            <td>
+        @if (suppliers.length > 0) {
+          @for (supplier of suppliers; track supplier.id) {
+            <tr>
+              <td class="vendor-bold">{{ supplier.businessNameAr }}</td>
+              <td>{{ supplier.fullName }}</td>
+              <td>{{ supplier.city }}</td>
+              <td class="date-text">{{ supplier.createdAt | date: 'short' }}</td>
+              <td>
+                <button class="btn-navy-outline" (click)="selectSupplier(supplier.id)">
+                  <span>عرض الوثائق</span>
+                  <i class="doc-icon"></i>
+                </button>
+              </td>
+              <!-- <td>
               <div class="action-group">
                 <button class="btn-status-success">قبول</button>
                 <button class="btn-status-error">رفض</button>
               </div>
-            </td>
+            </td> -->
+            </tr>
+          }
+        } @else {
+          <tr>
+            <td colspan="5">لا توجد طلبات للتوثيق</td>
           </tr>
         }
       </tbody>
     </table>
   </div>
 </div>
-<app-pagination
-  [totalRecords]="pagination?.totalItems ?? 0"
-  [rowsPerPage]="pageSize"
-  (pageChange)="onPageChange($event)"
-></app-pagination>
+@if (suppliers.length > 0) {
+  <app-pagination
+    [totalRecords]="pagination?.totalItems ?? 0"
+    [rowsPerPage]="pageSize"
+    (pageChange)="onPageChange($event)"
+  ></app-pagination>
+}
+@if (openModalBool) {
+  <app-verify-docs
+    [supplierId]="selectedSupplierId"
+    (accepted)="accepted()"
+    (close)="toggleModal()"
+  ></app-verify-docs>
+}

@@ -1,0 +1,60 @@
+<div class="modal-overlay" (click)="close.emit()">
+  <div class="modal-card" (click)="$event.stopPropagation()">
+    <header class="modal-header">
+      <div class="header-title-row">
+        <i class="warning-icon">⚠</i>
+        <h2>رفض طلب التوثيق</h2>
+      </div>
+      <button class="btn-close" (click)="close.emit()">&times;</button>
+    </header>
+
+    <div class="modal-body">
+      <p class="subtitle">يرجى تحديد سبب رفض طلب التوثيق. سيتم إرسال السبب للمورد.</p>
+
+      <label class="section-label">اختر سبب الرفض</label>
+      <div class="radio-list">
+        @for (option of rejectionOptions; track option) {
+          <label class="radio-item" [class.selected]="request.rejectionReason === option">
+            <input
+              type="radio"
+              name="reason"
+              [value]="option"
+              [(ngModel)]="request.rejectionReason"
+            />
+            <span class="radio-text">{{ option }}</span>
+            <div class="custom-radio"></div>
+          </label>
+        }
+      </div>
+
+      <label class="section-label">الوثائق المطلوب إعادة رفعها</label>
+      <div class="checkbox-group">
+        @for (doc of documentOptions; track doc.value) {
+          <button
+            type="button"
+            class="doc-chip"
+            [class.active]="request.requiredDocuments?.includes(doc.value)"
+            (click)="toggleDocument(doc.value)"
+          >
+            {{ doc.label }}
+          </button>
+        }
+      </div>
+
+      <label class="section-label">ملاحظات إضافية (اختياري)</label>
+      <textarea
+        class="admin-textarea"
+        [(ngModel)]="request.adminNotes"
+        placeholder="اكتب ملاحظاتك هنا   ..."
+      >
+      </textarea>
+    </div>
+
+    <footer class="modal-footer">
+      <button class="btn-confirm" (click)="onConfirm()" [disabled]="!request.rejectionReason">
+        تأكيد الرفض
+      </button>
+      <button class="btn-cancel" (click)="close.emit()">إلغاء</button>
+    </footer>
+  </div>
+</div>
