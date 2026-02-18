@@ -53,8 +53,8 @@
           <input type="text" placeholder="اسم النشاط / الورشة" formControlName="activityName" />
         </div>
 
-        @if (hasError('activityName','required')) {
-        <small class="error">اسم النشاط مطلوب</small>
+        @if (hasError('activityName', 'required')) {
+          <small class="error">اسم النشاط مطلوب</small>
         }
 
         <!-- Activity Type -->
@@ -85,8 +85,8 @@
           </select> -->
         </div>
 
-        @if (hasError('activityType','required')) {
-        <small class="error">نوع النشاط مطلوب</small>
+        @if (hasError('activityType', 'required')) {
+          <small class="error">نوع النشاط مطلوب</small>
         }
 
         <!-- City -->
@@ -94,8 +94,8 @@
           <lucide-icon name="building-2" [img]="building2" class="lucide-icon"></lucide-icon>
           <input type="text" placeholder="المدينة" formControlName="city" />
         </div>
-        @if (hasError('city','required')) {
-        <small class="error">المدينة مطلوبة</small>
+        @if (hasError('city', 'required')) {
+          <small class="error">المدينة مطلوبة</small>
         }
 
         <!-- District -->
@@ -110,31 +110,31 @@
           (click)="logoInput.click()"
         >
           @if (!hasFile('logo')) {
-          <!-- Upload Icon -->
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-            <polyline points="17 8 12 3 7 8" />
-            <line x1="12" y1="3" x2="12" y2="15" />
-          </svg>
+            <!-- Upload Icon -->
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="17 8 12 3 7 8" />
+              <line x1="12" y1="3" x2="12" y2="15" />
+            </svg>
           } @else {
-          <!-- Check Icon -->
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#16a34a"
-            stroke-width="2"
-          >
-            <polyline points="20 6 9 17 4 12" />
-          </svg>
+            <!-- Check Icon -->
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#16a34a"
+              stroke-width="2"
+            >
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
           }
           <span class="upload-lable">
             {{ getFileName('logo') || 'رفع شعار النشاط (اختياري)' }}
@@ -180,7 +180,7 @@
     </div>
 
     <div class="footer">
-      <div class="copyright-text">جميع الحقوق محفوظة. <span class="brand">Tashleeh</span>©</div>
+      <div class="copyright-text">جميع الحقوق محفوظة. <span class="brand">Altashalih</span>©</div>
       <button class="lang-switcher">
         English
         <svg

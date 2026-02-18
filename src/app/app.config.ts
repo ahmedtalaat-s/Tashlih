@@ -6,11 +6,6 @@ import {
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
 
 import { routes } from './app.routes';
-import {
-  provideClientHydration,
-  withEventReplay,
-  withHttpTransferCacheOptions,
-} from '@angular/platform-browser';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { MessageService } from 'primeng/api';
 import { errorInterceptor } from './core/interceptors/error-interceptor';
@@ -27,7 +22,6 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideClientHydration(withEventReplay()),
     provideHttpClient(
       withInterceptors([authInterceptor, errorInterceptor, loadingInterceptor]),
       withFetch(),
