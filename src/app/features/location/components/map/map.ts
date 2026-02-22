@@ -31,7 +31,6 @@ export class Map implements OnInit, OnDestroy {
 
   async initateMap() {
     if (isPlatformBrowser(this.platformId)) {
-      // SSR check to ensure this runs in the browser as GL JS requires a browser environment
       this.mapboxgl = (await import('mapbox-gl')).default; // dynamically import mapbox-gl as the default export
 
       // Create a new map instance
