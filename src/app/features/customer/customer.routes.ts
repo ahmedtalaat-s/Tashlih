@@ -34,13 +34,23 @@ export const routes: Routes = [
       import('./supplier-profile/supplier-profile').then((c) => c.SupplierProfile),
   },
   {
-    path: 'chat',
+    path: 'chat/:supplierId',
+    canActivate: [authGuard],
+    loadComponent: () => import('./chat/chat').then((c) => c.Chat),
+  },
+  {
+    path: 'chat/:supplierId/:threadId',
     canActivate: [authGuard],
     loadComponent: () => import('./chat/chat').then((c) => c.Chat),
   },
   {
     path: 'search',
     loadComponent: () => import('./search-products/search-products').then((c) => c.SearchProducts),
+  },
+  {
+    path: 'suppliers',
+    loadComponent: () =>
+      import('./search-suppliers/search-suppliers').then((c) => c.SearchSuppliers),
   },
   {
     path: 'help',

@@ -1,11 +1,11 @@
 <app-shared-chat
   currentUserRole="customer"
-  [supplierName]="supplier.name"
-  [supplierPhone]="supplier.phone"
-  [supplierLocation]="supplier.location"
-  [partName]="partInfo.name"
-  [partPrice]="partInfo.price"
-  [totalPrice]="partInfo.total"
+  [supplierName]="supplierdata()?.supplier?.businessNameAr ?? ''"
+  [supplierPhone]="supplierdata()?.supplier?.phone ?? ''"
+  [supplierLocation]="supplierdata()?.supplier?.city ?? ''"
+  [partName]="partdata().name"
+  [partPrice]="partdata().price"
+  [totalPrice]="partdata().total"
   [messages]="messages"
   (sendMessage)="sendMessage($event)"
 ></app-shared-chat>

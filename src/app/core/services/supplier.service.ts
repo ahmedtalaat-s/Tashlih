@@ -6,6 +6,7 @@ import {
   nearbySupplierRequest,
   NearbySuppliersResponse,
   supplierListResponse,
+  suppliersSearchResponse,
 } from '../models/supplier.model';
 
 @Injectable({
@@ -59,9 +60,9 @@ export class SupplierService {
 
   // GET /api/Suppliers/search
   searchSuppliers(params: {
-    keyword?: string;
+    Search?: string;
     categoryId?: number;
-    cityId?: number;
+    City?: number;
     page?: number;
     pageSize?: number;
   }) {
@@ -73,7 +74,7 @@ export class SupplierService {
       }
     });
 
-    return this.http.get<any>(
+    return this.http.get<suppliersSearchResponse>(
       `${API_CONSTANTS.BASE_URL}${API_CONSTANTS.END_POINTS.SUPPLIERS.SEARCH}`,
       {
         params: httpParams,

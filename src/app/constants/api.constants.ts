@@ -131,5 +131,13 @@ export const API_CONSTANTS = {
       DELETE: (id: number | string) => `Admin/suppliers/${id}`,
       VERIFY: (id: number | string) => `Admin/suppliers/${id}/verify`,
     },
+    CHAT: {
+      START: 'Chat/start',
+      MY_THREADS: 'Chat/my-threads',
+      MESSAGES: (threadId: number) => `Chat/${threadId}/messages`,
+      SEND: (threadId: number) => `Chat/${threadId}/send`,
+      READ: (threadId: number) => `Chat/${threadId}/read`,
+      DELETE: (threadId: number) => `Chat/${threadId}`,
+    },
   },
 };

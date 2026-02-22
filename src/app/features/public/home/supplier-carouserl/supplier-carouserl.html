@@ -3,45 +3,7 @@
 
   <div class="cards-container" #carousel>
     @for (supplier of suppliers; track supplier.id) {
-      <div class="supplier-card">
-        <div class="card-top">
-          <!-- Heart -->
-          <button
-            class="heart-btn"
-            (click)="toggleFavorite(supplier.id)"
-            [class.isfavorite]="isFavorite(supplier.id)"
-          >
-            <lucide-icon [img]="HeartIcon" size="18" strokeWidth="1.8"> </lucide-icon>
-          </button>
-
-          <!-- Image placeholder -->
-          <div class="image-placeholder">
-            @if (supplier.logoUrl) {
-              <img [src]="supplier.logoUrl" alt="Supplier Logo" />
-            } @else {
-              <lucide-icon [img]="ImageIcon" size="26" strokeWidth="1.5"> </lucide-icon>
-            }
-          </div>
-        </div>
-
-        <div class="card-info">
-          <h3 class="card-title">{{ supplier.businessNameAr }}</h3>
-
-          <!-- <div class="phone-number">
-            <span>+01123456789</span>
-            <lucide-icon class="phone-icon" [img]="PhoneIcon" size="16" strokeWidth="1.8">
-            </lucide-icon>
-          </div> -->
-
-          <span class="specialization-label">مدينة</span>
-          <div class="specialization-tag">{{ supplier.city }}</div>
-        </div>
-
-        <!-- Go button -->
-        <button class="go-btn" (click)="openSupplierProfilePage(supplier.id)">
-          <lucide-icon [img]="ChevronLeftIcon" size="18" strokeWidth="2"> </lucide-icon>
-        </button>
-      </div>
+      <app-supplier-card [supplier]="supplier"></app-supplier-card>
     }
   </div>
 

@@ -1,7 +1,14 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { SharedChat } from '../../../shared/shared-chat/shared-chat';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ChatMessage } from '../../../shared/shared-chat/model/chatemessage.model';
+import { ChatService } from '../../../core/services/chat.service';
+import { ToastService } from '../../../core/services/toast.service';
+import { PartsServices } from '../../../core/services/parts.service';
+import { SupplierService } from '../../../core/services/supplier.service';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { firstValueFrom } from 'rxjs';
+import { Supplier } from '../../../core/models/supplier.model';
 
 @Component({
   selector: 'app-chat',
@@ -9,102 +16,120 @@ import { ChatMessage } from '../../../shared/shared-chat/model/chatemessage.mode
   templateUrl: './chat.html',
   styleUrl: './chat.css',
 })
-export class Chat {
+export class Chat implements OnInit {
   supplierId!: string;
+  threadId: number | null = null;
+  partId: number | null = null;
 
   messages: ChatMessage[] = [];
+  isLoading = false;
 
-  supplier = {
-    name: '',
-    phone: '',
-    location: '',
-  };
-
-  partInfo = {
-    name: '',
-    price: '',
-    total: '',
-  };
   private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private chatService = inject(ChatService);
+  private toastService = inject(ToastService);
+  private partService = inject(PartsServices);
+  private supplierService = inject(SupplierService);
+
+  supplierdata: any;
+  partdata: any;
+
+  firstMessage = true;
 
   ngOnInit() {
     this.supplierId = this.route.snapshot.paramMap.get('supplierId')!;
-
-    this.loadSupplierData();
-    this.loadChatMessages();
-  }
-
-  loadSupplierData() {
-    // 🔥 API CALL
-    this.supplier = {
-      name: 'مركز البركة',
-      phone: '01123456789',
-      location: 'حي الفجر، الرياض',
-    };
-
-    this.partInfo = {
-      name: 'فرامل أمامية',
-      price: '1250',
-      total: '1250',
-    };
-  }
-
-  loadChatMessages() {
-    this.messages = [
-      {
-        id: Date.now(),
-        type: 'order',
-        senderRole: 'customer',
-        time: '06:10 مساءً',
-        order: {
-          partName: 'فرامل أمامية',
-          partPrice: 1250,
-          totalPrice: 1250,
-        },
-      },
-      {
-        id: 1,
-        type: 'text',
-        text: 'ممكن أعرف حالة القطعة؟',
-        senderRole: 'customer',
-        time: '05:54 مساءً',
-      },
-      {
-        id: 2,
-        type: 'text',
-        text: 'القطعة أصلية وحالتها ممتازة',
-        senderRole: 'supplier',
-        time: '05:55 مساءً',
-      },
-      {
-        id: 3,
-        type: 'text',
-        text: 'هل السعر شامل التركيب ولا بدون؟',
-        senderRole: 'customer',
-        time: '05:56 مساءً',
-      },
-      {
-        id: 4,
-        type: 'text',
-        text: 'السعر بدون تركيب، والتركيب متوفر برسوم إضافية',
-        senderRole: 'supplier',
-        time: '05:57 مساءً',
-      },
-    ];
+    this.partId = this.route.snapshot.queryParamMap.get('partId')
+      ? +this.route.snapshot.queryParamMap.get('partId')!
+      : null;
+    if (this.partId) this.partdata = toSignal(this.partService.getPartById(this.partId));
+    this.supplierdata = toSignal(this.supplierService.getSupplierById(this.supplierId));
   }
 
   sendMessage(text: string) {
-    this.messages = [
-      ...this.messages,
-      {
-        id: Date.now(),
-        text,
-        senderRole: 'customer',
-        type: 'text',
-        time: 'الآن',
-      },
-    ];
+    if (this.firstMessage) {
+      this.startNewChat(text);
+    } else {
+      if (!text.trim() || !this.threadId) return;
 
-    // 🚀 هنا SignalR / API
+      this.isLoading = true;
+
+      this.chatService
+        .sendMessage(this.threadId, {
+          Content: text,
+        })
+        .subscribe({
+          next: (response) => {
+            if (response.success && response.data) {
+              // Add the new message to the list
+              const newMessage: ChatMessage = response.data;
+              this.messages = [...this.messages, newMessage];
+              this.isLoading = false;
+            }
+          },
+          error: (err) => {
+            this.isLoading = false;
+            this.toastService.error('Failed to send message', 'Error');
+            console.error(err);
+          },
+        });
+    }
+  }
+
+  openThread() {
+    if (!this.threadId) return;
+
+    this.isLoading = true;
+    this.messages = [];
+
+    this.chatService.getMessages(this.threadId).subscribe({
+      next: (response) => {
+        if (response.success && response.data) {
+          // Load thread data and messages
+          // this.supplier.name = response.data.thread.supplierName;
+          // this.partInfo.name = response.data.thread.part?.nameAr || '';
+          // this.partInfo.price = response.data.thread.part?.price.toString() || '';
+
+          // Load messages
+          this.messages = response.data.messages as any;
+
+          // Mark as read
+          if (this.threadId) {
+            this.chatService.markAsRead(this.threadId).subscribe();
+          }
+
+          this.isLoading = false;
+        }
+      },
+      error: (err) => {
+        this.isLoading = false;
+        this.toastService.error('Failed to load messages', 'Error');
+        console.error(err);
+      },
+    });
+  }
+
+  startNewChat(message: string) {
+    if (!this.supplierId) return;
+
+    this.isLoading = true;
+
+    this.chatService
+      .startChat({
+        SupplierId: +this.supplierId,
+        PartId: this.partId || undefined,
+        Content: message,
+      })
+      .subscribe({
+        next: (response) => {
+          if (response.success && response.data) {
+            this.threadId = response.data.id;
+          }
+        },
+        error: (err) => {
+          this.isLoading = false;
+          this.toastService.error('Failed to start chat', 'Error');
+          console.error(err);
+        },
+      });
   }
 }

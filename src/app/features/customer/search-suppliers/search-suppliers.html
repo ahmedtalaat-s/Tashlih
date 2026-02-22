@@ -1,0 +1,74 @@
+<div class="page-container">
+  <aside class="sidebar" dir="rtl">
+    <!-- Header -->
+    <div class="filter-header">
+      <span>فلاتر البحث</span>
+      <button class="clear-all" (click)="clearAll()">مسح الكل</button>
+    </div>
+
+    <!-- Keyword -->
+    <div class="filter-section mb-3">
+      <span class="p-input-icon-right w-full">
+        <i class="pi pi-search"></i>
+        <input
+          type="text"
+          pInputText
+          [(ngModel)]="filters.Search"
+          placeholder="بحث بالاسم..."
+          class="w-full"
+        />
+      </span>
+    </div>
+
+    <!-- Location -->
+    <details class="filter-dropdown">
+      <summary>الموقع <span class="chevron"></span></summary>
+      <div class="dropdown-content">
+        <p-select
+          [options]="cities"
+          [(ngModel)]="filters.City"
+          optionLabel="nameAr"
+          optionValue="id"
+          placeholder="اختر المدينة"
+          [filter]="true"
+          filterBy="nameAr"
+          [showClear]="true"
+          class="w-full"
+        ></p-select>
+      </div>
+    </details>
+
+    <!-- Apply -->
+    <button class="apply-btn" (click)="applyFilters()">تطبيق الفلاتر</button>
+  </aside>
+
+  <!-- Main -->
+  <main class="main-content">
+    <header class="results-header">
+      <h2>{{ resultsHeader }}</h2>
+      <p>{{ resultsSummary }}</p>
+    </header>
+
+    <!-- Products -->
+    <div class="product-grid">
+      @for (item of suppliers; track $index) {
+        <app-supplier-card [supplier]="item"></app-supplier-card>
+      }
+    </div>
+    @if (suppliers.length === 0) {
+      <div class="no-products">
+        <lucide-icon [img]="Annoyed" [size]="100"></lucide-icon>
+
+        <h3>لا توجد موردين مطابقة للبحث</h3>
+        <p>حاول تغيير الفلاتر أو البحث بكلمات مختلفة</p>
+      </div>
+    }
+
+    <!-- Pagination -->
+    <app-pagination
+      [totalRecords]="pagination.totalItems"
+      [rowsPerPage]="pagination.pageSize"
+      (pageChange)="onPageChange($event)"
+    ></app-pagination>
+  </main>
+</div>

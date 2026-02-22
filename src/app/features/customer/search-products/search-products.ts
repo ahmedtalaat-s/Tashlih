@@ -205,7 +205,7 @@ export class SearchProducts {
     this.models = [];
   }
   onPageChange(page: number): void {
-    this.filters.Page = page;
+    this.filters.Page = page + 1;
     this.search();
   }
   private updateHeader() {

@@ -3,41 +3,59 @@
   <div class="chat-container">
     <div class="messages-area">
       @for (msg of messages; track msg.id) {
-        <!-- ORDER MESSAGE -->
-        @if (msg.type === 'order') {
-          <div class="msg order-msg">
-            <div class="order-header">معلومات الطلب</div>
-
-            <div class="order-body">
-              <div class="order-row">
-                <span>اسم القطعة</span>
-                <span>{{ msg.order?.partName }}</span>
-              </div>
-              <div class="order-row">
-                <span>سعر القطعة</span>
-                <span [innerHTML]="msg.order?.partPrice ?? 0 | saudiRiyal"></span>
-              </div>
+        <div class="msg" [class.sent]="isSent(msg)" [class.received]="!isSent(msg)">
+          <!-- TEXT MESSAGE -->
+          @if (msg.messageType === 'text' && msg.content) {
+            <div class="msg-content">
+              {{ msg.content }}
             </div>
+          }
 
-            <span class="msg-time">{{ msg.time }}</span>
-          </div>
-        }
+          <!-- VOICE MESSAGE -->
+          @if (msg.messageType === 'voice' && msg.attachments.length > 0) {
+            <div class="voice-msg">
+              @for (attachment of msg.attachments; track attachment.fileUrl) {
+                @if (attachment.fileType === 'voice') {
+                  <audio controls class="voice-player">
+                    <source [src]="attachment.fileUrl" type="audio/mpeg" />
+                    متصفحك لا يدعم تشغيل الصوت
+                  </audio>
+                  @if (attachment.duration) {
+                    <span class="duration">{{ attachment.duration }}ث</span>
+                  }
+                }
+              }
+            </div>
+          }
 
-        <!-- IMAGE MESSAGE -->
-        @else if (msg.imageUrl) {
-          <div class="image-msg" [class.sent]="isSent(msg)">
-            <img [src]="msg.imageUrl" />
-            <span class="msg-time">{{ msg.time }}</span>
-          </div>
-        }
+          <!-- IMAGE MESSAGE -->
+          @if (msg.messageType === 'image' || msg.messageType === 'mixed') {
+            <div class="images-container">
+              @for (attachment of msg.attachments; track attachment.fileUrl) {
+                @if (attachment.fileType === 'image') {
+                  <img [src]="attachment.fileUrl" alt="Chat image" class="chat-image" />
+                }
+              }
+            </div>
+          }
 
-        <!-- TEXT MESSAGE -->
-        @else {
-          <div class="msg" [class.sent]="isSent(msg)" [class.received]="!isSent(msg)">
-            {{ msg.text }}
-            <span class="msg-time">{{ msg.time }}</span>
-          </div>
-        }
+          <!-- VIDEO MESSAGE -->
+          @if (msg.messageType === 'video' || msg.messageType === 'mixed') {
+            <div class="videos-container">
+              @for (attachment of msg.attachments; track attachment.fileUrl) {
+                @if (attachment.fileType === 'video') {
+                  <video controls class="chat-video">
+                    <source [src]="attachment.fileUrl" type="video/mp4" />
+                    متصفحك لا يدعم تشغيل الفيديوهات
+                  </video>
+                }
+              }
+            </div>
+          }
+
+          <!-- MESSAGE TIME -->
+          <span class="msg-time">{{ formatDate(msg.createdAt) }}</span>
+        </div>
       }
     </div>
 
@@ -82,25 +100,24 @@
       </div>
     </div>
 
-    <!-- <div>
-      <div class="section-title">معلومات الطلب</div>
-      <div class="card order-info">
-        <label>اسم القطعة</label>
-        <input type="text" [value]="partName" readonly />
+    @if (partName) {
+      <div>
+        <div class="section-title">معلومات القطعة</div>
+        <div class="card order-info">
+          <label>اسم القطعة</label>
+          <input type="text" [value]="partName" readonly />
 
-        <div class="price-row">
-          <div class="price-box">
-            <label>سعر القطعة</label>
-            <span class="input" [innerHTML]="+partPrice | saudiRiyal"></span>
-          </div>
-
-          <div class="price-box">
-            <label>اجمالي السعر</label>
-            <span class="input" [innerHTML]="+totalPrice | saudiRiyal"></span>
-          </div>
+          @if (partPrice) {
+            <div class="price-row">
+              <div class="price-box">
+                <label>سعر القطعة</label>
+                <span class="input" [innerHTML]="+partPrice | saudiRiyal"></span>
+              </div>
+            </div>
+          }
         </div>
       </div>
-    </div> -->
+    }
 
     <button class="btn-profile">الملف الشخصي</button>
   </div>

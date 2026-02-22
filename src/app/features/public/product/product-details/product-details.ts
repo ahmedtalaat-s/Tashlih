@@ -184,4 +184,19 @@ export class ProductDetails {
 
     this.closeOrderModal();
   }
+
+  // chat
+
+  navigateToChat() {
+    if (!this.product?.supplierId) return;
+
+    // Navigate to chat with supplier ID and part ID as query parameters
+    !this.authService.isloggedIn()
+      ? this.router.navigate(['/auth/login'])
+      : this.router.navigate(['/customer/chat', this.product.supplierId], {
+          queryParams: {
+            partId: this.product.id,
+          },
+        });
+  }
 }

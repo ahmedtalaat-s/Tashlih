@@ -130,3 +130,20 @@ export interface Review {
   comment?: string;
   createdAt?: string;
 }
+
+export interface suppliersSearchResponse {
+  success: boolean;
+  message: string | null;
+  messageAr: string | null;
+  suppliers: Supplier[];
+  pagination: PaginationInfo;
+}
+
+export interface PaginationInfo {
+  currentPage: number;
+  pageSize: number;
+  totalItems: number;
+  totalPages: number;
+  hasNext: boolean;
+  hasPrevious: boolean;
+}
