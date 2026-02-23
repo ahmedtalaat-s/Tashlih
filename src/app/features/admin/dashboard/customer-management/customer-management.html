@@ -1,1 +1,167 @@
-<app-coming-soon></app-coming-soon>
+<header class="page-header">
+  <h1>إدارة العملاء</h1>
+</header>
+
+<section class="filter-card">
+  <div class="filter-grid">
+    <div class="filter-group">
+      <label>البحث</label>
+      <div class="search-input">
+        <input
+          [(ngModel)]="query.Search"
+          type="text"
+          placeholder="ابحث بالاسم، الجوال، أو الإيميل..."
+        />
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <label>الحالة</label>
+      <select [(ngModel)]="query.Status">
+        <option value="">الكل</option>
+        <option value="active">نشط</option>
+        <option value="inactive">غير نشط</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label>المدينة</label>
+      <select [(ngModel)]="query.City">
+        <option value="">اختر المدينة</option>
+        @for (city of cities; track $index) {
+          <option [value]="city.nameAr">{{ city.nameAr }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="filter-group btn-container">
+      <button class="btn-search" (click)="searchCustomers()">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        بحث
+      </button>
+    </div>
+  </div>
+</section>
+
+<section class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>الاسم</th>
+        <th>الجوال</th>
+        <th>البريد الإلكتروني</th>
+        <th>عدد الطلبات</th>
+        <th>الحالة</th>
+        <th>تاريخ التسجيل</th>
+        <th>الإجراءات</th>
+      </tr>
+    </thead>
+    <tbody>
+      @if (customers?.length === 0) {
+        <tr>
+          <td colspan="8" class="empty-state">لا يوجد موردون حالياً</td>
+        </tr>
+      } @else {
+        @for (customer of customers; track $index) {
+          <tr>
+            <td>{{ customer.fullName }}</td>
+            <td dir="ltr">{{ customer.phone }}</td>
+            <td>{{ customer.email }}</td>
+            <td>{{ customer.totalOrders }}</td>
+            <td>
+              <span
+                class="badge"
+                [class.badge-active]="customer.status == 'active'"
+                [class.badge-inactive]="customer.status != 'active'"
+              >
+                {{ customer.status == 'active' ? 'نشط' : 'غير نشط' }}
+              </span>
+            </td>
+            <td>{{ customer.createdAt | date: 'medium' }}</td>
+            <td>
+              <div class="actions">
+                @if (customer.status != 'active') {
+                  <button class="btn-icon text-success" (click)="activate(customer.id)">
+                    <i class="fa-regular fa-circle-check"></i>
+                  </button>
+                }
+                @if (customer.status == 'active') {
+                  <button class="btn-icon text-error" (click)="deactivate(customer.id)">
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g clip-path="url(#clip0_842_6668)">
+                        <path
+                          d="M12.2344 4.42578C12.9512 5.14292 13.4744 6.03007 13.7553 7.00433C14.0361 7.97859 14.0654 9.00815 13.8404 9.99679"
+                          stroke="#FFB700"
+                          stroke-width="1.33278"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                        <path
+                          d="M4.1012 4.10547C3.46453 4.6402 2.946 5.30146 2.57852 6.04728C2.21105 6.79309 2.00266 7.60717 1.96659 8.43782C1.93051 9.26847 2.06754 10.0975 2.36897 10.8724C2.6704 11.6473 3.12965 12.351 3.71757 12.9389C4.30548 13.5268 5.0092 13.9861 5.78407 14.2875C6.55894 14.5889 7.38801 14.726 8.21866 14.6899C9.04931 14.6538 9.86339 14.4454 10.6092 14.078C11.355 13.7105 12.0163 13.1919 12.551 12.5553"
+                          stroke="#FFB700"
+                          stroke-width="1.33278"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                        <path
+                          d="M8 1.33203V3.99759"
+                          stroke="#FFB700"
+                          stroke-width="1.33278"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                        <path
+                          d="M1.33594 1.33203L14.6637 14.6598"
+                          stroke="#FFB700"
+                          stroke-width="1.33278"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_842_6668">
+                          <rect width="15.9933" height="15.9933" fill="white" />
+                        </clipPath>
+                      </defs>
+                    </svg>
+                  </button>
+                }
+                <button class="btn-icon text-error" (click)="delete(customer.id)">
+                  <i class="fa-regular fa-trash-can"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        }
+      }
+    </tbody>
+  </table>
+</section>
+<app-pagination
+  [totalRecords]="pagination?.totalItems ?? 0"
+  [rowsPerPage]="pagination?.pageSize ?? 0"
+  (pageChange)="onPageChange($event)"
+></app-pagination>
+
+@if (openactivemodalBool) {
+  <app-confirm-modal
+    (cancel)="toggleactiveModal()"
+    (confirm)="confirmActivate($event)"
+  ></app-confirm-modal>
+}
+@if (opendeactivemodalBool) {
+  <app-confirm-modal
+    (cancel)="toggledeactiveModal()"
+    (confirm)="confirmDeactivate($event)"
+  ></app-confirm-modal>
+}
+@if (openDeletemodalBool) {
+  <app-delete-modal (cancel)="toggleDeleteModal()" (confirm)="confirmDelete()"></app-delete-modal>
+}

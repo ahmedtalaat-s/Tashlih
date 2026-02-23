@@ -167,3 +167,48 @@ export interface deactivateResponse {
   message: string;
   messageAr: string;
 }
+
+// customers part
+export interface Customer {
+  id: number;
+  fullName: string;
+  phone: string;
+  email: string;
+  city: string | null;
+  avatarUrl: string | null;
+  status: string;
+  isPhoneVerified: boolean;
+  totalOrders: number;
+  favoritesCount: number;
+  createdAt: string;
+  lastLoginAt: string | null;
+}
+
+export interface CustomersResponse {
+  success: boolean;
+  message: string | null;
+  messageAr: string | null;
+  customers: Customer[];
+  totalCount: number;
+  pagination: {
+    currentPage: number;
+    pageSize: number;
+    totalItems: number;
+    totalPages: number;
+    hasNext: boolean;
+    hasPrevious: boolean;
+  };
+}
+
+export interface CustomerActionBody {
+  reason: string;
+  adminNotes: string;
+}
+
+export interface GetCustomersParams {
+  Page?: number;
+  PageSize?: number;
+  Search?: string;
+  Status?: string;
+  City?: string;
+}

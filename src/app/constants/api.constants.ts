@@ -132,6 +132,12 @@ export const API_CONSTANTS = {
       VERIFY: (id: number | string) => `Admin/suppliers/${id}/verify`,
       ACTIVATE: (id: number | string) => `Admin/suppliers/${id}/activate`,
       DEACTIVATE: (id: number | string) => `Admin/suppliers/${id}/deactivate`,
+
+      GET_ALL_CUSTOMERS: `Admin/customers`,
+      GET_CUSTOMER_BY_ID: (id: number) => `Admin/customers/${id}`,
+      DELETE_CUSTOMER: (id: number) => `Admin/customers/${id}`,
+      ACTIVATE_CUSTOMER: (id: number) => `Admin/customers/${id}/activate`,
+      DEACTIVATE_CUSTOMER: (id: number) => `Admin/customers/${id}/deactivate`,
     },
     CHAT: {
       START: 'Chat/start',
