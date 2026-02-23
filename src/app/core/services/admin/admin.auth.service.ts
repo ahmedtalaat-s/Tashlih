@@ -25,6 +25,7 @@ export class AdminAuthService {
         map((res) => {
           this.token.setToken(res.token);
           this.setAdminInLocal(res.admin);
+          StorageHelper.setItem(APP_CONSTANTS.STORAGE_KEYS.ROLE, 'admin');
           return res;
         }),
       );

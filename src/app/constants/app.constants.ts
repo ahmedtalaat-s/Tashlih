@@ -8,6 +8,7 @@ export const APP_CONSTANTS = {
     USER_INFO: 'user_info',
     PHONE_NUMBER: 'phone_number',
     ADMIN: 'admin',
+    ROLE: 'role',
   },
   ROUTES: {},
 } as const;

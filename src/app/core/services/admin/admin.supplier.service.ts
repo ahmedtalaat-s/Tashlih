@@ -60,4 +60,17 @@ export class AdminSupplierService {
   verifySupplier(id: number | string, body: VerifySupplierRequest): Observable<any> {
     return this.http.put(this.baseUrl + API_CONSTANTS.END_POINTS.ADMIN.VERIFY(id), body);
   }
+
+  activateSupplier(id: any, reason?: string, adminNotes?: string) {
+    return this.http.put(this.baseUrl + API_CONSTANTS.END_POINTS.ADMIN.ACTIVATE(id), {
+      reason,
+      adminNotes,
+    });
+  }
+  deactivateSupplier(id: any, reason?: string, adminNotes?: string) {
+    return this.http.put(this.baseUrl + API_CONSTANTS.END_POINTS.ADMIN.DEACTIVATE(id), {
+      reason,
+      adminNotes,
+    });
+  }
 }

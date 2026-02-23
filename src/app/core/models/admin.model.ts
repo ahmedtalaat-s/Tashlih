@@ -161,3 +161,9 @@ export interface SupplierDetails extends SupplierListItem {
 export interface GetSupplierDetailsResponse extends ApiResponseBase {
   supplier: SupplierDetails;
 }
+
+export interface deactivateResponse {
+  success: boolean;
+  message: string;
+  messageAr: string;
+}

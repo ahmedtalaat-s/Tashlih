@@ -155,6 +155,7 @@
         --p-paginator-nav-button-selected-background:var(--primary-100) !important;
         --p-paginator-nav-button-selected-color:var(--primary-600) !important;
         --p-paginator-nav-button-focus-ring-color:var(--primary-500) !important;
+        --p-paginator-background:#ffffff00 !important;
 
         /* transition */
       --transition: all 0.3s ease;

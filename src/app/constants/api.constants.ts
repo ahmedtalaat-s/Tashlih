@@ -130,6 +130,8 @@ export const API_CONSTANTS = {
       GET_BY_ID: (id: number | string) => `Admin/suppliers/${id}`,
       DELETE: (id: number | string) => `Admin/suppliers/${id}`,
       VERIFY: (id: number | string) => `Admin/suppliers/${id}/verify`,
+      ACTIVATE: (id: number | string) => `Admin/suppliers/${id}/activate`,
+      DEACTIVATE: (id: number | string) => `Admin/suppliers/${id}/deactivate`,
     },
     CHAT: {
       START: 'Chat/start',

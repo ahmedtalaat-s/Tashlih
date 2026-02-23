@@ -7,17 +7,18 @@ import { Admin } from '../models/admin.model';
 
 export const adminGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
-  const admin = StorageHelper.getItem<Admin>(APP_CONSTANTS.STORAGE_KEYS.ADMIN);
-  const platformId = inject(PLATFORM_ID);
+  const token = StorageHelper.getItem<string>(APP_CONSTANTS.STORAGE_KEYS.TOKEN);
+  const role: role | null = StorageHelper.getItem<role>(APP_CONSTANTS.STORAGE_KEYS.ROLE);
 
-  const isBrowser = isPlatformBrowser(platformId);
-
-  if (!isBrowser) return true;
-
-  if (admin && admin != null) {
+  if (token && role == 'admin') {
     return true;
+  } else if (token && role == 'supplier') {
+    router.navigate(['/supplier']);
+    return false;
+  } else if (token && role == 'customer') {
+    router.navigate(['/']);
+    return false;
   }
-
   router.navigate(['/admin/login']);
   return false;
 };
