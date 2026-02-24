@@ -212,3 +212,32 @@ export interface GetCustomersParams {
   Status?: string;
   City?: string;
 }
+
+// subscribers
+export interface AdminSubscriptionsResponse {
+  success: boolean;
+  subscriptions: Subscriber[];
+  totalCount: number;
+}
+
+export interface Subscriber {
+  id: number;
+  supplierId: number;
+  supplierName: string;
+  supplierPhone: string;
+  planName: string;
+  price: number;
+  status: 'pending' | 'active' | 'expired' | string;
+  statusAr: string;
+  startsAt: string | null;
+  endsAt: string | null;
+  amountPaid: number | null;
+  paymentMethod: string | null;
+  createdAt: string;
+}
+
+export interface SubscriberWithStats extends Subscriber {
+  totalDays: number;
+  remainingDays: number;
+  percentage: number;
+}

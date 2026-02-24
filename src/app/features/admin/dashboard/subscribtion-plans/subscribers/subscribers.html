@@ -1,1 +1,72 @@
-<app-coming-soon></app-coming-soon>
+<div class="container">
+  <div class="search-container">
+    <input
+      type="text"
+      class="search-input"
+      placeholder="البحث بالاسم، الجوال، أو الإيميل..."
+      [(ngModel)]="searchText"
+    />
+  </div>
+
+  @if (filteredsubscribers?.length ?? 0 > 0) {
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>اسم المورد</th>
+            <th>رقم الجوال</th>
+            <th>الباقة</th>
+            <th>السعر</th>
+            <th>تاريخ البدء</th>
+            <th>تاريخ الانتهاء</th>
+            <th>الحالة</th>
+            <th>المدة المتبقية</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of filteredsubscribers; track $index) {
+            <tr>
+              <td>{{ item.supplierName }}</td>
+              <td class="phone-cell">{{ item.supplierPhone }}</td>
+              <td>
+                <span>{{ item.planName }}</span>
+              </td>
+              <td [innerHTML]="item.price | saudiRiyal"></td>
+              <td>{{ item.startsAt ? (item.startsAt | date: 'yyyy/MM/dd') : '-' }}</td>
+              <td>{{ item.endsAt ? (item.endsAt | date: 'yyyy/MM/dd') : '-' }}</td>
+              <td>
+                <span
+                  class="status-badge"
+                  [ngClass]="{
+                    'status-active': item.status === 'active',
+                    'status-expired': item.status === 'expired',
+                    'status-pending': item.status === 'pending',
+                  }"
+                >
+                  {{ item.statusAr }}
+                </span>
+              </td>
+              <td>
+                <div class="progress-container">
+                  <span>{{
+                    item.status === 'expired' ? 'منتهي' : item.remainingDays + ' يوم'
+                  }}</span>
+                  @if (item.status !== 'expired') {
+                    <div class="progress-bar">
+                      <div class="progress-fill" [style.width.%]="item.percentage"></div>
+                    </div>
+                  }
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  } @else {
+    <div class="empty-state">
+      <h3>لا يوجد مشتركين</h3>
+      <p>لم يتم العثور على أي بيانات مطابقة لبحثك أو لا توجد اشتراكات حالية.</p>
+    </div>
+  }
+</div>

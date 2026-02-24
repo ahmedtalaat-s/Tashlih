@@ -2,7 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { API_CONSTANTS } from '../../../constants/api.constants';
 import { Observable } from 'rxjs';
-import { Plan, PlanRequest, PlansResponse } from '../../models/admin.model';
+import {
+  AdminSubscriptionsResponse,
+  Plan,
+  PlanRequest,
+  PlansResponse,
+} from '../../models/admin.model';
 
 @Injectable({
   providedIn: 'root',
@@ -64,5 +69,12 @@ export class SubscribtionPlansService {
     if (data.logo) formData.append('logo', data.logo);
 
     return formData;
+  }
+
+  // subscribers
+  getSubscriptions() {
+    return this.http.get<AdminSubscriptionsResponse>(
+      this.baseUrl + API_CONSTANTS.END_POINTS.ADMIN.GET_SUBSCRIPTIONS,
+    );
   }
 }

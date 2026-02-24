@@ -117,6 +117,7 @@ export const API_CONSTANTS = {
       LOGIN: 'Admin/login',
       PROFILE: 'Admin/profile',
       PLANS: 'Admin/plans',
+      GET_SUBSCRIPTIONS: 'Admin/subscriptions',
       VEHICLE_TYPES: 'Admin/lookups/vehicle-types',
       MAKES: 'Admin/lookups/makes',
       MODELS: 'Admin/lookups/models',
